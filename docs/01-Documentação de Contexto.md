@@ -1,6 +1,15 @@
 # Introdução
 
-Texto descritivo com a visão geral do projeto abordado. Inclui o contexto, o problema, os objetivos, a justificativa e o público-alvo do projeto.
+Em um mundo cada vez mais digital, onde a agilidade e a eficiência são cruciais para o sucesso, a gestão tradicional de ponto, com métodos manuais e registros em papel, torna-se cada vez mais obsoleta. As empresas que buscam acompanhar a evolução tecnológica e otimizar seus processos precisam urgentemente de soluções inovadoras para o controle da jornada de trabalho de seus colaboradores.
+
+Os métodos tradicionais de controle de ponto apresentam diversas desvantagens, como a ineficiência dos processos manuais, a falta de confiabilidade nas marcações, a dificuldade de acesso e a falta de flexibilidade para registrar o ponto remotamente. Além disso, esses métodos podem ser bastante custosos para a empresa, necessitando de investimento em equipamentos físicos e mão de obra especializada.
+
+Um aplicativo de controle de ponto surge como uma solução inovadora e eficaz para superar os desafios da gestão tradicional. Através da tecnologia, o aplicativo oferece agilidade e praticidade, permitindo que os funcionários registrem seu ponto instantaneamente em qualquer lugar e a qualquer hora, através do seu smartphone. A tecnologia garante a precisão e confiabilidade das marcações, eliminando o risco de fraudes.
+
+O aplicativo também contribui para uma gestão eficiente, fornecendo relatórios detalhados e em tempo real sobre a jornada de trabalho, facilitando a tomada de decisões estratégicas. A automatização do processo de controle de ponto também gera uma significativa redução de custos para a empresa, eliminando a necessidade de equipamentos físicos e mão de obra especializada.
+
+Em suma, investir em um aplicativo de controle de ponto é um investimento estratégico que beneficia tanto a empresa quanto os colaboradores. Ao combinar agilidade, confiabilidade, eficiência e um ambiente de trabalho mais transparente, o aplicativo se torna uma ferramenta essencial para a gestão moderna de pessoas na era digital.
+
 
 ## Problema
 Nesse momento você deve apresentar o problema que a sua aplicação deve  resolver. No entanto, não é a hora de comentar sobre a aplicação.
