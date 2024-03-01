@@ -51,11 +51,16 @@ A seguir o mapeamento do modelo de negócio
 
 ### Descrição Geral da Proposta
 
-Apresente aqui uma descrição da sua proposta abordando seus limites e suas ligações com as estratégias e objetivos do negócio. Apresente aqui as oportunidades de melhorias.
+A proposta a seguir busca identificar e explicitar o fluxo de informações identificando os atores de interferência e seus respectivos papéis na cadeia de usabilidade do solução.
 
-### Processo 1 – NOME DO PROCESSO
+### Processo 1 – MACROPROCESSO DE USABILIDADE DO APP
 
-Apresente aqui o nome e as oportunidades de melhorias para o processo 1. Em seguida, apresente o modelo do processo 1, descrito no padrão BPMN. 
+Foi identificado ao longo do processo as seguintes oportunidade de melhorias:<br> 
+. desenvolver um aplicativo de controle de ponto a partir da base de dados geradas pelo setor de RH,<br>
+. criação de aplicativo de uso pessoal e intransferível para registro de ponto,<br>
+. disponibilizar relatórios com informações de horas trabalhadas e valores a receber destinado ao setores de interesse,<br>
+. permitir que o funcionário solicite sua correção do registro de ponto, quando necessário,<br>
+. criar uma página de status das aprovações e correções de ponto, disponibilizando ao usuário<br>
 
 ![Processo 1](img/02-bpmn-proc1.png)
 
