@@ -44,7 +44,10 @@ Apresente aqui as histórias de usuário que são relevantes para o projeto de s
 
 ### Análise da Situação Atual
 
-Apresente aqui os problemas existentes que viabilizam sua proposta. Apresente o modelo do sistema como ele funciona hoje. Caso sua proposta seja inovadora e não existam processos claramente definidos, apresente como as tarefas que o seu sistema pretende implementar são executadas atualmente, mesmo que não se utilize tecnologia computacional. 
+A partir dos problemas apresentados anteriormente são os fatores geradores de oportunidades de melhoria. 
+Desta forma, a partir do mapeamento de processo do negócio é possível perceber o fluxo e funcionamento da cadeia de ações a serem realizadas que ajudarão na implementação do software. 
+A seguir o mapeamento do modelo de negócio
+
 
 ### Descrição Geral da Proposta
 
