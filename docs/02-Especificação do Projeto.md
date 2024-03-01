@@ -62,7 +62,7 @@ Foi identificado ao longo do processo as seguintes oportunidade de melhorias:<br
 . permitir que o funcionário solicite sua correção do registro de ponto, quando necessário,<br>
 . criar uma página de status das aprovações e correções de ponto, disponibilizando ao usuário<br>
 
-![Processo 1](img/02-bpmn-proc1.png)
+![Processo 1](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-pmv-ads-2024-1-e4-proj-dad-t2-grupo12/assets/100534402/1f277e78-009f-4dbe-b063-64b6ba422d32)
 
 ### Processo 2 – NOME DO PROCESSO
 
