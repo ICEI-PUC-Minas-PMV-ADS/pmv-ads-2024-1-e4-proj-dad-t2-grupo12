@@ -36,12 +36,7 @@ O objetivo central deste trabalho é desenvolver uma ferramenta que permita ao u
 
 ## Justificativa
 
-Descreva a importância ou a motivação para trabalhar com esta aplicação que você escolheu. Indique as razões pelas quais você escolheu seus objetivos específicos ou as razões para aprofundar em certos aspectos do software.
-
-O grupo de trabalho pode fazer uso de questionários, entrevistas e dados estatísticos, que podem ser apresentados, com o objetivo de esclarecer detalhes do problema que será abordado pelo grupo.
-
-> **Links Úteis**:
-> - [Como montar a justificativa](https://guiadamonografia.com.br/como-montar-justificativa-do-tcc/)
+O mau gerenciamento do tempo de trabalho é um problema comum no cotidiano de diversas pessoas que não possuem recursos para registar e calcular o tempo gasto durante o período de trabalho. Esta falta de controle pode muitas vezes resultar em uma má administração do tempo de serviço, resultando em perda da valorização do esforço, como por exemplo, em casos no qual o funcionário acaba trabalhando mais em relação à remuneração, assim também, pode levar ao cansaço físico e mental, pois a má administração do tempo pode resultar em trabalho excessivo e falta de horas de descanso ou pausas. Diante deste cenário, torna-se evidente a necessidade de uma ferramenta que permita ao usuário o registro dos horários de serviço, permitindo que este visualize de maneira mais prática as horas trabalhadas, horas extras ou devidas e faça uma regulação melhor do seu tempo de trabalho.
 
 ## Público-Alvo
 
