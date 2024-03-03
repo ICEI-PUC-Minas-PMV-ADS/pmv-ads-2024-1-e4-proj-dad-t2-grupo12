@@ -116,6 +116,10 @@ Enumere as restrições à sua solução. Lembre-se de que as restrições geral
 > - [O que são Requisitos Funcionais e Requisitos Não Funcionais?](https://codificar.com.br/requisitos-funcionais-nao-funcionais/)
 > - [O que são requisitos funcionais e requisitos não funcionais?](https://analisederequisitos.com.br/requisitos-funcionais-e-requisitos-nao-funcionais-o-que-sao/)
 
+# Gerenciamento de Equipe
+
+![Tabela equipe](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-pmv-ads-2024-1-e4-proj-dad-t2-grupo12/assets/86340530/2070a753-d6b2-407c-8c44-325d1632801a)
+
 # Arquitetura Distribuída do projeto
 
 ![arq distribuida drawio](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-pmv-ads-2024-1-e4-proj-dad-t2-grupo12/assets/86340530/8557a65b-1717-4c1d-a9d9-ef0be19fffdf)
