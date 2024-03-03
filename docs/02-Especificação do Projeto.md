@@ -76,30 +76,25 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 
 |ID    | Descrição do Requisito  | Prioridade |
 |------|-----------------------------------------|----|
-|RF-001| Permitir que o usuário cadastre tarefas | ALTA | 
-|RF-002| Emitir um relatório de tarefas no mês   | MÉDIA |
+|RF-001| A aplicação deve permitir o registro do horário de trabalho. | ALTA | 
+|RF-002| A aplicação deve permitir a visualização do saldo de horas.   | ALTA |
+|RF-003| A aplicação deve permitir o login na plataforma pelo usuário.   | ALTA |
+|RF-004| A aplicação deve permitir que o usuário administrador cadastre usuários colaboradores.   | ALTA |
+|RF-005| A aplicação deve permitir a aprovação / reprovação dos horários dos colaboradores pelos usuários administradores.   | MÉDIA |
+|RF-006| A aplicação deve permitir a visualização dos valores a receber.   | MÉDIA |
+|RF-007| A aplicação deve permitir o gerenciamento do acesso dos usuários colaboradores  pelos usuários administradores.   | BAIXA |
+|RF-008| A aplicação deve permitir ao usuário colaborador a solicitação de alteração no registro dos pontos.   | BAIXA |
+|RF-009| A aplicação deve permitir o uso da localização para validação do registro.   | BAIXA |
 
 ### Requisitos não Funcionais
 
 |ID     | Descrição do Requisito  |Prioridade |
 |-------|-------------------------|----|
-|RNF-001| O sistema deve ser responsivo para rodar em um dispositivos móvel | MÉDIA | 
-|RNF-002| Deve processar requisições do usuário em no máximo 3s |  BAIXA | 
-
-Com base nas Histórias de Usuário, enumere os requisitos da sua solução. Classifique esses requisitos em dois grupos:
-
-- [Requisitos Funcionais
- (RF)](https://pt.wikipedia.org/wiki/Requisito_funcional):
- correspondem a uma funcionalidade que deve estar presente na
-  plataforma (ex: cadastro de usuário).
-- [Requisitos Não Funcionais
-  (RNF)](https://pt.wikipedia.org/wiki/Requisito_n%C3%A3o_funcional):
-  correspondem a uma característica técnica, seja de usabilidade,
-  desempenho, confiabilidade, segurança ou outro (ex: suporte a
-  dispositivos iOS e Android).
-Lembre-se que cada requisito deve corresponder à uma e somente uma
-característica alvo da sua solução. Além disso, certifique-se de que
-todos os aspectos capturados nas Histórias de Usuário foram cobertos.
+|RNF-001| A aplicação deve ser responsiva para funcionar em dispositivos móveis. | MÉDIA | 
+|RNF-002| A aplicação deve ter um bom nível de contraste entre os elementos da tela para que esteja em conformidade. | MÉDIA | 
+|RNF-003| O código do aplicativo deve ser modular e bem documentado para facilitar a manutenção e correção de bugs.   | MÉDIA |
+|RNF-004| O aplicativo deve garantir a segurança dos dados dos usuários, como fotos, CPF e informações de localização.   | MÉDIA |
+|RNF-005| O sistema deve ser compatível com os principais navegadores do mercado (Google Chrome, Firefox, Microsoft Edge).   | BAIXA |
 
 ## Restrições
 
@@ -107,8 +102,9 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 
 |ID| Restrição                                             |
 |--|-------------------------------------------------------|
-|01| O projeto deverá ser entregue até o final do semestre |
-|02| Não pode ser desenvolvido um módulo de backend        |
+|RE-01| A aplicação não poderá compartilhar dados sensíveis a qualquer outra plataforma, cumprindo os padrões de sigilo e tratativa de dados segundo a LGPD. |
+|RE-02| O projeto deverá ser entregue no final do semestre letivo, não podendo extrapolar a data de 19/06/2024.        |
+|RE-03| A equipe não pode subcontratar o desenvolvimento do trabalho.       |
 
 Enumere as restrições à sua solução. Lembre-se de que as restrições geralmente limitam a solução candidata.
 
