@@ -1,7 +1,5 @@
 # Especificações do Projeto
 
-<span style="color:red">Pré-requisitos: <a href="1-Documentação de Contexto.md"> Documentação de Contexto</a></span>
-
 Este documento descreve a especificação de um aplicativo de controle de ponto para automatizar e otimizar a gestão de horas trabalhadas na empresa. 
 A marcação de ponto manual apresenta diversos problemas, como:  erros frequentes na marcação manual, como inconsistências de horário e digitação incorreto, dificuldades no controle de horas extras, dificuldade de correção de ponto, dentre outros. 
 Para o desenvolvimento do aplicativo, serão utilizadas diversas técnicas e ferramentas de gestão.<br>
@@ -105,10 +103,6 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 |RE-02| O projeto deverá ser entregue no final do semestre letivo, não podendo extrapolar a data de 19/06/2024.        |
 |RE-03| A equipe não pode subcontratar o desenvolvimento do trabalho.       |
 
-# Gerenciamento de Equipe
-
-![Tabela equipe](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-pmv-ads-2024-1-e4-proj-dad-t2-grupo12/assets/86340530/2070a753-d6b2-407c-8c44-325d1632801a)
-
 # Arquitetura Distribuída do projeto
 
 ![arq distribuida drawio](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-pmv-ads-2024-1-e4-proj-dad-t2-grupo12/assets/86340530/8557a65b-1717-4c1d-a9d9-ef0be19fffdf)
@@ -138,9 +132,7 @@ De acordo com o PMBoK v6 as dez áreas que constituem os pilares para gerenciar 
 
 ## Gerenciamento de Equipe
 
-O gerenciamento adequado de tarefas contribuirá para que o projeto alcance altos níveis de produtividade. Por isso, é fundamental que ocorra a gestão de tarefas e de pessoas, de modo que os times envolvidos no projeto possam ser facilmente gerenciados. 
-
-![Simple Project Timeline](img/02-project-timeline.png)
+![Tabela equipe](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-pmv-ads-2024-1-e4-proj-dad-t2-grupo12/assets/86340530/2070a753-d6b2-407c-8c44-325d1632801a)
 
 ## Gestão de Orçamento
 
