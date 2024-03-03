@@ -2,43 +2,42 @@
 
 <span style="color:red">Pré-requisitos: <a href="1-Documentação de Contexto.md"> Documentação de Contexto</a></span>
 
-Definição do problema e ideia de solução a partir da perspectiva do usuário. É composta pela definição do  diagrama de personas, histórias de usuários, requisitos funcionais e não funcionais além das restrições do projeto.
+Este documento descreve a especificação de um aplicativo de controle de ponto para automatizar e otimizar a gestão de horas trabalhadas na empresa. 
+A marcação de ponto manual apresenta diversos problemas, como:  erros frequentes na marcação manual, como inconsistências de horário e digitação incorreto, dificuldades no controle de horas extras, dificuldade de correção de ponto, dentre outros. 
+Para o desenvolvimento do aplicativo, serão utilizadas diversas técnicas e ferramentas de gestão.<br>
+* Brainstorming
+* Modelagem de Processos
+* Prototipagem
+* Documentação Técnica
+* Validação de Requisitos
+* Simulação e Modelagem
+* Diagrama de Casos de Uso
+* Avaliação de Usabilidade
+
+O desenvolvimento de um aplicativo de controle de ponto trará diversos benefícios para a empresa e seus colaboradores, como agilidade, precisão, confiabilidade e economia de tempo. A utilização de técnicas e ferramentas de gestão adequadas garantirá que o projeto seja bem-sucedido e atenda às necessidades de todos os envolvidos
+
 
 Apresente uma visão geral do que será abordado nesta parte do documento, enumerando as técnicas e/ou ferramentas utilizadas para realizar a especificações do projeto
 
 ## Personas
 
-Pedro Paulo tem 26 anos, é arquiteto recém-formado e autônomo. Pensa em se desenvolver profissionalmente através de um mestrado fora do país, pois adora viajar, é solteiro e sempre quis fazer um intercâmbio. Está buscando uma agência que o ajude a encontrar universidades na Europa que aceitem alunos estrangeiros.
+As personas levantadas durante o processo de entendimento do problema são apresentadas na Figuras que se seguem.
 
-Enumere e detalhe as personas da sua solução. Para tanto, baseie-se tanto nos documentos disponibilizados na disciplina e/ou nos seguintes links:
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-pmv-ads-2024-1-e4-proj-dad-t2-grupo12/assets/100534402/835bf97d-dceb-44ef-8c5c-65cbd1340682)<br>
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-pmv-ads-2024-1-e4-proj-dad-t2-grupo12/assets/100534402/5e82a8c8-de69-4a68-b244-4d49883ae89b)<br>
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-pmv-ads-2024-1-e4-proj-dad-t2-grupo12/assets/100534402/c3bd3a08-f5ea-48c6-b244-710238382dd9)
 
-> **Links Úteis**:
-> - [Rock Content](https://rockcontent.com/blog/personas/)
-> - [Hotmart](https://blog.hotmart.com/pt-br/como-criar-persona-negocio/)
-> - [O que é persona?](https://resultadosdigitais.com.br/blog/persona-o-que-e/)
-> - [Persona x Público-alvo](https://flammo.com.br/blog/persona-e-publico-alvo-qual-a-diferenca/)
-> - [Mapa de Empatia](https://resultadosdigitais.com.br/blog/mapa-da-empatia/)
-> - [Mapa de Stalkeholders](https://www.racecomunicacao.com.br/blog/como-fazer-o-mapeamento-de-stakeholders/)
->
-Lembre-se que você deve ser enumerar e descrever precisamente e personalizada todos os clientes ideais que sua solução almeja.
 
 ## Histórias de Usuários
 
 Com base na análise das personas forma identificadas as seguintes histórias de usuários:
 
-|EU COMO... `PERSONA`| QUERO/PRECISO ... `FUNCIONALIDADE` |PARA ... `MOTIVO/VALOR`                 |
-|--------------------|------------------------------------|----------------------------------------|
-|Usuário do sistema  | Registrar minhas tarefas           | Não esquecer de fazê-las               |
-|Administrador       | Alterar permissões                 | Permitir que possam administrar contas |
-
-Apresente aqui as histórias de usuário que são relevantes para o projeto de sua solução. As Histórias de Usuário consistem em uma ferramenta poderosa para a compreensão e elicitação dos requisitos funcionais e não funcionais da sua aplicação. Se possível, agrupe as histórias de usuário por contexto, para facilitar consultas recorrentes à essa parte do documento.
-
-> **Links Úteis**:
-> - [Histórias de usuários com exemplos e template](https://www.atlassian.com/br/agile/project-management/user-stories)
-> - [Como escrever boas histórias de usuário (User Stories)](https://medium.com/vertice/como-escrever-boas-users-stories-hist%C3%B3rias-de-usu%C3%A1rios-b29c75043fac)
-> - [User Stories: requisitos que humanos entendem](https://www.luiztools.com.br/post/user-stories-descricao-de-requisitos-que-humanos-entendem/)
-> - [Histórias de Usuários: mais exemplos](https://www.reqview.com/doc/user-stories-example.html)
-> - [9 Common User Story Mistakes](https://airfocus.com/blog/user-story-mistakes/)
+|EU COMO... `PERSONA`          | QUERO/PRECISO ... `FUNCIONALIDADE`                  |PARA ... `MOTIVO/VALOR`                 |
+|------------------------------|-----------------------------------------------------|----------------------------------------|
+|Eu como... funcionário<br> usuário_01| Desejo ter... liberdade para registrar o <br>ponto de qualquer lugar | Para que eu possa ter mobilidade em<br>meu local de trabalho.|
+|Eu como... funcionário<br> usuário_02 2|Desejo ter… acompanhar o valor a ser recebido a<br> partir das horas já trabalhadas| Para que… que eu possa programar<br> minha margem de ganho mensal|
+|Eu como…  gerente de RH |Desejo ter … de uma forma de acompanhar e<br> monitorar o ponto dos funcionários| Para que … que eu possa ter mais confiabilidade<br>na apuração das horas trabalhadas|
+| Eu como… supervisor de área |Desejo ter … monitorar e aprovar o<br> ponto dos funcionários|Para que … eu possa gerar relatórios confiáveis<br> e dinâmicos a minha gerência|
 
 ## Modelagem do Processo de Negócio 
 
