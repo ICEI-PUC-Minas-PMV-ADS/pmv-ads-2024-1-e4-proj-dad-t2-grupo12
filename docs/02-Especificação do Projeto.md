@@ -102,7 +102,7 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 
 |ID| Restrição                                             |
 |--|-------------------------------------------------------|
-| RE-01 | A aplicação não poderá compartilhar dados sensíveis a qualquer outra plataforma, cumprindo os padrões de sigilo e tratativa de dados segundo a LGPD. |
+|RE-01| A aplicação não poderá compartilhar dados sensíveis a qualquer outra plataforma, cumprindo os padrões de sigilo e tratativa de dados segundo a LGPD. |
 |RE-02| O projeto deverá ser entregue no final do semestre letivo, não podendo extrapolar a data de 19/06/2024.        |
 |RE-03| A equipe não pode subcontratar o desenvolvimento do trabalho.       |
 
