@@ -12,16 +12,8 @@ Em suma, investir em um aplicativo de controle de ponto é um investimento estra
 
 
 ## Problema
-Nesse momento você deve apresentar o problema que a sua aplicação deve  resolver. No entanto, não é a hora de comentar sobre a aplicação.
 
-Descreva também o contexto em que essa aplicação será usada, se  houver: empresa, tecnologias, etc. Novamente, descreva apenas o que de  fato existir, pois ainda não é a hora de apresentar requisitos  detalhados ou projetos.
-
-Nesse momento, o grupo pode optar por fazer uso  de ferramentas como Design Thinking, que permite um olhar de ponta a ponta para o problema.
-
-> **Links Úteis**:
-> - [Objetivos, Problema de pesquisa e Justificativa](https://medium.com/@versioparole/objetivos-problema-de-pesquisa-e-justificativa-c98c8233b9c3)
-> - [Matriz Certezas, Suposições e Dúvidas](https://medium.com/educa%C3%A7%C3%A3o-fora-da-caixa/matriz-certezas-suposi%C3%A7%C3%B5es-e-d%C3%BAvidas-fa2263633655)
-> - [Brainstorming](https://www.euax.com.br/2018/09/brainstorming/)
+O controle de ponto manual é um processo lento, trabalhoso e propenso a erros, que causa frustração para gestores e colaboradores. A solução inovadora é o registro de ponto por smartphone, que oferece agilidade, precisão e confiabilidade. Com a aplicação, os colaboradores registram seu ponto de qualquer lugar e a qualquer hora, sem necessidade de se deslocarem. A tecnologia garante a segurança das informações e elimina o risco de fraudes. Relatórios detalhados facilitam a gestão de pessoas e a automatização do processo reduz custos. O registro de ponto por smartphone é um passo crucial para a modernização da gestão de pessoas, contribuindo para a satisfação dos colaboradores e o sucesso da empresa.
 
 ## Objetivo
 
