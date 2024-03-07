@@ -1,21 +1,23 @@
-# TÍTULO DO PROJETO
+# CONTROLE DE PONTO: de ponta ao ponto
 
-`CURSO`
+`CURSO` Tecnologia em Análise e Desenvolvimento de Sistemas
 
-`DISCIPLINA`
+`DISCIPLINA` Projeto: Desenvolvimento de uma Aplicação Distribuída - Turma 02 - 2024/1
 
-`SEMESTRE`
+`SEMESTRE` EIXO 4
 
 Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo desenvolvido.
 
 ## Integrantes
 
-* Nome completo do aluno 1
-* Nome completo do aluno 2
-* Nome completo do aluno 3
-* Nome completo do aluno 4
+* Jonathan Souza Costa
+* Juliana Dutra Moreira
+* Leonardo Igor Araujo de Souza
+* Pedro Mota Cassemiro
+* Renato de Freitas Gualberto
+  
 
-## Orientador
+## Leonardo Vilela Cardoso
 
 * Nome completo do professor 1
 
