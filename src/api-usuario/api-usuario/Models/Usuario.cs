@@ -27,7 +27,11 @@ namespace api_usuario.Models
         [Required]
         public StatusUsuario StatusUsuario { get; set; }
 
+        [Required]
         public DateTime DataCadastro { get; set; }
+
+        [Required]
+        public DateTime DataNaciemnto { get; set; }
 
         [Required]
         public Endereco Endereco { get; set; }
