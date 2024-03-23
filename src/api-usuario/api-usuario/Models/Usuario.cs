@@ -70,6 +70,8 @@ namespace api_usuario.Models
 
     public class Setor
     {
+        public string Id { get; set; }
+
         public string Nome { get; set; }
 
         public string Categoria { get; set; }
