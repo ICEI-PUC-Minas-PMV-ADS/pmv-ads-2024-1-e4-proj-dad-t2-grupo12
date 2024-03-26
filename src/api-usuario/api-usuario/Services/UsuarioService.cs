@@ -24,9 +24,16 @@ namespace api_usuario.Services
 
         public async Task<Usuario?> GetAsync(string id) =>
             await _usuarioCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+        
+        public async Task<Usuario?> FindByEmail(string email) =>
+            await _usuarioCollection.Find(x => x.Email == email).FirstOrDefaultAsync();
 
-        public async Task CreateAsync(Usuario newUsuario) =>
-            await _usuarioCollection.InsertOneAsync(newUsuario);
+        public async Task CreateAsync(RegisterDto registerDto)
+        {
+            registerDto.Senha = BCrypt.Net.BCrypt.HashPassword(registerDto.Senha);
+            var usuario = new Usuario(registerDto);
+            await _usuarioCollection.InsertOneAsync(usuario);
+        }
 
         public async Task UpdateAsync(string id, Usuario updatedUsuario) =>
             await _usuarioCollection.ReplaceOneAsync(x => x.Id == id, updatedUsuario);
