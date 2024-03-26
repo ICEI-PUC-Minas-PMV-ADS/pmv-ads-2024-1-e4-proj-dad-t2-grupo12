@@ -22,7 +22,7 @@ namespace api_usuario.Models
         public string SenhaCriptografada { get; set; }
 
         [Required]
-        public Setor Setor { get; set; }
+        public List<Setor> Setores { get; set; } 
 
         [Required]
         public StatusUsuario StatusUsuario { get; set; }
@@ -66,17 +66,5 @@ namespace api_usuario.Models
         public string Estado { get; set; }
 
     }
-
-
-    public class Setor
-    {
-        public string Id { get; set; }
-
-        public string Nome { get; set; }
-
-        public string Categoria { get; set; }
-
-    }
-
 
 }

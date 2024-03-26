@@ -7,6 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<UsuarioDatabaseSettings>(builder.Configuration.GetSection("UsuarioDatabase"));
 builder.Services.AddSingleton<UsuarioService>();
 
+builder.Services.Configure<SetorDatabaseSettings>(builder.Configuration.GetSection("UsuarioDatabase"));
+builder.Services.AddSingleton<SetorService>();
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
