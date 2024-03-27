@@ -8,7 +8,7 @@ public class Setor
 {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
-    public string Id { get; set; }
+    public string Idok { get; set; }
 
     [Required]
     public string Nome { get; set; }
