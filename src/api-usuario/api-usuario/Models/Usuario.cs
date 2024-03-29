@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace api_usuario.Models
 {
+    [BsonIgnoreExtraElements]
     public class Usuario
     {
         [BsonId]
@@ -42,6 +43,15 @@ namespace api_usuario.Models
         [Required]
         public bool UsuarioAdmin { get; set; }
 
+        public Usuario(RegisterDto registerDto)
+        {
+            Nome = registerDto.Nome;
+            Email = registerDto.Email;
+            CPF = registerDto.Cpf;
+            SenhaCriptografada = registerDto.Senha;
+            Endereco = registerDto.Endereco;
+        }
+
     }
 
     public enum StatusUsuario
@@ -53,6 +63,7 @@ namespace api_usuario.Models
         Inativo
     }
 
+    [BsonIgnoreExtraElements]
     public class Endereco
     {
         public string Rua { get; set; }
@@ -66,5 +77,5 @@ namespace api_usuario.Models
         public string Estado { get; set; }
 
     }
-
+    
 }
