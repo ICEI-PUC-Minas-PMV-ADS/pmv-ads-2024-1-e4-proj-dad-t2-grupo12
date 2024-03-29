@@ -14,7 +14,7 @@ Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo de
 * Juliana Dutra Moreira
 * Leonardo Igor Araujo de Souza
 * Pedro Mota Cassemiro
-* Renato de Freitas Gualberto
+* Renato de Freitas Gualberto (teste_commit_da branch_Renato)
   
 
 ## Leonardo Vilela Cardoso
