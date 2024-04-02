@@ -1,30 +1,29 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using System;
 
 
-[Table("Registros")]
+
 public class RegistroDePonto
 {
-    [Key]
-    public int Id { get; set; }
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
 
-    [Required]
-    public DateTime entradaManha  { get; set; }
+    public int Id { get; set; } = null;
 
-    [Required]
-    public DateTime saidadaManha { get; set; }
-
-    [Required]
-    public DateTime entraAlmoco { get; set; }
-
-    [Required]
-    public DateTime saidaAlmoco { get; set; }
-
-    [Required]
-    public DateTime entradaTarde { get; set; }
-    
-    [Required]
-    public DateTime saidaTarde { get; set; }
+    [BsonElement("RegistroDePonto")]
+    public DateTime entradaManha  { get; set; } = null;
+       
+    public DateTime saidadaManha { get; set; } = null;
+        
+    public DateTime entraAlmoco { get; set; } = null;
+        
+    public DateTime saidaAlmoco { get; set; } = null;
+       
+    public DateTime entradaTarde { get; set; } = null;
+       
+    public DateTime saidaTarde { get; set; } = null;
 
 }

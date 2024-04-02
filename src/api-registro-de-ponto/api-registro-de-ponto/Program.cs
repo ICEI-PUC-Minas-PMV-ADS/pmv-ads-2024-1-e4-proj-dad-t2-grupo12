@@ -8,6 +8,10 @@ using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.Configure<FuncionarioDatabaseSettings>(builder.Configuration.GetSection("UsuarioDatabase"));
+builder.Services.AddSingleton<FuncionarioService>();
+builder.Services.Configure<RegistroDePontoDatabaseSettings>(builder.Configuration.GetSection("UsuarioDatabase"));
+
 builder.Services.Configure<UsuarioDatabaseSettings>(builder.Configuration.GetSection("UsuarioDatabase"));
 builder.Services.AddSingleton<UsuarioService>();
 builder.Services.Configure<SetorDatabaseSettings>(builder.Configuration.GetSection("UsuarioDatabase"));

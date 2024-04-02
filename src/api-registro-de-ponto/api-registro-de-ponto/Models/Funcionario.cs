@@ -1,21 +1,23 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using System;
 
 
-[Table("Funcionarios")]
+[BsonIgnoreExtraElements] 
 public class Funcionario
 {
-    [key]
-    public string Id { get; set; }
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string? Id { get; set; } = null;
 
-    [Required]
-    public string NomeFuncionario { get; set; }
+    [BsonElement("Funcionario")]
+    public string NomeFuncionario { get; set; } = null;
 
-    [Required]
-    public string CPF { get; set; }
+    public string CPF { get; set; } = null;
 
-    public ICollection <RegistroDePonto> RegistroDePonto { get; set; }
+    public ICollection <RegistroDePonto> RegistroDePonto { get; set; } = null;
 
 
 }
