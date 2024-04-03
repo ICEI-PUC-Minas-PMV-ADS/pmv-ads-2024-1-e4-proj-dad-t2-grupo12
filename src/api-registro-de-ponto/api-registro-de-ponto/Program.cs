@@ -1,5 +1,5 @@
-using api_usuario.Models;
-using api_usuario.Services;
+using api_RegistroDePonto.Models;
+using api_RegistroDePonto.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -10,7 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.Configure<FuncionarioDatabaseSettings>(builder.Configuration.GetSection("UsuarioDatabase"));
 builder.Services.AddSingleton<FuncionarioService>();
+
 builder.Services.Configure<RegistroDePontoDatabaseSettings>(builder.Configuration.GetSection("UsuarioDatabase"));
+builder.Services.AddSingleton<RegistroDePontoService>();
 
 builder.Services.Configure<UsuarioDatabaseSettings>(builder.Configuration.GetSection("UsuarioDatabase"));
 builder.Services.AddSingleton<UsuarioService>();
