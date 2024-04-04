@@ -6,7 +6,7 @@
 
 `SEMESTRE` EIXO 4
 
-Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo desenvolvido.
+O presente projeto tem como objetivo desenvolver uma aplicação que ofereça um sistema eficiente de controle de horário de trabalho. Este sistema visa facilitar o registro preciso das horas trabalhadas, proporcionar a visualização do banco de horas acumulado, realizar cálculos automáticos de horas trabalhadas e salários mensais, tanto para os funcionários quanto para gestores e outros cargos administrativos.
 
 ## Integrantes
 
@@ -15,11 +15,10 @@ Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo de
 * Leonardo Igor Araujo de Souza
 * Pedro Mota Cassemiro
 * Renato de Freitas Gualberto
-  
 
-## Leonardo Vilela Cardoso
+## Orientador
 
-* Nome completo do professor 1
+* Leonardo Vilela Cardoso
 
 ## Instruções de utilização
 
