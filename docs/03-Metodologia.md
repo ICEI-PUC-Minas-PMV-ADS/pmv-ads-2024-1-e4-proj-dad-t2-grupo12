@@ -7,39 +7,32 @@ Descreva aqui a metodologia de trabalho do grupo para atacar o problema. Defini�
 
 ## Relação de Ambientes de Trabalho
 
-Os artefatos do projeto são desenvolvidos a partir de diversas plataformas e a relação dos ambientes com seu respectivo propósito deverá ser apresentada em uma tabela que especifica que detalha Ambiente, Plataforma e Link de Acesso. 
-Nota: Vide documento modelo do estudo de caso "Portal de Notícias" e defina também os ambientes e frameworks que serão utilizados no desenvolvimento de aplicações móveis.
+Os diversos ambientes de trabalho e suas respectivas plataformas estão descritos abaixo: 
+
+|Ambiente| Plataforma |Link de Acesso|
+|:--------------------:|:------------------------------------:|:----------------------------------------:|
+|Repositório de Código Fonte| <i>GitHub</i> |[GitHub - Controle de Ponto ](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-grupo12)|
+|Documentos do Projeto| <i>GitHub</i> |[GitHub - Controle de Ponto](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-grupo12/tree/main/docs)|
+|Projeto de Interface e <i>Wireframes</i>| <i>Figma</i> |[Figma - Projeto Controle de Ponto](https://www.figma.com/)|
 
 ## Controle de Versão
 
-A ferramenta de controle de versão adotada no projeto foi o
-[Git](https://git-scm.com/), sendo que o [Github](https://github.com)
-foi utilizado para hospedagem do repositório.
+A ferramenta escolhida para o controle de versões no projeto foi o [GitHub Desktop](https://desktop.github.com/) ou o [Git Bash](https://git-scm.com/), sendo utilizado o [Github](https://github.com) para hospedagem do repositório. Estas ferramentas foram escolhidas com base em experiências e projetos anteriores, em função da arquitetura da plataforma que fornece um controle simultâneo, acompanhamento das mudanças juntamente ao funcionamento da aplicação, sincronização de versões, além de proporcionar a reversão de alterações em situações pertinentes.
 
-O projeto segue a seguinte convenção para o nome de branches:
+Foram definidos os seguintes nomes para as principais branchs:
 
-- `main`: versão estável já testada do software
-- `unstable`: versão já testada do software, porém instável
-- `testing`: versão em testes do software
-- `dev`: versão de desenvolvimento do software
+- `main`: versão estável já testada do software.
+- `desenvolvimento`: versão já testada do software, porém instável.
+- `local`: versão individual com o nome de cada membro do projeto para desenvolvimento e testes.
 
-Quanto à gerência de issues, o projeto adota a seguinte convenção para
-etiquetas:
+Com relação ao controle do fluxo de versionamento, foi adotada a seguinte sequência: 
 
-- `documentation`: melhorias ou acréscimos à documentação
-- `bug`: uma funcionalidade encontra-se com problemas
-- `enhancement`: uma funcionalidade precisa ser melhorada
-- `feature`: uma nova funcionalidade precisa ser introduzida
-
-Discuta como a configuração do projeto foi feita na ferramenta de versionamento escolhida. Exponha como a gerência de tags, merges, commits e branchs é realizada. Discuta como a gerência de issues foi realizada.
-
-> **Links Úteis**:
-> - [Microfundamento: Gerência de Configuração](https://pucminas.instructure.com/courses/87878/)
-> - [Tutorial GitHub](https://guides.github.com/activities/hello-world/)
-> - [Git e Github](https://www.youtube.com/playlist?list=PLHz_AreHm4dm7ZULPAmadvNhH6vk9oNZA)
->  - [Comparando fluxos de trabalho](https://www.atlassian.com/br/git/tutorials/comparing-workflows)
-> - [Understanding the GitHub flow](https://guides.github.com/introduction/flow/)
-> - [The gitflow workflow - in less than 5 mins](https://www.youtube.com/watch?v=1SXpE08hvGs)
+- `Clone do repositório`: cada integrante faz a clonagem do repositório para seu computador pessoal.
+- `Criação das Branchs`: ramificação da aplicação para controle de versionamento sem afetar o projeto principal
+- `Commits`: publicação das alterações de uma versão específica de um projeto ou repositório.
+- `Pull`: operação executada pelo integrante para obter as atualizações mais recentes e mesclá-las em na branch desejada.
+- `Push`: ação realizada para enviar as alterações do membro do grupo à branch desejada, fornecendo essas alterações a todos os outros membros.
+- `Merge`: combinação de duas branchs de modo a integrar as versões entre elas, igualando ou fazendo o controle das versões.
 
 ## Gerenciamento de Projeto
 
@@ -72,16 +65,16 @@ Coloque  informações sobre detalhes da implementação do Scrum seguido pelo g
 
 ### Ferramentas
 
-As ferramentas empregadas no projeto são:
+As ferramentas de comunicação foram selecionadas com base na praticidade, levando em consideração a familiaridade dos membros com estas e a facilidade de uso. Foi escolhido o Figma devido à sua variedade de recursos, que permitem criar modelos de alta ou baixa fidelidade com grande qualidade, e também porque os membros já possuíam algum conhecimento básico prévio sobre essa ferramenta em projetos anteriores.
 
-- Editor de código.
-- Ferramentas de comunicação
-- Ferramentas de desenho de tela (_wireframing_)
-
-O editor de código foi escolhido porque ele possui uma integração com o sistema de versão. As ferramentas de comunicação utilizadas possuem integração semelhante e por isso foram selecionadas. Por fim, para criar diagramas utilizamos essa ferramenta por melhor captar as necessidades da nossa solução.
-
-Liste quais ferramentas foram empregadas no desenvolvimento do projeto, justificando a escolha delas, sempre que possível.
+As ferramentas utilizadas no desenvolvimento do projeto foram:
  
-> **Possíveis Ferramentas que auxiliarão no gerenciamento**: 
-> - [Slack](https://slack.com/)
-> - [Github](https://github.com/)
+|FERRAMENTA | SOLUÇÃO |
+|--------------------|-----------------------------------|
+| IDE de desenvolvimento Front-end | Visual Studio Code - Microsoft |
+| IDE de desenvolvimento Front-end | Webstorm - Jetbrains |
+| IDE de desenvolvimento Back-end | Visual Studio - Microsoft |
+| IDE de desenvolvimento Back-end | Rider - Jetbrains |
+| Comunicação | As ferramentas utilizadas na comunicação foram o Microsoft Teams, Google Meets e WhatsApp |
+|Desenho e Prototipação| A ferramenta escolhida para o desenvolvimento de desenhos de telas foi o Figma |
+| Google Docs | Organização de tópicos e demandas da documentação |
