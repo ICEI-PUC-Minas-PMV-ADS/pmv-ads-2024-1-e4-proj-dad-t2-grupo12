@@ -25,11 +25,247 @@ As referências abaixo irão auxiliá-lo na geração do artefato “Modelo ER�
 
 ## Esquema Relacional
 
-O Esquema Relacional corresponde à representação dos dados em tabelas juntamente com as restrições de integridade e chave primária.
- 
-As referências abaixo irão auxiliá-lo na geração do artefato “Esquema Relacional”.
+```json
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Usuario",
+    "type": "object",
+    "properties": {
+        "Id": {
+            "type": "string",
+            "format": "objectId"
+        },
+        "Nome": {
+            "type": "string"
+        },
+        "CPF": {
+            "type": "string"
+        },
+        "Email": {
+            "type": "string",
+            "format": "email"
+        },
+        "SenhaCriptografada": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "Setores": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "Id": {
+                        "type": "string",
+                        "format": "objectId"
+                    },
+                    "Nome": {
+                        "type": "string"
+                    },
+                    "Categoria": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "Id",
+                    "Nome",
+                    "Categoria"
+                ]
+            }
+        },
+        "StatusUsuario": {
+            "type": "string",
+            "enum": [
+                "Ativo",
+                "Inativo"
+            ]
+        },
+        "DataCadastro": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "DataNaciemnto": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "Endereco": {
+            "type": "object",
+            "properties": {
+                "Rua": {
+                    "type": "string"
+                },
+                "Numero": {
+                    "type": "string"
+                },
+                "Cep": {
+                    "type": "string"
+                },
+                "Cidade": {
+                    "type": "string"
+                },
+                "Estado": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "Rua",
+                "Numero",
+                "Cep",
+                "Cidade",
+                "Estado"
+            ]
+        },
+        "Salario": {
+            "type": "number"
+        },
+        "UsuarioAdmin": {
+            "type": "boolean"
+        }
+    },
+    "required": [
+        "Nome",
+        "CPF",
+        "Email",
+        "Setores",
+        "StatusUsuario",
+        "DataCadastro",
+        "DataNaciemnto",
+        "Endereco",
+        "Salario",
+        "UsuarioAdmin"
+    ]
+}
+```
 
-> - [Criando um modelo relacional - Documentação da IBM](https://www.ibm.com/docs/pt-br/cognos-analytics/10.2.2?topic=designer-creating-relational-model)
+```json
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Setor",
+    "type": "object",
+    "properties": {
+        "Id": {
+            "type": "string",
+            "format": "objectId"
+        },
+        "Nome": {
+            "type": "string"
+        },
+        "Categoria": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "Nome",
+        "Categoria"
+    ]
+}
+```
+
+```json
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Ponto",
+    "type": "object",
+    "properties": {
+        "Id": {
+            "type": "string",
+            "format": "objectId"
+        },
+        "InicioExpediente": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "InicioIntervalo": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "FimIntervalo": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "FimExpediente": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "HorasPositivas": {
+            "type": "number"
+        },
+        "HorasNegativas": {
+            "type": "number"
+        },
+        "Saldo": {
+            "type": "number"
+        },
+        "Holerite": {
+            "type": "object",
+            "properties": {
+                "Id": {
+                    "type": "string",
+                    "format": "objectId"
+                },
+                "ValorHoraPositivas": {
+                    "type": "number"
+                },
+                "ValorHoraNegativas": {
+                    "type": "number"
+                },
+                "ValorTotalPositivas": {
+                    "type": "number"
+                },
+                "ValorTotalNegativas": {
+                    "type": "number"
+                },
+                "SalarioFinal": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "Id"
+            ]
+        },
+        "UsuarioId": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "id",
+        "Holerite"
+    ]
+}
+```
+
+```json
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Holerite",
+    "type": "object",
+    "properties": {
+        "Id": {
+            "type": "string",
+            "format": "objectId"
+        },
+        "ValorHoraPositivas": {
+            "type": "number"
+        },
+        "ValorHoraNegativas": {
+            "type": "number"
+        },
+        "ValorTotalPositivas": {
+            "type": "number"
+        },
+        "ValorTotalNegativas": {
+            "type": "number"
+        },
+        "SalarioFinal": {
+            "type": "number"
+        }
+    },
+    "required": [
+        "id"
+    ]
+}
+```
 
 ## Modelo Físico
 
