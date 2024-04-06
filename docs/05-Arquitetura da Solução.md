@@ -269,7 +269,75 @@ As referências abaixo irão auxiliá-lo na geração do artefato “Modelo ER�
 
 ## Modelo Físico
 
-Entregar um arquivo banco.sql contendo os scripts de criação das tabelas do banco de dados. Este arquivo deverá ser incluído dentro da pasta src\bd.
+```json
+{
+  "_id": ObjectId,
+  "Nome": String,
+  "CPF": String,
+  "Email": String,
+  "SenhaCriptografada": String,
+  "Setores": [
+    {
+      "_id": ObjectId,
+      "Nome": String,
+      "Categoria": String
+    }
+  ],
+  "StatusUsuario": String,
+  "DataCadastro": ISODate,
+  "DataNaciemnto": ISODate,
+  "Endereco": {
+    "Rua": String,
+    "Numero": String,
+    "Cep": String,
+    "Cidade": String,
+    "Estado": String
+  },
+  "Salario": Number,
+  "UsuarioAdmin": Boolean
+}
+```
+
+```json
+{
+  "_id": ObjectId,
+  "InicioExpediente": ISODate,
+  "InicioIntervalo": ISODate,
+  "FimIntervalo": ISODate,
+  "FimExpediente": ISODate,
+  "HorasPositivas": Number,
+  "HorasNegativas": Number,
+  "Saldo": Number,
+  "Holerite": {
+    "_id": ObjectId,
+    "ValorHoraPositivas": Number,
+    "ValorHoraNegativas": Number,
+    "ValorTotalPositivas": Number,
+    "ValorTotalNegativas": Number,
+    "SalarioFinal": Number
+  },
+  "UsuarioId": ObjectId
+}
+```
+
+```json
+{
+  "_id": ObjectId,
+  "Nome": String,
+  "Categoria": String
+}    
+```
+
+```json
+{
+  "_id": ObjectId,
+  "ValorHoraPositivas": Number,
+  "ValorHoraNegativas": Number,
+  "ValorTotalPositivas": Number,
+  "ValorTotalNegativas": Number,
+  "SalarioFinal": Number
+}
+```
 
 ## Tecnologias Utilizadas
 
