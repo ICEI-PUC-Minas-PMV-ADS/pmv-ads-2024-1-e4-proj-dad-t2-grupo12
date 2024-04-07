@@ -26,9 +26,10 @@ namespace registro_ponto.Models
 
         public decimal Saldo { get; set; }
 
+        public Holerite Holerite { get; set; }
 
         [Required]
-        public Holerite Holerite { get; set; }
+        public string usuarioId { get; set; }
 
     }
 

@@ -25,5 +25,9 @@ namespace registro_ponto.Models
 
         [Required]
         public decimal SalarioFinal { get; set; }
+
+        [Required]
+        public string usuarioId { get; set; }
+
     }
 }
