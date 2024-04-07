@@ -29,7 +29,7 @@ namespace registro_ponto.Models
         public Holerite Holerite { get; set; }
 
         [Required]
-        public string usuarioId { get; set; }
+        public string UsuarioId { get; set; }
 
     }
 
