@@ -38,43 +38,29 @@ Com relação ao controle do fluxo de versionamento, foi adotada a seguinte sequ
 
 ### Divisão de Papéis
 
-Apresente a divisão de papéis entre os membros do grupo.
+Para coordenar e atribuir responsabilidades no projeto, estamos adotando uma abordagem de gestão estruturada, conforme descrito a seguir:
 
-Exemplificação: A equipe utiliza metodologias ágeis, tendo escolhido o Scrum como base para definição do processo de desenvolvimento. A equipe está organizada da seguinte maneira:
-- Scrum Master: Felipe Domingos;
-- Product Owner: Rommel Carneiro;
-- Equipe de Desenvolvimento: Pedro Penna, Pedro Ivo, Rodrigo Richard;
-- Equipe de Design: Simone Nogueira.
+Não Iniciado: Esta lista centraliza as tarefas a serem abordadas e corresponde ao Backlog do Produto. Todas as atividades identificadas durante o curso do projeto devem ser incluídas aqui;
 
-> **Links Úteis**:
-> - [11 Passos Essenciais para Implantar Scrum no seu Projeto](https://mindmaster.com.br/scrum-11-passos/)
-> - [Scrum em 9 minutos](https://www.youtube.com/watch?v=XfvQWnRgxG0)
-> - [Os papéis do Scrum e a verdade sobre cargos nessa técnica](https://www.atlassian.com/br/agile/scrum/roles)
+Em progresso: Indica as tarefas que estão em progresso no momento;
+
+Concluído: Aqui são registradas as tarefas que passaram pelos testes e controle de qualidade, estando prontas para serem entregues ao usuário. Não requerem mais edições ou revisões; estão agendadas e prontas para serem implementadas. Optamos por utilizar o quadro Kanban para gerenciar o projeto. Com o sistema Kanban, podemos monitorar o progresso do trabalho da equipe, planejar etapas subsequentes, mensurar o tempo dedicado a tarefas específicas e facilitar a colaboração entre os membros da equipe, tudo de forma simples e visual.
+
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-grupo12/assets/86340530/6a5bb918-da72-416b-b2b9-e270721d70b0)
+
 
 ### Processo
 
-Coloque  informações sobre detalhes da implementação do Scrum seguido pelo grupo. O grupo deverá fazer uso do recurso de gerenciamento de projeto oferecido pelo GitHub, que permite acompanhar o andamento do projeto, a execução das tarefas e o status de desenvolvimento da solução.
- 
-> **Links Úteis**:
-> - [Planejamento e Gestáo Ágil de Projetos](https://pucminas.instructure.com/courses/87878/pages/unidade-2-tema-2-utilizacao-de-ferramentas-para-controle-de-versoes-de-software)
-> - [Sobre quadros de projeto](https://docs.github.com/pt/issues/organizing-your-work-with-project-boards/managing-project-boards/about-project-boards)
-> - [Project management, made simple](https://github.com/features/project-management/)
-> - [Sobre quadros de projeto](https://docs.github.com/pt/github/managing-your-work-on-github/about-project-boards)
-> - [Como criar Backlogs no Github](https://www.youtube.com/watch?v=RXEy6CFu9Hk)
-> - [Tutorial Slack](https://slack.com/intl/en-br/)
+Product Owner: Juliana Dutra
+
+Scrum Master: Renato Freitas
+
+Equipe de Desenvolvimento Web e Mobile: Pedro Mota, Leonardo Igor, Jonathan Costa
+
 
 ### Ferramentas
 
-As ferramentas de comunicação foram selecionadas com base na praticidade, levando em consideração a familiaridade dos membros com estas e a facilidade de uso. Foi escolhido o Figma devido à sua variedade de recursos, que permitem criar modelos de alta ou baixa fidelidade com grande qualidade, e também porque os membros já possuíam algum conhecimento básico prévio sobre essa ferramenta em projetos anteriores.
-
-As ferramentas utilizadas no desenvolvimento do projeto foram:
- 
-|FERRAMENTA | SOLUÇÃO |
-|--------------------|-----------------------------------|
-| IDE de desenvolvimento Front-end | Visual Studio Code - Microsoft |
-| IDE de desenvolvimento Front-end | Webstorm - Jetbrains |
-| IDE de desenvolvimento Back-end | Visual Studio - Microsoft |
-| IDE de desenvolvimento Back-end | Rider - Jetbrains |
-| Comunicação | As ferramentas utilizadas na comunicação foram o Microsoft Teams, Google Meets e WhatsApp |
-|Desenho e Prototipação| A ferramenta escolhida para o desenvolvimento de desenhos de telas foi o Figma |
-| Google Docs | Organização de tópicos e demandas da documentação |
+As ferramentas empregadas no projeto são:
+Editor de código - Visual Studio Code.
+Ferramentas de comunicação - WhatsApp, Microsoft Teams.
+Ferramentas de desenho de tela - Draw.io.
