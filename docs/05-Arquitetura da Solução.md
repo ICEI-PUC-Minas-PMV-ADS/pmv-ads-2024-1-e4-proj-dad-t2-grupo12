@@ -1,10 +1,6 @@
 # Arquitetura da Solução
 
-<span style="color:red">Pré-requisitos: <a href="3-Projeto de Interface.md"> Projeto de Interface</a></span>
-
-Definição de como o software é estruturado em termos dos componentes que fazem parte da solução e do ambiente de hospedagem da aplicação.
-
-![Arquitetura da Solução](img/02-mob-arch.png)
+![Captura de tela 2024-04-07 221229](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-grupo12/assets/114538749/cd949d2d-7da7-4ba4-a4f0-55ac7b53ea28)
 
 ## Diagrama de Classes
 
