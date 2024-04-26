@@ -1,0 +1,36 @@
+.app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.header {
+    background-color: #fdfdfd;
+    color: white;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    flex: 1;
+    padding: 0;
+}
+
+.menu-lateral {
+    width: 300px;
+    background-color: #f4f4f4;
+
+}
+
+
+.main-panel {
+    background-color: #f6f6f6;
+    flex: 1;
+    padding: 20px;
+}
+
+@media (min-width: 1280px) {
+    .container {
+        max-width: 3000px
+    }
+}
