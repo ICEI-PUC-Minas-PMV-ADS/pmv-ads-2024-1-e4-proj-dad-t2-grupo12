@@ -48,7 +48,7 @@ function DropdownButtonAction({ status }) {
 }
 
 DropdownButtonAction.propTypes = {
-    status: PropTypes.string.isRequired // Validação da propriedade 'status' como uma string obrigatória
+    status: PropTypes.string.isRequired
 };
 
 

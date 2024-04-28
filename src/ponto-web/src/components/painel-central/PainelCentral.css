@@ -6,34 +6,31 @@
     margin-bottom: 20px;
     border: 1px solid #fdfdfd;
     border-radius: 8px;
-    overflow: hidden; /* Para garantir que o conteúdo não ultrapasse os limites do card */
+    overflow: hidden;
     background: #fdfdfd;
 }
 
-/* Estilo para células de cabeçalho */
 th {
     line-height: 4;
     padding: 10px;
-    font-weight: bold; /* Deixa o texto em negrito */
-    text-align: center; /* Alinha o texto ao centro */
+    font-weight: bold;
+    text-align: center;
     border: none;
 }
 
-/* Estilo para células de dados */
 td {
     line-height: 3;
     padding: 10px;
-    text-align: center; /* Alinha o texto ao centro */
+    text-align: center;
     border: none;
 }
 
-/* Estilo para células de dados alternadas */
 tr:nth-child(even) {
-    background-color: #f9f9f9; /* Alterna a cor de fundo para melhorar a legibilidade */
+    background-color: #f9f9f9;
 }
 
 tr.tr-cabecalho-primeira-linha {
-    border-top: none; /* Remove a borda superior das células do cabeçalho */
+    border-top: none;
 }
 
 .tr-cabecalho-primeira-linha th {
@@ -42,14 +39,14 @@ tr.tr-cabecalho-primeira-linha {
 }
 
 .linha-tabela td {
-    color: #848484; /* Altere para a cor desejada */
+    color: #848484;
     font-size: 17px;
 }
 
 .aprovacao-badge {
-    background-color: #5ae05d; /* Altera a cor de fundo para verde */
-    color: white; /* Altera a cor do texto para branco */
-    font-size: 15px; /* Define o tamanho do texto como 12 pixels */
+    background-color: #5ae05d;
+    color: white;
+    font-size: 15px;
     border-radius: 25px;
     align-content: center;
     width: 150px;
@@ -57,9 +54,9 @@ tr.tr-cabecalho-primeira-linha {
 }
 
 .solicitacao-badge {
-    background-color: #e8be33; /* Altera a cor de fundo para verde */
-    color: white; /* Altera a cor do texto para branco */
-    font-size: 15px; /* Define o tamanho do texto como 12 pixels */
+    background-color: #e8be33;
+    color: white;
+    font-size: 15px;
     border-radius: 25px;
     align-content: center;
     width: 150px;
@@ -67,9 +64,9 @@ tr.tr-cabecalho-primeira-linha {
 }
 
 .incompleto-badge {
-    background-color: #f63b3b; /* Altera a cor de fundo para verde */
-    color: white; /* Altera a cor do texto para branco */
-    font-size: 15px; /* Define o tamanho do texto como 12 pixels */
+    background-color: #f63b3b;
+    color: white;
+    font-size: 15px;
     border-radius: 25px;
     align-content: center;
     width: 150px;
