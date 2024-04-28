@@ -30,6 +30,7 @@
     background-color: #f6f6f6;
     flex: 1;
     padding: 20px;
+    height: 90%;
 }
 
 .barra-pesquisa {
@@ -109,6 +110,15 @@
     border-left: 3px solid #ccc;
     height: 50px;
     margin: 0 10px;
+}
+
+.painel-table {
+    width: 96%;
+    height: 96%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
 }
 
 @media (min-width: 1280px) {

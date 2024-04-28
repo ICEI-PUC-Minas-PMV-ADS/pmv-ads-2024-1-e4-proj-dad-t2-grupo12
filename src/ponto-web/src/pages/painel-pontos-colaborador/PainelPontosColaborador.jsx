@@ -56,7 +56,9 @@ const PainelPontosColaborador = () => {
                         </div>
                     </div>
                     <div className="main-panel">
+                        <div className="painel-table">
                         <PainelCentral></PainelCentral>
+                        </div>
                     </div>
                 </div>
             </div>

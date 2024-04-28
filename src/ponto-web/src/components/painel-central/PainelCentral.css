@@ -1,0 +1,37 @@
+.table-div {
+    background: #fdfdfd;
+}
+
+.tr-cabecalho {
+    margin-bottom: 20px;
+    border: 1px solid #fdfdfd;
+    border-radius: 8px;
+    overflow: hidden; /* Para garantir que o conteúdo não ultrapasse os limites do card */
+    background: #fdfdfd;
+}
+
+/* Estilo para células de cabeçalho */
+th {
+    line-height: 4;
+    padding: 10px;
+    font-weight: bold; /* Deixa o texto em negrito */
+    text-align: center; /* Alinha o texto ao centro */
+    border: none;
+}
+
+/* Estilo para células de dados */
+td {
+    line-height: 3;
+    padding: 10px;
+    text-align: center; /* Alinha o texto ao centro */
+    border: none;
+}
+
+/* Estilo para células de dados alternadas */
+tr:nth-child(even) {
+    background-color: #f9f9f9; /* Alterna a cor de fundo para melhorar a legibilidade */
+}
+
+tr.tr-cabecalho-primeira-linha {
+    border-top: none; /* Remove a borda superior das células do cabeçalho */
+}

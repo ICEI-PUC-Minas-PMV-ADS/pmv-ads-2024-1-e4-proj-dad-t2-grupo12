@@ -1,0 +1,18 @@
+.dropdown-toggle {
+    background: #1f3c8d;
+    border-color: #1f3c8d;
+}
+
+.button-item {
+    margin: 0px;
+    padding: 0px 0px 0px 15px;
+    font-size: 15px;
+    font-weight: normal;
+}
+
+.button-menu {
+    width: 200px;
+    height: auto;
+    padding: 0px;
+    margin: 0px;
+}
