@@ -35,3 +35,43 @@ tr:nth-child(even) {
 tr.tr-cabecalho-primeira-linha {
     border-top: none; /* Remove a borda superior das células do cabeçalho */
 }
+
+.tr-cabecalho-primeira-linha th {
+    color: #838383;
+    font-size: 19px;
+}
+
+.linha-tabela td {
+    color: #848484; /* Altere para a cor desejada */
+    font-size: 17px;
+}
+
+.aprovacao-badge {
+    background-color: #5ae05d; /* Altera a cor de fundo para verde */
+    color: white; /* Altera a cor do texto para branco */
+    font-size: 15px; /* Define o tamanho do texto como 12 pixels */
+    border-radius: 25px;
+    align-content: center;
+    width: 150px;
+    height: 30px;
+}
+
+.solicitacao-badge {
+    background-color: #e8be33; /* Altera a cor de fundo para verde */
+    color: white; /* Altera a cor do texto para branco */
+    font-size: 15px; /* Define o tamanho do texto como 12 pixels */
+    border-radius: 25px;
+    align-content: center;
+    width: 150px;
+    height: 30px;
+}
+
+.incompleto-badge {
+    background-color: #f63b3b; /* Altera a cor de fundo para verde */
+    color: white; /* Altera a cor do texto para branco */
+    font-size: 15px; /* Define o tamanho do texto como 12 pixels */
+    border-radius: 25px;
+    align-content: center;
+    width: 150px;
+    height: 30px;
+}
