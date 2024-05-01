@@ -4,15 +4,6 @@
     height: 100vh;
 }
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    background-color: #fdfdfd;
-    color: white;
-    padding: 20px;
-    border-bottom: 1px solid rgb(229, 226, 226);
-}
-
 .container {
     display: flex;
     flex: 1;
@@ -32,12 +23,6 @@
     height: 80%;
 }
 
-.barra-pesquisa {
-    width: 600px;
-    margin-left: auto;
-    margin-right: 50px;
-}
-
 .form-control::placeholder {
     color: #999;
 }
@@ -46,17 +31,6 @@
     width: 40px;
     height: 40px;
     margin-left: 30px;
-}
-
-.user-name {
-    color: #4f5656;
-    margin-right: 30px;
-}
-
-.user-name-div {
-    margin-right: 50px;
-    margin-left: 10px;
-    margin-top: 8px;
 }
 
 .conteudo-central {
