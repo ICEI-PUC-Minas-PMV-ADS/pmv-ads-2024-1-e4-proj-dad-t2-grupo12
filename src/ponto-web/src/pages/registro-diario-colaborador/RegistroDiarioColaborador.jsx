@@ -1,6 +1,5 @@
 import './RegistroDiarioColaborador.css';
 import MenuLateral from "../../components/menu-lateral/MenuLateral.jsx";
-import {Button, InputGroup, Form, Image, Col} from "react-bootstrap";
 import Timeline from "../../components/timeline/Timeline.jsx";
 import Header from "../../components/header/Header.jsx";
 
