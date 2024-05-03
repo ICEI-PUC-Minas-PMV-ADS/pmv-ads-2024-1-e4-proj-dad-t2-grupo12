@@ -8,7 +8,7 @@
 
 .timeline-item {
     display: flex;
-    flex-direction: column; /* Alterando para column para alinhar os itens verticalmente */
+    flex-direction: column;
     position: relative;
     margin-top: 20px;
     padding: 5px 10px 5px 0px;
@@ -16,7 +16,7 @@
 
 .timeline-content-inicial {
     display: flex;
-    align-items: center; /* Alinhando os itens centralmente */
+    align-items: center;
     z-index: 2;
 }
 

@@ -112,7 +112,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #fff;
     display: flex;
-    position: relative; /* Torna o posicionamento dos elementos filhos relativo a este contêiner */
+    position: relative;
 
 }
 
@@ -193,15 +193,15 @@
 }
 
 .save-button {
-    position: absolute; /* Posiciona o botão de forma absoluta dentro do card */
-    bottom: 20px; /* Distância do fundo */
-    left: 50%; /* Posiciona o botão no meio horizontal do card */
-    transform: translateX(-50%); /* Centraliza horizontalmente o botão */
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .btn-save {
     font-weight: bold;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra suave */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 @media (min-width: 1280px) {
