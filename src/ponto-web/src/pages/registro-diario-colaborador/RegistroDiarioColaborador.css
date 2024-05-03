@@ -16,7 +16,6 @@
 .menu-lateral {
     width: 300px;
     background-color: #f4f4f4;
-
 }
 
 .main-panel {
@@ -107,12 +106,14 @@
 
 .central-card {
     width: 96%;
-    height: 96%;
+    height: 100%;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #fff;
     display: flex;
+    position: relative; /* Torna o posicionamento dos elementos filhos relativo a este contêiner */
+
 }
 
 .timeline-div {
@@ -121,12 +122,13 @@
 
 .timeline-titulo{
     color: #848484;
-    font-size: 20px;
+    font-size: 24px;
     font-weight: bold;
 }
 
 .motivo-div {
     padding: 10px 10px 0px 40px;
+    height: 250px;
 }
 
 .card-motivo {
@@ -140,9 +142,30 @@
     display: flex;
 }
 
+.saldo-informacao {
+    padding: 10px 0px 0px 40px;
+}
+
+.saldo-item {
+    padding-bottom: 20px;
+}
+
+.saldo-label {
+    font-size: 24px;
+    font-weight: bold;
+    color: #848484;
+}
+
+.saldo-valor {
+    color: #28a745;
+    font-size: 24px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
 .motivo-titulo {
     color: #848484;
-    font-size: 20px;
+    font-size: 24px;
     font-weight: bold;
 }
 
@@ -157,6 +180,29 @@
     font-size: 15px;
 }
 
+.botoes-div {
+    width: 300px;
+    padding-left: 30px;
+}
+
+
+.botoes-titulo {
+    padding-bottom: 30px;
+    padding-top: 30px;
+    text-align: center;
+}
+
+.save-button {
+    position: absolute; /* Posiciona o botão de forma absoluta dentro do card */
+    bottom: 20px; /* Distância do fundo */
+    left: 50%; /* Posiciona o botão no meio horizontal do card */
+    transform: translateX(-50%); /* Centraliza horizontalmente o botão */
+}
+
+.btn-save {
+    font-weight: bold;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra suave */
+}
 
 @media (min-width: 1280px) {
     .container {
