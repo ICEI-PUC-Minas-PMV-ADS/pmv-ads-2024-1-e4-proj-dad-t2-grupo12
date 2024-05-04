@@ -3,8 +3,11 @@ import MenuLateral from "../../components/menu-lateral/MenuLateral.jsx";
 import Timeline from "../../components/timeline/Timeline.jsx";
 import Header from "../../components/header/Header.jsx";
 import StatusSelector from "../../components/status-selector/StatusSelector.jsx";
+import {useNavigate} from "react-router-dom";
 
 const RegistroDiarioColaborador = () => {
+    const navigateTo = useNavigate()
+
     return (
         <div className="app">
             <Header></Header>
@@ -63,8 +66,9 @@ const RegistroDiarioColaborador = () => {
                                     <StatusSelector></StatusSelector>
                                 </div>
                             </div>
-                            <div className="save-button">
-                                <button type="button" className="btn btn-warning btn-save">Salvar</button>
+                            <div className="options-button">
+                                <button type="button" onClick={() => navigateTo(-1)} className="btn btn-warning btn-cancel">Cancelar</button>
+                                <button type="button" onClick={() => navigateTo(-1)} className="btn btn-warning btn-save">Salvar</button>
                             </div>
                         </div>
                     </div>

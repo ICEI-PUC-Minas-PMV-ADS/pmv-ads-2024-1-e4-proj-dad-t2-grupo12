@@ -192,16 +192,46 @@
     text-align: center;
 }
 
-.save-button {
+.options-button {
     position: absolute;
     bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+    right: 20px;
 }
 
 .btn-save {
     font-weight: bold;
+    background-color: #ffc107;
+    color: #212529;
+    margin-left: 10px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.btn-save:hover {
+    background-color: #e0a800;
+}
+
+.btn-save:active {
+    background-color: #d39e00;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.btn-cancel {
+    font-weight: bold;
+    background-color: #4f5656;
+    color: #f4f4f4;
+    margin-right: 20px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.btn-cancel:hover {
+    background-color: #343a3a;
+}
+
+.btn-cancel:active {
+    background-color: #2d3232;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 @media (min-width: 1280px) {

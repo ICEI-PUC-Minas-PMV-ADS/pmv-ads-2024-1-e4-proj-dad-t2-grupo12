@@ -1,34 +1,41 @@
 import Dropdown from 'react-bootstrap/Dropdown';
 import './DropdownButtonAction.css';
 import PropTypes from "prop-types";
+import {useNavigate} from "react-router-dom";
 
 function DropdownButtonAction({ status }) {
+    const navigateTo = useNavigate()
+
+    const handleVisualizarRegistrosClick = () => {
+        navigateTo(`registro-dia`);
+    };
+
     const renderizarItensDropdown = (status) => {
         switch (status) {
             case "Solicitação":
                 return (
                     <>
-                        <Dropdown.Item href="#/action-1" className="button-item">Visualizar registros do dia</Dropdown.Item>
-                        <Dropdown.Item href="#/action-1" className="button-item">Visualizar solicitação</Dropdown.Item>
+                        <Dropdown.Item onClick={handleVisualizarRegistrosClick} className="button-item">Visualizar registros do dia</Dropdown.Item>
+                        <Dropdown.Item className="button-item">Visualizar solicitação</Dropdown.Item>
                     </>
                 );
             case "Aprovado":
                 return (
                     <>
-                        <Dropdown.Item href="#/action-1" className="button-item">Visualizar registros do dia</Dropdown.Item>
+                        <Dropdown.Item onClick={handleVisualizarRegistrosClick} className="button-item">Visualizar registros do dia</Dropdown.Item>
                     </>
                 );
             case "Incompleto":
                 return (
                     <>
-                        <Dropdown.Item href="#/action-1" className="button-item">Visualizar registros do dia</Dropdown.Item>
-                        <Dropdown.Item href="#/action-3" className="button-item">Solicitar revisão</Dropdown.Item>
+                        <Dropdown.Item onClick={handleVisualizarRegistrosClick} className="button-item">Visualizar registros do dia</Dropdown.Item>
+                        <Dropdown.Item className="button-item">Solicitar revisão</Dropdown.Item>
                     </>
                 );
             default:
                 return (
                     <>
-                        <Dropdown.Item href="#/action-1" className="button-item" >Visualizar registros do dia</Dropdown.Item>
+                        <Dropdown.Item onClick={handleVisualizarRegistrosClick} className="button-item" >Visualizar registros do dia</Dropdown.Item>
                     </>
                 );
         }
