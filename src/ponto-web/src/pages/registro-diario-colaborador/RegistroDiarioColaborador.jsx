@@ -29,7 +29,7 @@ const RegistroDiarioColaborador = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="main-panel">
+                    <div className="main-painel">
                         <div className="central-card">
                             <div className="timeline-div">
                                 <span className="timeline-titulo">Registro de horários do dia:</span>

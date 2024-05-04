@@ -28,8 +28,8 @@ const PainelPontosColaborador = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="main-panel">
-                        <div className="painel-table">
+                    <div className="main-painel-pontos">
+                        <div className="painel-table-pontos">
                         <PainelCentral></PainelCentral>
                         </div>
                     </div>

@@ -11,8 +11,8 @@ const PaginaInicial = () => {
                     <MenuLateral></MenuLateral>
                 </div>
                 <div className="conteudo-central">
-                    <div className="main-panel">
-                        <div className="painel-table">
+                    <div className="main-painel-principal">
+                        <div className="painel-table-principal">
 
                         </div>
                     </div>
