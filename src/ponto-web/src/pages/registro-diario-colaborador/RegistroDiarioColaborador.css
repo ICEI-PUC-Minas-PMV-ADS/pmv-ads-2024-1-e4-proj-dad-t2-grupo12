@@ -1,0 +1,241 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #fdfdfd;
+    color: white;
+    padding: 20px;
+    border-bottom: 1px solid rgb(229, 226, 226);
+}
+
+.container {
+    display: flex;
+    flex: 1;
+    padding: 0;
+}
+
+.menu-lateral {
+    width: 300px;
+    background-color: #f4f4f4;
+}
+
+.main-painel {
+    background-color: #f6f6f6;
+    flex: 1;
+    padding: 20px;
+    height: 80%;
+}
+
+.barra-pesquisa {
+    width: 600px;
+    margin-left: auto;
+    margin-right: 50px;
+}
+
+.form-control::placeholder {
+    color: #999;
+}
+
+.imagem-perfil {
+    width: 40px;
+    height: 40px;
+    margin-left: 30px;
+}
+
+.user-name {
+    color: #4f5656;
+    margin-right: 30px;
+}
+
+.user-name-div {
+    margin-right: 50px;
+    margin-left: 10px;
+    margin-top: 8px;
+}
+
+.conteudo-central {
+    flex: 1;
+    background: #f6f6f6;
+}
+
+.top-table {
+    background-color: #f6f6f6;
+    color: #848484;
+    padding: 30px 0px 0px 30px;
+    margin-bottom: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.title-top-table {
+    width: 600px;
+}
+
+.name-top-table {
+    display: flex;
+    justify-content: flex-end;
+    font-weight: bold;
+    padding-left: 600px;
+}
+
+.employee-name {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    padding-left: 30px;
+}
+
+.setor-name {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
+    padding-right: 10px;
+}
+
+.setor-name span,
+.employee-name span {
+    margin-bottom: 5px;
+}
+
+.vertical-line {
+    border-left: 3px solid #ccc;
+    height: 50px;
+    margin: 0 10px;
+}
+
+.central-card {
+    width: 96%;
+    height: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    display: flex;
+    position: relative;
+
+}
+
+.timeline-div {
+    padding: 10px 30px 20px 30px;
+}
+
+.timeline-titulo{
+    color: #848484;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.motivo-div {
+    padding: 10px 10px 0px 40px;
+    height: 250px;
+}
+
+.card-motivo {
+    width: 500px;
+    height: 150px;
+    padding: 20px;
+    margin: 30px 20px 20px 0px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: rgba(245, 244, 244, 0.93);
+    display: flex;
+}
+
+.saldo-informacao {
+    padding: 10px 0px 0px 40px;
+}
+
+.saldo-item {
+    padding-bottom: 20px;
+}
+
+.saldo-label {
+    font-size: 24px;
+    font-weight: bold;
+    color: #848484;
+}
+
+.saldo-valor {
+    color: #28a745;
+    font-size: 24px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+.motivo-titulo {
+    color: #848484;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.vertical-line-painel {
+    border-left: 3px solid #efefef;
+    height: 450px;
+    margin: 50px 10px 10px 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.motivo-texto {
+    font-size: 15px;
+}
+
+.botoes-div {
+    width: 300px;
+    padding-left: 30px;
+}
+
+
+.botoes-titulo {
+    padding-bottom: 30px;
+    padding-top: 30px;
+    text-align: center;
+}
+
+.options-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+.btn-save {
+    font-weight: bold;
+    background-color: #ffc107;
+    color: #212529;
+    margin-left: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.btn-save:hover {
+    background-color: #e0a800;
+}
+
+.btn-save:active {
+    background-color: #d39e00;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.btn-cancel {
+    font-weight: bold;
+    background-color: #4f5656;
+    color: #f4f4f4;
+    margin-right: 20px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.btn-cancel:hover {
+    background-color: #343a3a;
+}
+
+.btn-cancel:active {
+    background-color: #2d3232;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+@media (min-width: 1280px) {
+    .container {
+        max-width: 3000px
+    }
+}
