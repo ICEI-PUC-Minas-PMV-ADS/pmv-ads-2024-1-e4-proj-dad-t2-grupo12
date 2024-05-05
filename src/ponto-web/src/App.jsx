@@ -6,6 +6,7 @@ import PainelPontosColaborador from "./pages/painel-pontos-colaborador/PainelPon
 import RegistroDiarioColaborador from "./pages/registro-diario-colaborador/RegistroDiarioColaborador.jsx";
 import Login from "./pages/login/Login.jsx";
 import CadastroUsuario from "./pages/cadastro-usuario/CadastroUsuario.jsx";
+import PaginaPerfil from './pages/pagina-perfil/PaginaPerfil.jsx';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path='painel-colaborador' element={<PainelPontosColaborador />} />
         <Route path='painel-colaborador/registro-dia' element={<RegistroDiarioColaborador />} />
         <Route path='cadastro-usuario' element={<CadastroUsuario />} />
+        <Route path='perfil' element={<PaginaPerfil/>}/>
     </Routes>
     </>
   )

@@ -13,7 +13,6 @@ const PaginaInicial = () => {
                 <div className="conteudo-central">
                     <div className="main-painel-principal">
                         <div className="painel-table-principal">
-
                         </div>
                     </div>
                 </div>
@@ -21,5 +20,6 @@ const PaginaInicial = () => {
         </div>
     );
 }
+
 
 export default PaginaInicial;
