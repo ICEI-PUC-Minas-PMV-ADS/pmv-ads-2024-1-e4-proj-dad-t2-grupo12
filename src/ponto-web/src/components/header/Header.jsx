@@ -1,4 +1,6 @@
 import './Header.css';
+import logotransparente from "/src/assets/logotransparente.png";
+import perfilimagem from "/src/assets/perfil.png";
 import {Button, InputGroup, Form, Image, Col} from "react-bootstrap";
 
 const Header = () => {
@@ -6,7 +8,7 @@ const Header = () => {
         <div className="app">
             <header className="header">
                 <div>
-                    <img src="src/assets/logotransparente.png" alt="Logo" width="50" height="50"/>
+                    <img src={logotransparente} alt="Logo" width="50" height="50"/>
                 </div>
                 <div className="barra-pesquisa">
                     <InputGroup className="mb-3">
@@ -22,7 +24,7 @@ const Header = () => {
                 </div>
                 <div className="usuario-logado">
                     <Col xs={6} md={4}>
-                        <Image src="src/assets/perfil.png" roundedCircle
+                        <Image src={perfilimagem} roundedCircle
                                className="imagem-perfil"
                         />
                     </Col>

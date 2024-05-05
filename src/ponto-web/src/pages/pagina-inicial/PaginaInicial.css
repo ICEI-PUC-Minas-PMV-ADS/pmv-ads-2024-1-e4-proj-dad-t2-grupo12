@@ -1,19 +1,30 @@
-.painel-table {
+.painel-table-inicial {
     height: 750px;
 }
 
-.main-painel-principal {
+.main-painel-inicial {
     background-color: #f6f6f6;
     flex: 1;
     padding: 20px;
-    height: 90%;
+    height: 700px;
 }
 
-.painel-table-principal {
+.painel-table-inicial {
+    position: relative; /* Adicionando posição relativa para que a posição absoluta da imagem seja relativa a este contêiner */
     width: 96%;
     height: 100%;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #fff;
+    overflow: hidden; /* Garantindo que a imagem não ultrapasse o contêiner */
+}
+
+.imagem-painel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0.5;
+    width: 900px; /* Defina a largura desejada */
+    height: auto; /* Mantenha a proporção da imagem */
 }

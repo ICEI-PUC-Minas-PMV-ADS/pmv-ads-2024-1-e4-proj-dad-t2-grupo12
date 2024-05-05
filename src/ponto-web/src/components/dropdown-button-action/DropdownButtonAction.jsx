@@ -15,27 +15,27 @@ function DropdownButtonAction({ status }) {
             case "Solicitação":
                 return (
                     <>
-                        <Dropdown.Item onClick={handleVisualizarRegistrosClick} className="button-item">Visualizar registros do dia</Dropdown.Item>
-                        <Dropdown.Item className="button-item">Visualizar solicitação</Dropdown.Item>
+                        <Dropdown.Item className="button-item">Visualizar registros do dia</Dropdown.Item>
+                        <Dropdown.Item className="button-item" onClick={handleVisualizarRegistrosClick}>Visualizar solicitação</Dropdown.Item>
                     </>
                 );
             case "Aprovado":
                 return (
                     <>
-                        <Dropdown.Item onClick={handleVisualizarRegistrosClick} className="button-item">Visualizar registros do dia</Dropdown.Item>
+                        <Dropdown.Item className="button-item">Visualizar registros do dia</Dropdown.Item>
                     </>
                 );
             case "Incompleto":
                 return (
                     <>
-                        <Dropdown.Item onClick={handleVisualizarRegistrosClick} className="button-item">Visualizar registros do dia</Dropdown.Item>
+                        <Dropdown.Item className="button-item">Visualizar registros do dia</Dropdown.Item>
                         <Dropdown.Item className="button-item">Solicitar revisão</Dropdown.Item>
                     </>
                 );
             default:
                 return (
                     <>
-                        <Dropdown.Item onClick={handleVisualizarRegistrosClick} className="button-item" >Visualizar registros do dia</Dropdown.Item>
+                        <Dropdown.Item >Visualizar registros do dia</Dropdown.Item>
                     </>
                 );
         }
