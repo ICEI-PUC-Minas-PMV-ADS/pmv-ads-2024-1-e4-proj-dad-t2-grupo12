@@ -11,8 +11,14 @@ const PaginaInicial = () => {
                     <MenuLateral></MenuLateral>
                 </div>
                 <div className="conteudo-central">
-                    <div className="main-painel-principal">
-                        <div className="painel-table-principal">
+                    <div className="top-table">
+                        <div className="title-top-table">
+                            <h2>Bem vindo, usuário logado</h2>
+                        </div>
+                    </div>
+                    <div className="main-painel-inicial">
+                        <div className="painel-table-inicial">
+                            <img src="src/assets/logogrande.png" alt="Descrição da imagem" className="imagem-painel" />
                         </div>
                     </div>
                 </div>
