@@ -6,7 +6,7 @@ const Perfil = () => {
     return (
         <div className="perfil-container">
             <div className="perfil-dados-fixo">
-                <img src="" alt="Foto do usuário" className="perfil-foto"/>
+                <img src="src/assets/exemplo.jpeg" alt="Foto do usuário" className="perfil-foto"/>
                 <input type="text" value="Usuário Teste" disabled className="input-disabled"/>
                 <input type="text" value="usuario@teste.com" disabled className="input-disabled"/>
                 <input type="text" value="000.000.000-00" disabled className="input-disabled"/>
@@ -15,12 +15,11 @@ const Perfil = () => {
             <div className="perfil-dados-editaveis">
             <label>
                     Setor:
-                    <select defaultValue="TI" className="input-editavel">
+                    <select defaultValue="Comercial" className="input-editavel">
                         <option value="Comercial">Comercial</option>
                         <option value="Operacional">Operacional</option>
                         <option value="RH">RH</option>
                         <option value="Logistica">Logística</option>
-                        <option value="TI">TI</option> {/* Incluído para manter a entrada padrão */}
                     </select>
                 </label>
                 <label>

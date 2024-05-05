@@ -30,7 +30,7 @@
 }
 
 .input-disabled, .input-editavel {
-    width: 70%; /* Largura dos inputs */
+     /* Largura dos inputs */
     padding: 10px;
     margin: 10px 0;
     border: none;
@@ -65,3 +65,4 @@
      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
      background-color: #ffffff;
 }
+
