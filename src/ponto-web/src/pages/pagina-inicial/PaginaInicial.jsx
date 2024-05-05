@@ -1,4 +1,5 @@
 import './PaginaInicial.css';
+import logogrande from "/src/assets/logogrande.png.png";
 import MenuLateral from "../../components/menu-lateral/MenuLateral.jsx";
 import Header from "../../components/header/Header.jsx";
 
@@ -18,7 +19,7 @@ const PaginaInicial = () => {
                     </div>
                     <div className="main-painel-inicial">
                         <div className="painel-table-inicial">
-                            <img src="src/assets/logogrande.png" alt="Descrição da imagem" className="imagem-painel" />
+                            <img src={logogrande} alt="Descrição da imagem" className="imagem-painel" />
                         </div>
                     </div>
                 </div>
