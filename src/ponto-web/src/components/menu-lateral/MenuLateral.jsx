@@ -19,7 +19,7 @@ function MenuLateral() {
             <Dropdown.Item eventKey="2" onClick={() => handleNavigateTo(`/`)}>Página inicial</Dropdown.Item>
             <Dropdown.Item eventKey="3" onClick={() => handleNavigateTo(`painel-colaborador`)}>Solicitações </Dropdown.Item>
             <Dropdown.Item eventKey="4">Cadastrar/Editar colaborador</Dropdown.Item>
-            <Dropdown.Item eventKey="4">Perfil</Dropdown.Item>
+            <Dropdown.Item eventKey="4" onClick={() => handleNavigateTo('perfil')}>Perfil</Dropdown.Item>
         </Dropdown.Menu>
     );
 }

@@ -1,0 +1,67 @@
+/* Perfil.css */
+.perfil-container {
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+.perfil-dados-editaveis{
+    justify-content: center;
+
+}
+
+.perfil-dados-fixo, .perfil-dados-editaveis {
+    flex: 1;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: #fff; /* Fundo branco para os painéis */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.perfil-foto {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.input-disabled, .input-editavel {
+    width: 70%; /* Largura dos inputs */
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    background-color: #f0f0f0; /* Fundo cinza claro para inputs */
+}
+
+.input-editavel {
+    background-color: #d4d4d4; /* Fundo branco para inputs editáveis */
+    
+}
+
+.btn-resetar {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50; /* Verde para o botão */
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-resetar:hover {
+    background-color: #45a049; /* Escurece o botão ao passar o mouse */
+}
+
+.painel-table-principal{
+    width: 96%; 
+     height: 100%; 
+     padding: 20px; 
+     border-radius: 10px; 
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+     background-color: #ffffff;
+}
