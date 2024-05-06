@@ -30,7 +30,7 @@
 }
 
 .input-disabled, .input-editavel {
-    width: 70%; /* Largura dos inputs */
+     /* Largura dos inputs */
     padding: 10px;
     margin: 10px 0;
     border: none;
@@ -40,7 +40,8 @@
 
 .input-editavel {
     background-color: #d4d4d4; /* Fundo branco para inputs editáveis */
-    
+    width: auto;
+    margin-left: 10px;
 }
 
 .btn-resetar {
@@ -64,4 +65,8 @@
      border-radius: 10px; 
      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
      background-color: #ffffff;
+}
+
+.label-perfil {
+    width: 400px;
 }
