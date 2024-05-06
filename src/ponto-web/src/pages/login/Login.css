@@ -4,7 +4,8 @@
     align-items: center;
     min-height: 100vh;
     background-size:cover;
-    background: url("src/assets/logogrande.png") no-repeat center;
+    /*background: url("src/assets/logogrande.png") no-repeat center;*/
+    background: url("/assets/logogrande.png") no-repeat center;
 }
 
 .conteiner {
