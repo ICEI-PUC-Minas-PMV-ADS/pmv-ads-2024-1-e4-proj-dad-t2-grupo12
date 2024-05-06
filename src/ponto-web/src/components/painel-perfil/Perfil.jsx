@@ -1,12 +1,15 @@
 // Perfil.jsx
 import React from 'react';
 import './Perfil.css';
+import fotousuario from "/src/assets/exemplo.jpeg";
+
+
 
 const Perfil = () => {
     return (
         <div className="perfil-container">
             <div className="perfil-dados-fixo">
-                <img src="src/assets/exemplo.jpeg" alt="Foto do usuário" className="perfil-foto"/>
+                <img src={fotousuario} alt="Foto do usuário" className="perfil-foto"/>
                 <input type="text" value="Usuário Teste" disabled className="input-disabled"/>
                 <input type="text" value="usuario@teste.com" disabled className="input-disabled"/>
                 <input type="text" value="000.000.000-00" disabled className="input-disabled"/>
