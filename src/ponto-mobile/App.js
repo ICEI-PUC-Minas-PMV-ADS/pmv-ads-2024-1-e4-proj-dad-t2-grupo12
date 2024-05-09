@@ -1,10 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import PaginaInicial from "./src/pages/pagina-inicial/PaginaInicial";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Se você esta vendo isso é porque deu certo</Text>
+      <PaginaInicial></PaginaInicial>
       <StatusBar style="auto" />
     </View>
   );
@@ -13,8 +14,5 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
