@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import PaginaInicial from "./src/pages/pagina-inicial/PaginaInicial";
+import PaginaInicial from "./src/pages/PaginaInicial";
 
 export default function App() {
   return (

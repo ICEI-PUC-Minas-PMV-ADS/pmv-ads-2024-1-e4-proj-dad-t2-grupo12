@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
-import HeaderMenu from "../../components/header/HeaderMenu";
+import HeaderMenu from "../components/HeaderMenu";
 
 const PaginaInicial = () => {
 
