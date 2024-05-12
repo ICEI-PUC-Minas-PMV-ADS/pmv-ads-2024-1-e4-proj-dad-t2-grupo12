@@ -13,14 +13,14 @@ const HeaderMenu = () => {
     };
 
     return (
-        <View style={styles.container}>
+        <View style={styles.containerMenu}>
             <View style={styles.header}>
                 <Pressable onPress={toggleMenu}>
                     <Text style={styles.menuIcon}>{isMenuOpen ? 'X' : '☰'}</Text>
                 </Pressable>
                 <Text style={styles.title}>Controle de Ponto</Text>
             </View>
-            <View style={styles.content}>
+            <View style={styles.contentMenu}>
                 {isMenuOpen && (
                     <View style={styles.menu}>
                         <Pressable onPress={handlePrintOk}>
@@ -48,7 +48,7 @@ const HeaderMenu = () => {
 const HEADER_HEIGHT = 60;
 
 const styles = StyleSheet.create({
-    container: {
+    containerMenu: {
         flex: 1,
     },
     header: {
@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
         borderBottomColor: '#ccc',
         height: HEADER_HEIGHT,
         marginTop: 30,
+        backgroundColor: '#efeef4',
     },
     title: {
         fontSize: 20,
@@ -71,10 +72,10 @@ const styles = StyleSheet.create({
     menu: {
         position: 'absolute',
         left: 0,
-        backgroundColor: '#f0f0f0',
+        backgroundColor: 'red', // Opacidade ajustável
         paddingVertical: 10,
         width: '100%', // Largura total
-        zIndex: 1, // Garante que o menu esteja acima do conteúdo
+        zIndex: 1,
     },
     menuItem: {
         fontSize: 18,
@@ -85,10 +86,10 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
     },
-    content: {
+    contentMenu: {
         flex: 1,
-        position: 'relative', // Para garantir que o conteúdo não seja coberto pelo menu
-        zIndex: 0, // Para garantir que o conteúdo não seja coberto pelo menu
+        position: 'relative',
+        zIndex: 0,
     },
 });
 
