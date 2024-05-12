@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, Pressable} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 
 const HeaderMenu = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,30 +20,37 @@ const HeaderMenu = () => {
                 </Pressable>
                 <Text style={styles.title}>Controle de Ponto</Text>
             </View>
-            {isMenuOpen && (
-                <View style={styles.menu}>
-                    <Pressable onPress={handlePrintOk}>
-                        <Text style={styles.menuItem}>Página inicial</Text>
-                    </Pressable>
-                    <View style={styles.divider}></View>
-                    <Pressable>
-                        <Text style={styles.menuItem}>Solicitações</Text>
-                    </Pressable>
-                    <View style={styles.divider}></View>
-                    <Pressable>
-                        <Text style={styles.menuItem}>Cadastrar colaborador</Text>
-                    </Pressable>
-                    <View style={styles.divider}></View>
-                    <Pressable>
-                        <Text style={styles.menuItem}>Perfil</Text>
-                    </Pressable>
-                </View>
-            )}
+            <View style={styles.content}>
+                {isMenuOpen && (
+                    <View style={styles.menu}>
+                        <Pressable onPress={handlePrintOk}>
+                            <Text style={styles.menuItem}>Página inicial</Text>
+                        </Pressable>
+                        <View style={styles.divider}></View>
+                        <Pressable>
+                            <Text style={styles.menuItem}>Solicitações</Text>
+                        </Pressable>
+                        <View style={styles.divider}></View>
+                        <Pressable>
+                            <Text style={styles.menuItem}>Cadastrar colaborador</Text>
+                        </Pressable>
+                        <View style={styles.divider}></View>
+                        <Pressable>
+                            <Text style={styles.menuItem}>Perfil</Text>
+                        </Pressable>
+                    </View>
+                )}
+            </View>
         </View>
     );
 }
 
+const HEADER_HEIGHT = 60;
+
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
     header: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -51,7 +58,8 @@ const styles = StyleSheet.create({
         padding: 15,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
-        marginTop: 30
+        height: HEADER_HEIGHT,
+        marginTop: 30,
     },
     title: {
         fontSize: 20,
@@ -61,16 +69,17 @@ const styles = StyleSheet.create({
         fontSize: 24,
     },
     menu: {
+        position: 'absolute',
+        left: 0,
         backgroundColor: '#f0f0f0',
         paddingVertical: 10,
+        width: '100%', // Largura total
+        zIndex: 1, // Garante que o menu esteja acima do conteúdo
     },
     menuItem: {
         fontSize: 18,
         paddingHorizontal: 20,
         paddingVertical: 10,
-    },
-    selectedMenuItem: {
-        color: 'blue',
     },
     divider: {
         borderBottomWidth: 1,
@@ -78,9 +87,8 @@ const styles = StyleSheet.create({
     },
     content: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingHorizontal: 20,
+        position: 'relative', // Para garantir que o conteúdo não seja coberto pelo menu
+        zIndex: 0, // Para garantir que o conteúdo não seja coberto pelo menu
     },
 });
 
