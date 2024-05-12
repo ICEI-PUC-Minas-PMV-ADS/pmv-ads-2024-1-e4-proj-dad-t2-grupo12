@@ -72,9 +72,9 @@ const styles = StyleSheet.create({
     menu: {
         position: 'absolute',
         left: 0,
-        backgroundColor: 'red', // Opacidade ajustável
+        backgroundColor: '#f0f0f0',
         paddingVertical: 10,
-        width: '100%', // Largura total
+        width: '100%',
         zIndex: 1,
     },
     menuItem: {
