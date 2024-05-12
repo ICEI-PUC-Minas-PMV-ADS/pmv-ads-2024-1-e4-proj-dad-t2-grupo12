@@ -19,9 +19,9 @@ const TabelaPontosSemanais = ({ data }) => {
     return (
         <View style={styles.container}>
             <View style={styles.principalRow}>
-                <Text style={[styles.cell, styles.header]}>Data</Text>
-                <Text style={[styles.cell, styles.header]}>Entrada/Saída</Text>
-                <Text style={[styles.cell, styles.header]}>Saldo Diário</Text>
+                <Text style={[styles.cellPrincipal, styles.header]}>Data</Text>
+                <Text style={[styles.cellPrincipal, styles.header]}>Entrada/Saída</Text>
+                <Text style={[styles.cellPrincipal, styles.header]}>Saldo Diário</Text>
             </View>
             {data.map((rowData, index) => (
                 <Pressable
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingTop: 15,
         paddingBottom: 15,
-        backgroundColor: '#efeef4',
+        backgroundColor: '#14213d',
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
     },
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingTop: 15,
         paddingBottom: 15,
-        backgroundColor: '#f6f6f6',
+        backgroundColor: '#ffffff',
     },
     rowPressed: {
         backgroundColor: '#dcdcdc'
@@ -71,6 +71,13 @@ const styles = StyleSheet.create({
         flex: 1,
         textAlign: 'center',
         color: '#7e7d7d',
+        fontSize: 15
+        ,
+    },
+    cellPrincipal: {
+        flex: 1,
+        textAlign: 'center',
+        color: '#fdfdfd',
         fontSize: 15
         ,
     },
