@@ -1,17 +1,17 @@
-FROM ubuntu:latest AS build
-#LABEL authors="Julianadm"
+FROM maven:3.8.5-openjdk-17 AS build
 
-RUN apt-get update
-RUN apt-get install openjdk-17-jdk -y
-COPY . .
+WORKDIR /app
 
-RUN apt-get install maven -y
+COPY pom.xml .
+
+COPY src ./src
+
 RUN mvn clean install
 
 FROM openjdk:17-jdk-slim
+WORKDIR /app
 
+COPY --from=build /app/target/nova-api-controller-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
-
-COPY --from=build target/nova-api-controller-0.0.1-SNAPSHOT.jar app.jar
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
