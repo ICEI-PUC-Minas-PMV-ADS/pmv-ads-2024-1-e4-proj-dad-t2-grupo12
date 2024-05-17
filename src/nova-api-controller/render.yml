@@ -1,0 +1,1 @@
+buildCommand: "docker build -f src/nova-api-controller/Dockerfile -t nova-api-controller ."
