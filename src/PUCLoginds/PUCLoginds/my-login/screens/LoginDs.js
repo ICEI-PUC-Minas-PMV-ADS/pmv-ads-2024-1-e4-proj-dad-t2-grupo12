@@ -1,37 +1,35 @@
 import React, { useState } from 'react';
+import { View, StyleSheet } from 'react-native'; // Adicionado View e StyleSheet
 import { Button, Input, Text } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from '../style/MainStyle';
 
-
-export default function LoginDs({navigation}) {
+export default function LoginDs({ navigation }) {
   
-  const [email, setEmail] = useState(null)
-  const [password, setPassword] = useState(null)
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
 
   const entrar = () => {
-    console.log("entrou")
-    console.log(email)
-    console.log(password)
-
-    }
+    console.log("entrou");
+    console.log(email);
+    console.log(password);
+  };
     
-   return (
+  return (
     <View style={[styles.container, specificStyle.specificContainer]}>
-      <Text h3>Entrar no App </Text>
+      <Text h3>Entrar no App</Text>
       <Input 
-      placeholder='E-mail'
-      leftIcon = {{type: 'font-awesome', name:'envelope'}}
-      onChangeText={value => setEmail(value)}
-      keyboardType='email-address'> 
-      </Input>
+        placeholder='E-mail'
+        leftIcon={{ type: 'font-awesome', name: 'envelope' }}
+        onChangeText={value => setEmail(value)}
+        keyboardType='email-address'
+      />
       <Input 
-      placeholder='Digite a senha'
-      leftIcon = {{type: 'font-awesome', name:'lock'}}
-      onChangeText={value => setPassword(value)}
-      secureTextEntry = {true}> 
-      </Input>
-      
+        placeholder='Digite a senha'
+        leftIcon={{ type: 'font-awesome', name: 'lock' }}
+        onChangeText={value => setPassword(value)}
+        secureTextEntry={true}
+      />
       <Button
         icon={
           <Icon 
@@ -41,14 +39,14 @@ export default function LoginDs({navigation}) {
           />
         }
         title="Entrar"
-        onPress={() => entrar()}
+        onPress={entrar}
       />
     </View>
   );
 }
+
 const specificStyle = StyleSheet.create({
-  specificContainer:{
+  specificContainer: {
     backgroundColor: '#fff'
   }
-})
-
+});
