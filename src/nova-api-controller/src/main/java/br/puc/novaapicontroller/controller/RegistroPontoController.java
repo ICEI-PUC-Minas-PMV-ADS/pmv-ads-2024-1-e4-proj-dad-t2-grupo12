@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/v1/public/registroponto")
+@CrossOrigin(origins = "http://localhost:8081", maxAge = 3600)
 public class RegistroPontoController {
 
     private final RegistroPontoService service;
