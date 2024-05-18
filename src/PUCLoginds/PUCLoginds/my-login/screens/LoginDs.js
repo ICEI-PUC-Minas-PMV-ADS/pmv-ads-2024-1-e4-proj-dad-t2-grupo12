@@ -10,10 +10,16 @@ export default function LoginDs({ navigation }) {
   const [password, setPassword] = useState(null);
 
   const entrar = () => {
-    console.log("entrou");
-    console.log(email);
-    console.log(password);
+    navigation.reset({
+      index:0,
+      routes: [{name:"Principal"}]
+    })
   };
+
+  const cadastrar = () => {
+    navigation.navigate("Cadastro")
+  };
+
     
   return (
     <View style={[styles.container, specificStyle.specificContainer]}>
@@ -38,8 +44,23 @@ export default function LoginDs({ navigation }) {
             color="white"
           />
         }
-        title="Entrar"
-        onPress={entrar}
+        title=" Entrar"
+        buttonStyle={specificStyle.button}
+        onPress={() =>entrar()}
+      />
+
+
+      <Button
+        icon={
+          <Icon 
+            name="user"
+            size={15}
+            color="white"
+          />
+        }
+        title=" Cadastrar"
+        buttonStyle={specificStyle.button}
+        onPress={() => cadastrar()}
       />
     </View>
   );
@@ -48,5 +69,9 @@ export default function LoginDs({ navigation }) {
 const specificStyle = StyleSheet.create({
   specificContainer: {
     backgroundColor: '#fff'
+  },
+    button:{ 
+      width: "100%",
+    marginTop: 10
   }
 });
