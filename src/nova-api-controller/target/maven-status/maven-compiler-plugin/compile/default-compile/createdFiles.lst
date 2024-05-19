@@ -1,4 +1,5 @@
 br\puc\novaapicontroller\client\UsuarioPontoClient.class
+br\puc\novaapicontroller\config\WebConfig.class
 br\puc\novaapicontroller\dto\usuario\SetorDto.class
 br\puc\novaapicontroller\dto\usuario\UsuarioDto$UsuarioDtoBuilder.class
 br\puc\novaapicontroller\service\UsuarioPontoService.class
@@ -22,5 +23,5 @@ br\puc\novaapicontroller\util\ClientUtil.class
 br\puc\novaapicontroller\client\RegistroPontoClient$1.class
 br\puc\novaapicontroller\dto\usuario\SetorDto$SetorDtoBuilder.class
 br\puc\novaapicontroller\client\UsuarioPontoClient$1.class
-br\puc\novaapicontroller\config\SecurityConfig.class
+br\puc\novaapicontroller\config\WebConfig$1.class
 br\puc\novaapicontroller\service\RegistroPontoService.class
