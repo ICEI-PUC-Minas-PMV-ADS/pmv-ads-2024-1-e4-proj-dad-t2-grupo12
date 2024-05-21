@@ -38,7 +38,7 @@ export default function Cadastro({navigation}) {
     if (telefone == null){
         setErroTelefone("Preencher telefone correto.")
         erro = true
-    }
+    } 
     return !erro
   }
 
