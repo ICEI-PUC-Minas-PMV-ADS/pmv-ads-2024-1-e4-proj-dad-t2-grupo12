@@ -19,8 +19,8 @@ public class UsuarioPontoService {
         return usuarioClient.obterListaUsarios();
     }
 
-    public UsuarioDto obterUsario(String id) {
-        return usuarioClient.obterUsario(id);
+    public UsuarioDto obterUsario(String id, String token) {
+        return usuarioClient.obterUsario(id, token);
 
     }
 
@@ -29,8 +29,8 @@ public class UsuarioPontoService {
 
     }
 
-    public UsuarioDto editarUsuario(String id, UsuarioDto usuario) throws JsonProcessingException {
-        return usuarioClient.editarUsuario(id, usuario);
+    public UsuarioDto editarUsuario(String id, UsuarioDto usuario, String token) throws JsonProcessingException {
+        return usuarioClient.editarUsuario(id, usuario, token);
     }
 
     public UsuarioDto removerUsuario(String id) throws JsonProcessingException {

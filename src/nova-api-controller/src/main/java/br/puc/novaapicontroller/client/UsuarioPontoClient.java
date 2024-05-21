@@ -36,7 +36,7 @@ public class UsuarioPontoClient {
 
     public List<UsuarioDto> obterListaUsarios() {
         String erroPadrao = "Erro ao buscar lista de usuarios ";
-        Request requisicao = construirRequisicaoGet("");
+        Request requisicao = construirRequisicaoGet("", "", "");
 
         try (Response resposta = ClientUtil.obterClient(okHttpClient).newCall(requisicao).execute()) {
             if (resposta.isSuccessful() && resposta.body() != null) {
@@ -56,9 +56,9 @@ public class UsuarioPontoClient {
         return null;
     }
 
-    public UsuarioDto obterUsario(String id) {
+    public UsuarioDto obterUsario(String id, String token ) {
         String erroPadrao = "Erro ao buscar usuario ";
-        Request requisicao = construirRequisicaoGet(id);
+        Request requisicao = construirRequisicaoGet(id, "Authorization", token);
 
         return executarRequisicao(erroPadrao, requisicao);
     }
@@ -73,12 +73,12 @@ public class UsuarioPontoClient {
         return executarRequisicao(erroPadrao, requisicao);
     }
 
-    public UsuarioDto editarUsuario(String id, UsuarioDto usuario) throws JsonProcessingException {
+    public UsuarioDto editarUsuario(String id, UsuarioDto usuario, String token) throws JsonProcessingException {
         String erroPadrao = "Erro ao editar usuario ";
 
         String corpo = objectMapper.writeValueAsString(usuario);
         RequestBody corpoRequisicao = ClientUtil.converterCorpoRequisicao(corpo);
-        Request requisicao = construirRequisicaoPut(id, corpoRequisicao);
+        Request requisicao = construirRequisicaoPut(id, corpoRequisicao, token);
 
         return executarRequisicao(erroPadrao, requisicao);
     }
@@ -110,11 +110,20 @@ public class UsuarioPontoClient {
         return null;
     }
 
-    private Request construirRequisicaoGet(String urlComplemento) {
-        return new Request.Builder()
-                .url(url + urlComplemento)
-                .get()
-                .build();
+    private Request construirRequisicaoGet(String urlComplemento, String headerNome, String headerValor) {
+        if (headerNome.equalsIgnoreCase("")) {
+            return new Request.Builder()
+                    .url(url + urlComplemento)
+                    .get()
+                    .build();
+        } else {
+            return new Request.Builder()
+                    .url(url + urlComplemento)
+                    .header(headerNome, headerValor)
+                    .get()
+                    .build();
+        }
+
     }
 
     private Request construirRequisicaoPost(String urlComplemento, RequestBody corpoRequisicao) {
@@ -124,9 +133,10 @@ public class UsuarioPontoClient {
                 .build();
     }
 
-    private Request construirRequisicaoPut(String urlComplemento, RequestBody corpoRequisicao) {
+    private Request construirRequisicaoPut(String urlComplemento, RequestBody corpoRequisicao, String token) {
         return new Request.Builder()
                 .url(url + urlComplemento)
+                .header("Authorization", token)
                 .put(corpoRequisicao)
                 .build();
     }
