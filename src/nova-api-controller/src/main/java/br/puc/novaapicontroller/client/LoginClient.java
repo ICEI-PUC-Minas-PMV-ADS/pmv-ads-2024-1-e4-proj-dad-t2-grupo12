@@ -37,7 +37,7 @@ public class LoginClient {
 
         String corpo = objectMapper.writeValueAsString(request);
         RequestBody corpoRequisicao = ClientUtil.converterCorpoRequisicao(corpo);
-        Request requisicao = construirRequisicaoPost("/authenticate", corpoRequisicao);
+        Request requisicao = construirRequisicaoPost("authenticate", corpoRequisicao);
 
         return executarRequisicaoLogin(erroPadrao, requisicao);
     }
