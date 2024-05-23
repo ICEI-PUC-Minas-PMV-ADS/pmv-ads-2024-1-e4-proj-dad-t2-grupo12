@@ -19,12 +19,15 @@ br\puc\novaapicontroller\dto\registroponto\PontoDto$PontoDtoBuilder.class
 br\puc\novaapicontroller\dto\usuario\UsuarioDto.class
 br\puc\novaapicontroller\util\DateUtil.class
 br\puc\novaapicontroller\util\enums\StatusUsuarioEnum.class
+br\puc\novaapicontroller\dto\Login\LoginBasic.class
 br\puc\novaapicontroller\dto\registroponto\HoleriteDto$HoleriteDtoBuilder.class
 br\puc\novaapicontroller\NovaApiControllerApplication.class
+br\puc\novaapicontroller\dto\Login\LoginSiteResponse.class
 br\puc\novaapicontroller\dto\usuario\EnderecoDto.class
 br\puc\novaapicontroller\dto\usuario\EnderecoDto$EnderecoDtoBuilder.class
 br\puc\novaapicontroller\util\ClientUtil.class
 br\puc\novaapicontroller\client\RegistroPontoClient$1.class
+br\puc\novaapicontroller\util\CriptografiaUtil.class
 br\puc\novaapicontroller\dto\usuario\SetorDto$SetorDtoBuilder.class
 br\puc\novaapicontroller\controller\LoginController.class
 br\puc\novaapicontroller\client\UsuarioPontoClient$1.class

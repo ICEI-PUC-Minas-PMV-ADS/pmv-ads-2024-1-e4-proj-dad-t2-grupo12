@@ -100,6 +100,12 @@ namespace ponto_usuario.Controllers
 
             return Ok(new
             {
+                id = usuarioDb.Id,
+                email = usuarioDb.Email,
+                endereco = usuarioDb.Endereco,
+                setores = usuarioDb.Setores,
+                dataNacimento = usuarioDb.DataNaciemnto,
+                salario = usuarioDb.Salario,
                 jwtToken = jwt
             });
         }
