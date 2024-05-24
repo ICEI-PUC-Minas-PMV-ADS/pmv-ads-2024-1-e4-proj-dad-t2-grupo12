@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Enumeration;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,15 +21,19 @@ public class PontoUsuarioController {
 
     private final UsuarioPontoService service;
 
-    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/listar", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> obterListaUsuarios() {
         return ResponseEntity.ok(service.obterListaUsarios());
     }
 
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> obterUsuario(@PathVariable String id, HttpServletRequest requisicao) {
+    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> obterUsuario(HttpServletRequest requisicao) {
         String token = requisicao.getHeader("Authorization");
-        return ResponseEntity.ok(service.obterUsario(id, token));
+        try {
+            return ResponseEntity.ok(service.obterUsario(token));
+        } catch (Exception ex) {
+            return ResponseEntity.status(500).body(ex.getMessage());
+        }
     }
 
     @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -36,14 +42,23 @@ public class PontoUsuarioController {
     }
 
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> editarUsuario(@PathVariable String id, @RequestBody UsuarioDto usuario, HttpServletRequest requisicao) throws JsonProcessingException {
+    public ResponseEntity<?> editarUsuario(@RequestBody UsuarioDto usuario, HttpServletRequest requisicao) {
         String token = requisicao.getHeader("Authorization");
-        return ResponseEntity.ok(service.editarUsuario(id, usuario, token));
+        try {
+            return ResponseEntity.ok(service.editarUsuario(usuario, token));
+        } catch (Exception ex) {
+            return ResponseEntity.status(500).body(ex.getMessage());
+        }
     }
 
-    @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> removerUsuario(@PathVariable String id) throws JsonProcessingException {
-        return ResponseEntity.ok(service.removerUsuario(id));
+    @DeleteMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> removerUsuario(HttpServletRequest requisicao) {
+        String token = requisicao.getHeader("Authorization");
+        try {
+            return ResponseEntity.ok(service.removerUsuario(token));
+        } catch (Exception ex) {
+            return ResponseEntity.status(500).body(ex.getMessage());
+        }
     }
 
 }

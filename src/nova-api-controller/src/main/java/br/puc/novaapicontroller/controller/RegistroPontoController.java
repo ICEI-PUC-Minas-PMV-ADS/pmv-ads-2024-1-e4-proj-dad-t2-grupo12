@@ -3,6 +3,7 @@ package br.puc.novaapicontroller.controller;
 import br.puc.novaapicontroller.dto.registroponto.PontoDto;
 import br.puc.novaapicontroller.service.RegistroPontoService;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,16 +16,22 @@ public class RegistroPontoController {
 
     private final RegistroPontoService service;
 
-    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/listar", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> obterListagemRegistroPontos() {
         return ResponseEntity.ok(service.obterListagemRegistroPontos());
     }
 
-    //    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<?> obterRegistroPonto() {
-//        return ResponseEntity.ok(service.obterRegistroPonto());
-//    }
-//
+    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> obterRegistroPonto(HttpServletRequest requisicao) {
+        String token = requisicao.getHeader("Authorization");
+
+        try {
+            return ResponseEntity.ok(service.obterRegistroPonto(token));
+        } catch (Exception ex) {
+            return ResponseEntity.status(500).body(ex.getMessage());
+        }
+    }
+
     @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> registrarPonto(@RequestBody PontoDto pontoDto) throws JsonProcessingException {
         return ResponseEntity.ok(service.registrarPonto(pontoDto));
@@ -35,7 +42,7 @@ public class RegistroPontoController {
         return ResponseEntity.ok(service.editarRegistroPonto(id, pontoDto));
     }
 
-    @DeleteMapping (value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> removerPonto(@PathVariable String id) throws JsonProcessingException {
         return ResponseEntity.ok(service.removerPonto(id));
     }

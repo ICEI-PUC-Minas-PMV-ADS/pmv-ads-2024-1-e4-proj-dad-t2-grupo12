@@ -22,5 +22,7 @@ C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-gr
 C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\util\DateUtil.java
 C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\util\CriptografiaUtil.java
 C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\client\UsuarioPontoClient.java
+C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\dto\JwtPayload.java
+C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\util\JWTUtil.java
 C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\dto\Login\LoginBasic.java
 C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\dto\Login\LoginSiteResponse.java

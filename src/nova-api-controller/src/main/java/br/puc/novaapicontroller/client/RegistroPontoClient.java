@@ -55,7 +55,7 @@ public class RegistroPontoClient {
         return null;
     }
 
-    public PontoDto obterRegistroPonto(String id) {
+    public PontoDto obterRegistros(String id) {
         String erroPadrao = "Erro ao buscar registro de ponto";
         Request requisicao = construirRequisicaoGet(id);
 
