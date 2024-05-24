@@ -20,14 +20,8 @@ public class RegistroPontoService {
         return registroPontoClient.obterListagemRegistroPontos();
     }
 
-    public PontoDto obterRegistroPonto(String token) throws Exception {
-        JwtPayload usuarioId = JWTUtil.decodeJwt(token);
-
-        if (usuarioId != null) {
-            return registroPontoClient.obterRegistros(usuarioId.getNameid());
-        }
-
-        throw new Exception("Não foi possível obter dados do usuário");
+    public PontoDto obterRegistroPonto(String registroId) throws Exception {
+        return registroPontoClient.obterRegistros(registroId);
     }
 
     public PontoDto registrarPonto(PontoDto pontoDto) throws JsonProcessingException {

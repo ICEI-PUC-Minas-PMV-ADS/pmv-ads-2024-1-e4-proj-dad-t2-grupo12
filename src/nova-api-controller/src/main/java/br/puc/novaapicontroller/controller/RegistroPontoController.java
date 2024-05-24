@@ -21,12 +21,10 @@ public class RegistroPontoController {
         return ResponseEntity.ok(service.obterListagemRegistroPontos());
     }
 
-    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> obterRegistroPonto(HttpServletRequest requisicao) {
-        String token = requisicao.getHeader("Authorization");
-
+    @GetMapping(value = "/{registroId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> obterRegistroPonto(@PathVariable String registroId) {
         try {
-            return ResponseEntity.ok(service.obterRegistroPonto(token));
+            return ResponseEntity.ok(service.obterRegistroPonto(registroId));
         } catch (Exception ex) {
             return ResponseEntity.status(500).body(ex.getMessage());
         }
