@@ -15,6 +15,8 @@ public class PontoDto {
 
     public String id;
 
+    public String dataRegistro;
+
     public String inicioExpediente;
 
     public String inicioIntervalo;
