@@ -13,6 +13,9 @@ namespace registro_ponto.Models
         public string Id { get; set; }
 
         [Required]
+        public DateTime DataRegistro { get; set; }
+
+        [Required]
         public DateTime InicioExpediente { get; set; }
 
         [Required]
