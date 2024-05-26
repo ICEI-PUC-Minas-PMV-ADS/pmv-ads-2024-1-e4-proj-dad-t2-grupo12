@@ -98,8 +98,12 @@ public class RegistroPontoClient {
                 if (!corpoResposta.trim().isEmpty()) {
                     return objectMapper.readValue(corpoResposta, PontoDto.class);
                 }
+            } else {
+                String erro = "Erro ao fazer requisição. " + erroPadrao + ": " + resposta.code();
+                logger.log(Level.SEVERE, erro);
+                throw new Exception(erro);
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             String erro = erroPadrao + ". Erro: " + e.getMessage();
             LogUtil.buscarLinhaExcecaoEImprimirLogErro(e, erro, "RegistroPontoClient.java");
             return null;
