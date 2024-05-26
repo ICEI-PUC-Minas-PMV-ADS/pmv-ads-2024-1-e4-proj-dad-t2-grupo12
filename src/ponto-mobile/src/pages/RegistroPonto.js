@@ -1,42 +1,41 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Pressable, Modal, TextInput, Button, FlatList } from 'react-native';
-import { getRegistrosPonto, saveRegistroPonto } from "../services/Api";
+import { View, Text, StyleSheet, Pressable, Modal, Button, FlatList } from 'react-native';
+import { getRegistrosPonto, saveRegistroPonto, updateRegistroPonto } from "../services/Api";
 
 const TabelaPontosSemanais = () => {
-    const [horarios, setHorarios] = useState([]);
+    const [horario, setHorario] = useState(null);
     const [modalVisible, setModalVisible] = useState(false);
-    const [newTime, setNewTime] = useState('');
-    const [newDescription, setNewDescription] = useState('');
     const [selectedDate, setSelectedDate] = useState(new Date());
+    const [successMessage, setSuccessMessage] = useState('');
+    const [lastAddedRegistro, setLastAddedRegistro] = useState(null);
+    const [confirmModalVisible, setConfirmModalVisible] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 let data = await getRegistrosPonto(selectedDate);
-                console.log("Data selecionada:", selectedDate.toISOString());
-
-                if (!data || data.length === 0) {
-                    setHorarios([]);
-                    console.log("Nenhum registro retornado pela API");
-                    return;
-                }
-
-                console.log("Registros retornados pela API:", data);
 
                 const selectedDateString = selectedDate.toISOString().slice(0, 10);
-                console.log("Data selecionada (somente data):", selectedDateString);
-
-                const registroSelecionado = data.find(registro => {
+                let registroSelecionado = data.find(registro => {
                     const registroDateString = new Date(registro.dataRegistro).toISOString().slice(0, 10);
-                    console.log("Comparando", registroDateString, "com", selectedDateString);
-
                     return registroDateString === selectedDateString;
                 });
 
-                console.log("Registro selecionado:", registroSelecionado);
+                if (!registroSelecionado) {
+                    const novoHorario = {
+                        dataRegistro: selectedDate.toISOString(),
+                        inicioExpediente: null,
+                        inicioIntervalo: null,
+                        fimIntervalo: null,
+                        fimExpediente: null,
+                        saldo: 0,
+                        usuarioId: '664bdc3adf17108bf6c8a689'
+                    };
+                    registroSelecionado = await saveRegistroPonto(novoHorario);
+                }
 
-                setHorarios(registroSelecionado ? [registroSelecionado] : []);
-
+                setHorario(registroSelecionado);
+                setLastAddedRegistro(registroSelecionado);
             } catch (error) {
                 console.error('Erro ao buscar dados da API:', error);
             }
@@ -44,6 +43,28 @@ const TabelaPontosSemanais = () => {
 
         fetchData();
     }, [selectedDate]);
+
+    const openConfirmModal = () => {
+        setConfirmModalVisible(true);
+    };
+
+    const cancelConfirmAction = () => {
+        setConfirmModalVisible(false);
+    };
+
+    const confirmDesfazerAcao = async () => {
+        try {
+            if (lastAddedRegistro) {
+                await deleteUltimoRegistroPonto(lastAddedRegistro.id);
+                setHorario(null);
+                setSuccessMessage('');
+                setLastAddedRegistro(null);
+                setConfirmModalVisible(false);
+            }
+        } catch (error) {
+            console.error('Erro ao desfazer a ação:', error);
+        }
+    };
 
     const goToPreviousDay = () => {
         const previousDay = new Date(selectedDate);
@@ -58,35 +79,41 @@ const TabelaPontosSemanais = () => {
     };
 
     const addHorario = async () => {
-        if (newTime && newDescription && horarios.length < 4) {
-            const novoRegistro = {
-                dataRegistro: newTime,
-                inicioExpediente: newTime,
-                inicioIntervalo: '',
-                fimIntervalo: '',
-                fimExpediente: '',
-                saldo: 0,
-                holerite: {
-                    id: '',
-                    valorHoraPositivas: 0,
-                    valorHoraNegativas: 0,
-                    valorTotalPositivas: 0,
-                    valorTotalNegativas: 0,
-                    salarioFinal: 0,
-                    usuarioId: 'string'
-                },
-                usuarioId: 'string'
-            };
+        const currentDateTime = new Date().toISOString();
 
-            try {
-                const savedRegistro = await saveRegistroPonto(novoRegistro);
-                setHorarios([...horarios, savedRegistro]);
-                setNewTime('');
-                setNewDescription('');
-                setModalVisible(false);
-            } catch (error) {
-                console.error('Erro ao salvar o registro:', error);
+        if (!horario) return;
+
+        if (!horario.inicioExpediente) {
+            horario.inicioExpediente = currentDateTime;
+        } else if (!horario.inicioIntervalo) {
+            horario.inicioIntervalo = currentDateTime;
+        } else if (!horario.fimIntervalo) {
+            horario.fimIntervalo = currentDateTime;
+        } else if (!horario.fimExpediente) {
+            horario.fimExpediente = currentDateTime;
+        }
+
+        try {
+            const updatedRegistro = await updateRegistroPonto(horario.id, horario);
+            setHorario(updatedRegistro);
+            setLastAddedRegistro(updatedRegistro);
+            setSuccessMessage('Ponto atualizado com sucesso.');
+            setModalVisible(true);
+        } catch (error) {
+            console.error('Erro ao atualizar o horário:', error);
+        }
+    };
+
+    const desfazerAcao = async () => {
+        try {
+            if (lastAddedRegistro) {
+                await deleteUltimoRegistroPonto(lastAddedRegistro.id);
+                setHorario(null);
+                setSuccessMessage('');
+                setLastAddedRegistro(null);
             }
+        } catch (error) {
+            console.error('Erro ao desfazer a ação:', error);
         }
     };
 
@@ -106,49 +133,54 @@ const TabelaPontosSemanais = () => {
                 <Text style={styles.date}>{formatDate(selectedDate)}</Text>
                 <Pressable onPress={goToNextDay}><Text style={styles.navText}>Próximo</Text></Pressable>
             </View>
-            {horarios.length > 0 && (
-                <Text style={styles.date}>{formatDate(selectedDate)}</Text>
+            {horario && (
+                <Text style={styles.date}>{formatDate(horario.dataRegistro)}</Text>
             )}
             <View style={styles.summary}>
                 <Text style={styles.summaryText}>Trab. no dia 07h 55m</Text>
                 <Text style={styles.summaryText}>Saldo do dia -00h 11m</Text>
                 <Text style={styles.summaryText}>Saldo total +09h 55m</Text>
             </View>
-            <FlatList
-                data={horarios}
-                renderItem={({ item }) => (
-                    <View style={styles.timelineItem}>
-                        <View style={styles.timelineIndicator} />
-                        <View style={styles.timelineContent}>
-                            <Text style={styles.timelineDesc}>{item.inicioExpediente}</Text>
-                            <Text style={styles.timelineDesc}>{item.inicioIntervalo}</Text>
-                            <Text style={styles.timelineDesc}>{item.fimIntervalo}</Text>
-                            <Text style={styles.timelineDesc}>{item.fimExpediente}</Text>
+            {horario && (
+                <FlatList
+                    data={[horario]}
+                    renderItem={({ item }) => (
+                        <View style={styles.timelineItem}>
+                            <View style={styles.timelineIndicator} />
+                            <View style={styles.timelineContent}>
+                                <Text style={styles.timelineDesc}>{item.inicioExpediente}</Text>
+                                <Text style={styles.timelineDesc}>{item.inicioIntervalo}</Text>
+                                <Text style={styles.timelineDesc}>{item.fimIntervalo}</Text>
+                                <Text style={styles.timelineDesc}>{item.fimExpediente}</Text>
+                            </View>
                         </View>
-                    </View>
-                )}
-                keyExtractor={item => item.id}
-            />
-            <Pressable style={styles.addButton} onPress={() => setModalVisible(true)}>
+                    )}
+                    keyExtractor={item => item.id}
+                />
+            )}
+            <Pressable style={styles.addButton} onPress={addHorario}>
                 <Text style={styles.addButtonText}>+</Text>
             </Pressable>
+
             <Modal visible={modalVisible} transparent={true}>
                 <View style={styles.modalContainer}>
                     <View style={styles.modalContent}>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Hora"
-                            value={newTime}
-                            onChangeText={setNewTime}
-                        />
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Descrição"
-                            value={newDescription}
-                            onChangeText={setNewDescription}
-                        />
-                        <Button title="Adicionar" onPress={addHorario} />
-                        <Button title="Cancelar" onPress={() => setModalVisible(false)} />
+                        <Text>{successMessage}</Text>
+                        {successMessage && (
+                            <Button title="Desfazer" onPress={openConfirmModal} />
+                        )}
+                        <Button title="Ok" onPress={() => setModalVisible(false)} />
+                    </View>
+                </View>
+            </Modal>
+
+            {/* Modal de confirmação para desfazer a ação */}
+            <Modal visible={confirmModalVisible} transparent={true}>
+                <View style={styles.modalContainer}>
+                    <View style={styles.modalContent}>
+                        <Text>Deseja realmente desfazer a ação?</Text>
+                        <Button title="Sim" onPress={confirmDesfazerAcao} />
+                        <Button title="Não" onPress={cancelConfirmAction} />
                     </View>
                 </View>
             </Modal>
