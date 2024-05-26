@@ -10,22 +10,20 @@ namespace registro_ponto.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         [Required]
         public DateTime DataRegistro { get; set; }
 
-        public DateTime InicioExpediente { get; set; }
+        public DateTime? InicioExpediente { get; set; }
 
-        public DateTime InicioIntervalo { get; set; }
+        public DateTime? InicioIntervalo { get; set; }
 
-        public DateTime FimIntervalo { get; set; }
+        public DateTime? FimIntervalo { get; set; }
 
-        public DateTime FimExpediente { get; set; }
+        public DateTime? FimExpediente { get; set; }
 
-        public decimal Saldo { get; set; }
-
-        public Holerite Holerite { get; set; }
+        public decimal? Saldo { get; set; }
 
         [Required]
         public string UsuarioId { get; set; }

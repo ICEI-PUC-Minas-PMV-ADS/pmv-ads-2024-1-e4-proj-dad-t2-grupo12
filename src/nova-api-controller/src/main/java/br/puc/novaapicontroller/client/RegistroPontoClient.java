@@ -55,14 +55,14 @@ public class RegistroPontoClient {
         return null;
     }
 
-    public PontoDto obterRegistros(String id) {
+    public PontoDto obterRegistros(String id) throws Exception {
         String erroPadrao = "Erro ao buscar registro de ponto";
         Request requisicao = construirRequisicaoGet(id);
 
         return executarRequisicaoPonto(erroPadrao, requisicao);
     }
 
-    public PontoDto registrarPonto(PontoDto pontoDto) throws JsonProcessingException {
+    public PontoDto registrarPonto(PontoDto pontoDto) throws Exception {
         String erroPadrao = "Erro ao registrar ponto ";
 
         String corpo = objectMapper.writeValueAsString(pontoDto);
@@ -72,7 +72,7 @@ public class RegistroPontoClient {
         return executarRequisicaoPonto(erroPadrao, requisicao);
     }
 
-    public PontoDto editarRegistroPonto(String id, PontoDto pontoDto) throws JsonProcessingException {
+    public PontoDto editarRegistroPonto(String id, PontoDto pontoDto) throws Exception {
         String erroPadrao = "Erro ao editar registro de ponto ";
 
         String corpo = objectMapper.writeValueAsString(pontoDto);
@@ -82,7 +82,7 @@ public class RegistroPontoClient {
         return executarRequisicaoPonto(erroPadrao, requisicao);
     }
 
-    public PontoDto removerPonto(String id) throws JsonProcessingException {
+    public PontoDto removerPonto(String id) throws Exception {
         String erroPadrao = "Erro ao remover registro de ponto ";
 
         Request requisicao = construirRequisicaoDelete(id);
@@ -91,26 +91,31 @@ public class RegistroPontoClient {
     }
 
     @Nullable
-    private PontoDto executarRequisicaoPonto(String erroPadrao, Request requisicao) {
+    private PontoDto executarRequisicaoPonto(String erroPadrao, Request requisicao) throws Exception {
+        String erroRequisicao = "Erro ao fazer requisição. ";
+
         try (Response resposta = ClientUtil.obterClient(okHttpClient).newCall(requisicao).execute()) {
-            if (resposta.isSuccessful() && resposta.body() != null) {
+            if (resposta.body() != null) {
                 String corpoResposta = resposta.body().string();
-                if (!corpoResposta.trim().isEmpty()) {
-                    return objectMapper.readValue(corpoResposta, PontoDto.class);
+                if (resposta.isSuccessful()) {
+                    if (!corpoResposta.trim().isEmpty()) {
+                        return objectMapper.readValue(corpoResposta, PontoDto.class);
+                    }
+                } else {
+                    erroRequisicao = erroRequisicao + erroPadrao + ": " + resposta.code() + ". Resposta: " + corpoResposta;
                 }
             } else {
-                String erro = "Erro ao fazer requisição. " + erroPadrao + ": " + resposta.code();
-                logger.log(Level.SEVERE, erro);
-                throw new Exception(erro);
+                erroRequisicao = erroRequisicao + erroPadrao + ": " + resposta.code();
             }
+
+            logger.log(Level.SEVERE, erroRequisicao);
+            throw new Exception(erroRequisicao);
+
         } catch (Exception e) {
             String erro = erroPadrao + ". Erro: " + e.getMessage();
             LogUtil.buscarLinhaExcecaoEImprimirLogErro(e, erro, "RegistroPontoClient.java");
-            return null;
+            throw new Exception(erroRequisicao);
         }
-
-        logger.log(Level.SEVERE, erroPadrao);
-        return null;
     }
 
     private Request construirRequisicaoGet(String urlComplemento) {

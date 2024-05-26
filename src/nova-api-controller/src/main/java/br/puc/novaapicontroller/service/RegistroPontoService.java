@@ -1,10 +1,8 @@
 package br.puc.novaapicontroller.service;
 
 import br.puc.novaapicontroller.client.RegistroPontoClient;
-import br.puc.novaapicontroller.dto.JwtPayload;
 import br.puc.novaapicontroller.dto.registroponto.PontoDto;
-import br.puc.novaapicontroller.util.JWTUtil;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import br.puc.novaapicontroller.util.DateUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,15 +22,16 @@ public class RegistroPontoService {
         return registroPontoClient.obterRegistros(registroId);
     }
 
-    public PontoDto registrarPonto(PontoDto pontoDto) throws JsonProcessingException {
+    public PontoDto registrarPonto(PontoDto pontoDto) throws Exception {
+        pontoDto.setDataRegistro(DateUtil.formatarDataISO(pontoDto.dataRegistro));
         return registroPontoClient.registrarPonto(pontoDto);
     }
 
-    public PontoDto editarRegistroPonto(String id, PontoDto pontoDto) throws JsonProcessingException {
+    public PontoDto editarRegistroPonto(String id, PontoDto pontoDto) throws Exception {
         return registroPontoClient.editarRegistroPonto(id, pontoDto);
     }
 
-    public PontoDto removerPonto(String id) throws JsonProcessingException {
+    public PontoDto removerPonto(String id) throws Exception {
         return registroPontoClient.removerPonto(id);
     }
 

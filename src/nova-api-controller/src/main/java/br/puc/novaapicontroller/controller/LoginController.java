@@ -17,7 +17,11 @@ public class LoginController {
 
     @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> login(@RequestBody LoginRequest request) throws JsonProcessingException {
-        return ResponseEntity.ok(service.logar(request));
+        try {
+            return ResponseEntity.ok(service.logar(request));
+        } catch (Exception ex) {
+            return ResponseEntity.status(500).body(ex.getMessage());
+        }
     }
 
 }

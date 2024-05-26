@@ -32,16 +32,20 @@ public class RegistroPontoController {
 
     @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> registrarPonto(@RequestBody PontoDto pontoDto) throws JsonProcessingException {
-        return ResponseEntity.ok(service.registrarPonto(pontoDto));
+        try {
+            return ResponseEntity.ok(service.registrarPonto(pontoDto));
+        } catch (Exception ex) {
+            return ResponseEntity.status(500).body(ex.getMessage());
+        }
     }
 
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> editarRegistroPonto(@PathVariable String id, @RequestBody PontoDto pontoDto) throws JsonProcessingException {
+    public ResponseEntity<?> editarRegistroPonto(@PathVariable String id, @RequestBody PontoDto pontoDto) throws Exception {
         return ResponseEntity.ok(service.editarRegistroPonto(id, pontoDto));
     }
 
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> removerPonto(@PathVariable String id) throws JsonProcessingException {
+    public ResponseEntity<?> removerPonto(@PathVariable String id) throws Exception {
         return ResponseEntity.ok(service.removerPonto(id));
     }
 

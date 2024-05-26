@@ -27,7 +27,7 @@ public class PontoDto {
 
     public Double saldo;
 
-    public HoleriteDto holerite;
+//    public HoleriteDto holerite;
 
     public String usuarioId;
 
