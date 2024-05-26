@@ -1,26 +1,61 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Pressable, Modal, TextInput, Button, FlatList } from 'react-native';
 import { getRegistrosPonto, saveRegistroPonto } from "../services/Api";
-import { format, parseISO } from 'date-fns';
-import { ptBR } from 'date-fns/locale';
 
 const TabelaPontosSemanais = () => {
     const [horarios, setHorarios] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
     const [newTime, setNewTime] = useState('');
     const [newDescription, setNewDescription] = useState('');
+    const [selectedDate, setSelectedDate] = useState(new Date());
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const data = await getRegistrosPonto();
-                setHorarios(data);
+                let data = await getRegistrosPonto(selectedDate);
+                console.log("Data selecionada:", selectedDate.toISOString());
+
+                if (!data || data.length === 0) {
+                    setHorarios([]);
+                    console.log("Nenhum registro retornado pela API");
+                    return;
+                }
+
+                console.log("Registros retornados pela API:", data);
+
+                const selectedDateString = selectedDate.toISOString().slice(0, 10);
+                console.log("Data selecionada (somente data):", selectedDateString);
+
+                const registroSelecionado = data.find(registro => {
+                    const registroDateString = new Date(registro.dataRegistro).toISOString().slice(0, 10);
+                    console.log("Comparando", registroDateString, "com", selectedDateString);
+
+                    return registroDateString === selectedDateString;
+                });
+
+                console.log("Registro selecionado:", registroSelecionado);
+
+                setHorarios(registroSelecionado ? [registroSelecionado] : []);
+
             } catch (error) {
                 console.error('Erro ao buscar dados da API:', error);
             }
         };
+
         fetchData();
-    }, []);
+    }, [selectedDate]);
+
+    const goToPreviousDay = () => {
+        const previousDay = new Date(selectedDate);
+        previousDay.setDate(selectedDate.getDate() - 1);
+        setSelectedDate(previousDay);
+    };
+
+    const goToNextDay = () => {
+        const nextDay = new Date(selectedDate);
+        nextDay.setDate(selectedDate.getDate() + 1);
+        setSelectedDate(nextDay);
+    };
 
     const addHorario = async () => {
         if (newTime && newDescription && horarios.length < 4) {
@@ -56,21 +91,23 @@ const TabelaPontosSemanais = () => {
     };
 
     const formatDate = (dateString) => {
-        const date = parseISO(dateString);
-        return format(date, "EEE, dd 'de' MMM 'de' yyyy", { locale: ptBR });
+        if (!dateString) {
+            return '';
+        }
+
+        const date = new Date(dateString);
+        return date.toLocaleDateString('pt-BR', { weekday: 'short', day: '2-digit', month: 'short', year: 'numeric' });
     };
 
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <Pressable><Text style={styles.navText}>Anterior</Text></Pressable>
-                {/*{horarios.length > 0 && (*/}
-                {/*    <Text style={styles.title}>{formatDate(horarios[0].dataRegistro)}</Text>*/}
-                {/*)}*/}
-                <Pressable><Text style={styles.navText}>Próximo</Text></Pressable>
+                <Pressable onPress={goToPreviousDay}><Text style={styles.navText}>Anterior</Text></Pressable>
+                <Text style={styles.date}>{formatDate(selectedDate)}</Text>
+                <Pressable onPress={goToNextDay}><Text style={styles.navText}>Próximo</Text></Pressable>
             </View>
             {horarios.length > 0 && (
-                <Text style={styles.date}>{formatDate(horarios[0].dataRegistro)}</Text>
+                <Text style={styles.date}>{formatDate(selectedDate)}</Text>
             )}
             <View style={styles.summary}>
                 <Text style={styles.summaryText}>Trab. no dia 07h 55m</Text>
