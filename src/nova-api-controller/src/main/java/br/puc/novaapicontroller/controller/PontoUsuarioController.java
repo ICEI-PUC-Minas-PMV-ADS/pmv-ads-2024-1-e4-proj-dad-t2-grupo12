@@ -38,7 +38,11 @@ public class PontoUsuarioController {
 
     @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> cadastrarUsuario(@RequestBody CadastroUsuarioDto cadastro) throws JsonProcessingException {
-        return ResponseEntity.ok(service.cadastrarUsuario(cadastro));
+        try {
+            return ResponseEntity.ok(service.cadastrarUsuario(cadastro));
+        } catch (Exception ex) {
+            return ResponseEntity.status(500).body(ex.getMessage());
+        }
     }
 
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

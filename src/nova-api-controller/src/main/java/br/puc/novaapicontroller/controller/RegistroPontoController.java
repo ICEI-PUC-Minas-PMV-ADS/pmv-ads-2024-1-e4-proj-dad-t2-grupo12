@@ -41,7 +41,11 @@ public class RegistroPontoController {
 
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> editarRegistroPonto(@PathVariable String id, @RequestBody PontoDto pontoDto) throws Exception {
-        return ResponseEntity.ok(service.editarRegistroPonto(id, pontoDto));
+        try {
+            return ResponseEntity.ok(service.editarRegistroPonto(id, pontoDto));
+        } catch (Exception ex) {
+            return ResponseEntity.status(500).body(ex.getMessage());
+        }
     }
 
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
