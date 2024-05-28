@@ -21,8 +21,10 @@ br\puc\novaapicontroller\util\DateUtil.class
 br\puc\novaapicontroller\util\enums\StatusUsuarioEnum.class
 br\puc\novaapicontroller\dto\Login\LoginBasic.class
 br\puc\novaapicontroller\dto\registroponto\HoleriteDto$HoleriteDtoBuilder.class
+br\puc\novaapicontroller\dto\registroponto\PontoSiteResponse.class
 br\puc\novaapicontroller\NovaApiControllerApplication.class
 br\puc\novaapicontroller\dto\Login\LoginSiteResponse.class
+br\puc\novaapicontroller\dto\registroponto\SaldoDiario.class
 br\puc\novaapicontroller\dto\usuario\EnderecoDto.class
 br\puc\novaapicontroller\dto\JwtPayload.class
 br\puc\novaapicontroller\dto\usuario\EnderecoDto$EnderecoDtoBuilder.class
@@ -34,4 +36,5 @@ br\puc\novaapicontroller\util\JWTUtil.class
 br\puc\novaapicontroller\controller\LoginController.class
 br\puc\novaapicontroller\client\UsuarioPontoClient$1.class
 br\puc\novaapicontroller\config\WebConfig$1.class
+br\puc\novaapicontroller\dto\registroponto\PontoSiteResponse$PontoSiteResponseBuilder.class
 br\puc\novaapicontroller\service\RegistroPontoService.class
