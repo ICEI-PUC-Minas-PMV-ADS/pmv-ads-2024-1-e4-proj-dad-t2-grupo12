@@ -19,6 +19,11 @@ export const saveRegistroPonto = async (registro) => {
     return response.data;
 }
 
+export const updateRegistroPonto = async (id, registro) => {
+    const response = await Api.put('/v1/public/registroponto/' + id, registro);
+    return response.data;
+}
+
 // export const outroEndpoint = async () => {
 //     try {
 //         const response = await Api.get('/outro/endpoint/', {

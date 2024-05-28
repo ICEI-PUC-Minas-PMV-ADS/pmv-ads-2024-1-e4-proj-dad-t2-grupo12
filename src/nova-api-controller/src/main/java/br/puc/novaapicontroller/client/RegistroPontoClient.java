@@ -78,8 +78,8 @@ public class RegistroPontoClient {
         String corpo = objectMapper.writeValueAsString(pontoDto);
         RequestBody corpoRequisicao = ClientUtil.converterCorpoRequisicao(corpo);
         Request requisicao = construirRequisicaoPut(id, corpoRequisicao);
-
-        return executarRequisicaoPonto(erroPadrao, requisicao);
+        executarRequisicaoPonto(erroPadrao, requisicao);
+        return pontoDto;
     }
 
     public PontoDto removerPonto(String id) throws Exception {
@@ -100,6 +100,9 @@ public class RegistroPontoClient {
                 if (resposta.isSuccessful()) {
                     if (!corpoResposta.trim().isEmpty()) {
                         return objectMapper.readValue(corpoResposta, PontoDto.class);
+                    } else {
+                        return null;
+
                     }
                 } else {
                     erroRequisicao = erroRequisicao + erroPadrao + ": " + resposta.code() + ". Resposta: " + corpoResposta;
