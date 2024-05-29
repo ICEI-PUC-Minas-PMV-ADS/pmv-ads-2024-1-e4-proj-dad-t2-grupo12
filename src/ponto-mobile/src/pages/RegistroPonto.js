@@ -9,6 +9,8 @@ const TabelaPontosSemanais = () => {
     const [successMessage, setSuccessMessage] = useState('');
     const [lastAddedRegistro, setLastAddedRegistro] = useState(null);
     const [confirmModalVisible, setConfirmModalVisible] = useState(false);
+    const [saldoDiario, setSaldoDiario] = useState('00:00');
+    const [horasTrabalhadas, setHorasTrabalhadas] = useState('00h 00m');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -123,23 +125,40 @@ const TabelaPontosSemanais = () => {
         }
 
         const date = new Date(dateString);
-        return date.toLocaleDateString('pt-BR', { weekday: 'short', day: '2-digit', month: 'short', year: 'numeric' });
+        return date.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+    };
+
+    const formatTime = (timeString) => {
+        if (!timeString) {
+            return '';
+        }
+
+        const date = new Date(timeString);
+        return date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
     };
 
     return (
         <View style={styles.container}>
             <View style={styles.header}>
                 <Pressable onPress={goToPreviousDay}><Text style={styles.navText}>Anterior</Text></Pressable>
-                <Text style={styles.date}>{formatDate(selectedDate)}</Text>
                 <Pressable onPress={goToNextDay}><Text style={styles.navText}>Próximo</Text></Pressable>
             </View>
             {horario && (
                 <Text style={styles.date}>{formatDate(horario.dataRegistro)}</Text>
             )}
             <View style={styles.summary}>
-                <Text style={styles.summaryText}>Trab. no dia 07h 55m</Text>
-                <Text style={styles.summaryText}>Saldo do dia -00h 11m</Text>
-                <Text style={styles.summaryText}>Saldo total +09h 55m</Text>
+                <View style={styles.totals}>
+                    <Text style={styles.summaryText}>Trab. no dia</Text>
+                    <Text style={styles.summaryText}>{horasTrabalhadas}</Text>
+                </View>
+                <View style={styles.totals}>
+                    <Text style={styles.summaryText}>Saldo do dia</Text>
+                    <Text style={styles.summaryText}>{saldoDiario}</Text>
+                </View>
+                <View style={styles.totals}>
+                    <Text style={styles.summaryText}>Saldo total</Text>
+                    <Text style={styles.summaryText}>+09h 55m</Text>
+                </View>
             </View>
             {horario && (
                 <FlatList
@@ -148,10 +167,10 @@ const TabelaPontosSemanais = () => {
                         <View style={styles.timelineItem}>
                             <View style={styles.timelineIndicator} />
                             <View style={styles.timelineContent}>
-                                <Text style={styles.timelineDesc}>{item.inicioExpediente}</Text>
-                                <Text style={styles.timelineDesc}>{item.inicioIntervalo}</Text>
-                                <Text style={styles.timelineDesc}>{item.fimIntervalo}</Text>
-                                <Text style={styles.timelineDesc}>{item.fimExpediente}</Text>
+                                <Text style={styles.timelineDesc}>Início Expediente: {formatTime(item.inicioExpediente)}</Text>
+                                <Text style={styles.timelineDesc}>Início Intervalo: {formatTime(item.inicioIntervalo)}</Text>
+                                <Text style={styles.timelineDesc}>Fim Intervalo: {formatTime(item.fimIntervalo)}</Text>
+                                <Text style={styles.timelineDesc}>Fim Expediente: {formatTime(item.fimExpediente)}</Text>
                             </View>
                         </View>
                     )}
@@ -196,6 +215,7 @@ const styles = StyleSheet.create({
     },
     header: {
         flexDirection: 'row',
+        paddingTop: 70,
         justifyContent: 'space-between',
         alignItems: 'center',
         marginBottom: 10,
@@ -209,9 +229,10 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     date: {
-        fontSize: 18,
+        fontSize: 20,
         textAlign: 'center',
         marginVertical: 10,
+        paddingBottom: 10,
     },
     summary: {
         flexDirection: 'row',
@@ -285,6 +306,9 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         borderRadius: 5,
     },
+    totals: {
+        alignItems: "center"
+    }
 });
 
 export default TabelaPontosSemanais;
