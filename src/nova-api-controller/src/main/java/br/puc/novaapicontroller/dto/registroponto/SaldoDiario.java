@@ -7,6 +7,6 @@ public class SaldoDiario {
 
     private String saldo;
 
-    private boolean isPositivo;
+    private boolean positivo;
 
 }

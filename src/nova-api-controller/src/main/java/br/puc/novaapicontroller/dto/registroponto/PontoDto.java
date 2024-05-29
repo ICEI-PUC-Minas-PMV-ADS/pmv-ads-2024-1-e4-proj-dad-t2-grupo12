@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PontoDto {
 
     public String id;
@@ -27,7 +28,8 @@ public class PontoDto {
 
     public String saldo;
 
-    private boolean isPositivo;
+    @JsonProperty("isPositivo")
+    private boolean positivo;
 
 //    public HoleriteDto holerite;
 

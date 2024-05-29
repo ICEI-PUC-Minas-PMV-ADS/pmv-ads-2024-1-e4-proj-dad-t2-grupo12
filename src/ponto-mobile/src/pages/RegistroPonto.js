@@ -95,6 +95,9 @@ const TabelaPontosSemanais = () => {
             horario.fimExpediente = currentDateTime;
         }
 
+        horario.isPositivo = null;
+        horario.saldo = null;
+
         try {
             const updatedRegistro = await updateRegistroPonto(horario.id, horario);
             setHorario(updatedRegistro);

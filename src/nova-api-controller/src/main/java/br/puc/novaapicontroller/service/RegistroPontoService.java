@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.logging.Logger;
 
 import static br.puc.novaapicontroller.util.DateUtil.stringToLocalDteTime;
 
@@ -42,14 +41,16 @@ public class RegistroPontoService {
             pontoDto.setFimIntervalo(pontoDto.getFimIntervalo() != null ? DateUtil.formatarDataISO(pontoDto.getFimIntervalo()) : null);
             pontoDto.setFimExpediente(pontoDto.getFimExpediente() != null ? DateUtil.formatarDataISO(pontoDto.getFimExpediente()) : null);
 
-            PontoDto pontoRetorno = registroPontoClient.editarRegistroPonto(id, pontoDto);
-
             LocalDateTime inicioExpediente = pontoDto.getInicioExpediente() != null ? stringToLocalDteTime(pontoDto.getInicioExpediente(), "yyyy-MM-dd'T'HH:mm:ss.SSS") : null;
             LocalDateTime inicioIntervalo = pontoDto.getInicioIntervalo() != null ? stringToLocalDteTime(pontoDto.getInicioIntervalo(), "yyyy-MM-dd'T'HH:mm:ss.SSS") : null;
             LocalDateTime fimIntervalo = pontoDto.getFimIntervalo() != null ? stringToLocalDteTime(pontoDto.getFimIntervalo(), "yyyy-MM-dd'T'HH:mm:ss.SSS") : null;
             LocalDateTime fimExpediente = pontoDto.getFimExpediente() != null ? stringToLocalDteTime(pontoDto.getFimExpediente(), "yyyy-MM-dd'T'HH:mm:ss.SSS") : null;
 
             SaldoDiario saldoDiario = calcularSaldo(inicioExpediente, inicioIntervalo, fimIntervalo, fimExpediente);
+            pontoDto.setSaldo(saldoDiario.getSaldo());
+            pontoDto.setPositivo(saldoDiario.isPositivo());
+
+            PontoDto pontoRetorno = registroPontoClient.editarRegistroPonto(id, pontoDto);
 
             return PontoSiteResponse.builder()
                     .id(pontoRetorno.getId())
