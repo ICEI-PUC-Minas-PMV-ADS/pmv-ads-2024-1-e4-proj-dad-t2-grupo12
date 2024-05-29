@@ -25,7 +25,9 @@ public class PontoDto {
 
     public String fimExpediente;
 
-    public Double saldo;
+    public String saldo;
+
+    private boolean isPositivo;
 
 //    public HoleriteDto holerite;
 

@@ -23,7 +23,9 @@ namespace registro_ponto.Models
 
         public DateTime? FimExpediente { get; set; }
 
-        public decimal? Saldo { get; set; }
+        public string? Saldo { get; set; }
+
+        public bool? isPositivo { get; set; }
 
         [Required]
         public string UsuarioId { get; set; }
