@@ -45,7 +45,7 @@ public class PontoUsuarioController {
         }
     }
 
-    @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> editarUsuario(@RequestBody UsuarioDto usuario, HttpServletRequest requisicao) {
         String token = requisicao.getHeader("Authorization");
         try {
