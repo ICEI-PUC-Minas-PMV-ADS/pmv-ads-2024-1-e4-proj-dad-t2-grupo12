@@ -130,5 +130,20 @@ namespace ponto_usuario.Controllers
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
+        
+        [HttpPut("change-password/{id:length(24)}")]
+        public async Task<IActionResult> ChangePassword(string id, ChangePasswordDto changePasswordDto)
+        {
+            var usuario = await _usuarioService.GetAsync(id);
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+
+            usuario.SenhaCriptografada = BCrypt.Net.BCrypt.HashPassword(changePasswordDto.NovaSenha);
+            await _usuarioService.UpdatePasswordAsync(id, usuario.SenhaCriptografada);
+
+            return Ok(new { Message = "Senha atualizada com sucesso!" });
+        }
     }
 }

@@ -35,6 +35,14 @@ namespace ponto_usuario.Services
             var usuario = new Usuario(registerDto);
             await _usuarioCollection.InsertOneAsync(usuario);
         }
+        
+        public async Task UpdatePasswordAsync(string id, string novaSenha)
+        {
+            var filtro = Builders<Usuario>.Filter.Eq(u => u.Id, id);
+            var atualizacao = Builders<Usuario>.Update.Set(u => u.SenhaCriptografada, novaSenha);
+    
+            await _usuarioCollection.UpdateOneAsync(filtro, atualizacao);
+        }
 
         public async Task UpdateAsync(string id, Usuario updatedUsuario) =>
             await _usuarioCollection.ReplaceOneAsync(x => x.Id == id, updatedUsuario);
