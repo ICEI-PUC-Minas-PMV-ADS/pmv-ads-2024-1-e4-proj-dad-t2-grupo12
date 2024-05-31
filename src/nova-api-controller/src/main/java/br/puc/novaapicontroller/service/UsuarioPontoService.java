@@ -1,8 +1,10 @@
 package br.puc.novaapicontroller.service;
 
+import br.puc.novaapicontroller.client.LoginClient;
 import br.puc.novaapicontroller.client.UsuarioPontoClient;
 import br.puc.novaapicontroller.dto.AlteracaoSenhaDto;
 import br.puc.novaapicontroller.dto.CadastroUsuarioDto;
+import br.puc.novaapicontroller.dto.EmailVerificacaoResponse;
 import br.puc.novaapicontroller.dto.JwtPayload;
 import br.puc.novaapicontroller.dto.usuario.AlteracaoSenhaRetorno;
 import br.puc.novaapicontroller.dto.usuario.UsuarioDto;
@@ -21,6 +23,8 @@ public class UsuarioPontoService {
 
     private final UsuarioPontoClient usuarioClient;
 
+    private final LoginClient loginClient;
+
     public List<UsuarioDto> obterListaUsarios() {
         return usuarioClient.obterListaUsarios();
     }
@@ -35,8 +39,14 @@ public class UsuarioPontoService {
         throw new Exception("Não foi possível obter dados do usuário. Usuário não encontrado");
     }
 
-    public UsuarioDto cadastrarUsuario(CadastroUsuarioDto cadastroUsuario) throws JsonProcessingException {
-        return usuarioClient.cadastrarUsuario(cadastroUsuario);
+    public UsuarioDto cadastrarUsuario(CadastroUsuarioDto cadastroUsuario) throws Exception {
+        EmailVerificacaoResponse emailVerificacaoResponse = loginClient.verificarSeEmailExiste(cadastroUsuario.getEmail());
+
+        if (!emailVerificacaoResponse.getEmailExists()) {
+            return usuarioClient.cadastrarUsuario(cadastroUsuario);
+        }
+
+        throw new Exception("Email já cadastrado por outro usuário");
 
     }
 

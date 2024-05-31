@@ -1,9 +1,11 @@
 package br.puc.novaapicontroller.service;
 
 import br.puc.novaapicontroller.client.LoginClient;
+import br.puc.novaapicontroller.dto.EmailVerificacaoResponse;
 import br.puc.novaapicontroller.dto.Login.LoginRequest;
 import br.puc.novaapicontroller.dto.Login.LoginResponse;
 import br.puc.novaapicontroller.dto.Login.LoginSiteResponse;
+import br.puc.novaapicontroller.dto.usuario.AlteracaoSenhaRetorno;
 import br.puc.novaapicontroller.util.CriptografiaUtil;
 import br.puc.novaapicontroller.util.LogUtil;
 import lombok.RequiredArgsConstructor;
@@ -40,6 +42,10 @@ public class LoginService {
             return null;
         }
 
+    }
+
+    public EmailVerificacaoResponse verificarSeEmailJaCadastrado(String email) throws Exception {
+        return loginClient.verificarSeEmailExiste(email);
     }
 
 }

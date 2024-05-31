@@ -26,6 +26,7 @@ br\puc\novaapicontroller\dto\registroponto\HoleriteDto$HoleriteDtoBuilder.class
 br\puc\novaapicontroller\dto\usuario\AlteracaoSenhaRetorno$AlteracaoSenhaRetornoBuilder.class
 br\puc\novaapicontroller\dto\registroponto\PontoSiteResponse.class
 br\puc\novaapicontroller\NovaApiControllerApplication.class
+br\puc\novaapicontroller\dto\EmailVerificacaoResponse$EmailVerificacaoResponseBuilder.class
 br\puc\novaapicontroller\dto\Login\LoginSiteResponse.class
 br\puc\novaapicontroller\dto\registroponto\SaldoDiario.class
 br\puc\novaapicontroller\dto\usuario\EnderecoDto.class
@@ -33,6 +34,7 @@ br\puc\novaapicontroller\dto\JwtPayload.class
 br\puc\novaapicontroller\dto\usuario\EnderecoDto$EnderecoDtoBuilder.class
 br\puc\novaapicontroller\util\ClientUtil.class
 br\puc\novaapicontroller\client\RegistroPontoClient$1.class
+br\puc\novaapicontroller\dto\EmailVerificacaoResponse.class
 br\puc\novaapicontroller\util\CriptografiaUtil.class
 br\puc\novaapicontroller\dto\usuario\SetorDto$SetorDtoBuilder.class
 br\puc\novaapicontroller\util\JWTUtil.class

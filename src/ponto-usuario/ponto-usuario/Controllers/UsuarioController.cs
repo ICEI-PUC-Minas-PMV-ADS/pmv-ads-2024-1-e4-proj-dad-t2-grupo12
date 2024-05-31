@@ -145,5 +145,13 @@ namespace ponto_usuario.Controllers
 
             return Ok(new { Message = "Senha atualizada com sucesso!" });
         }
+        
+        [AllowAnonymous]
+        [HttpGet("check-email-exists/{email}")]
+        public async Task<IActionResult> CheckEmailExists(string email)
+        {
+            var emailExists = await _usuarioService.CheckIfEmailExistsAsync(email);
+            return Ok(new { EmailExists = emailExists });
+        }
     }
 }

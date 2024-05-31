@@ -49,5 +49,12 @@ namespace ponto_usuario.Services
 
         public async Task RemoveAsync(string id) =>
             await _usuarioCollection.DeleteOneAsync(x => x.Id == id);
+        
+        public async Task<bool> CheckIfEmailExistsAsync(string email)
+        {
+            var usuario = await _usuarioCollection.Find(x => x.Email == email).FirstOrDefaultAsync();
+            return usuario != null;
+        }
+        
     }
 }
