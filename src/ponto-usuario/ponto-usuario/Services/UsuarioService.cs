@@ -35,11 +35,26 @@ namespace ponto_usuario.Services
             var usuario = new Usuario(registerDto);
             await _usuarioCollection.InsertOneAsync(usuario);
         }
+        
+        public async Task UpdatePasswordAsync(string id, string novaSenha)
+        {
+            var filtro = Builders<Usuario>.Filter.Eq(u => u.Id, id);
+            var atualizacao = Builders<Usuario>.Update.Set(u => u.SenhaCriptografada, novaSenha);
+    
+            await _usuarioCollection.UpdateOneAsync(filtro, atualizacao);
+        }
 
         public async Task UpdateAsync(string id, Usuario updatedUsuario) =>
             await _usuarioCollection.ReplaceOneAsync(x => x.Id == id, updatedUsuario);
 
         public async Task RemoveAsync(string id) =>
             await _usuarioCollection.DeleteOneAsync(x => x.Id == id);
+        
+        public async Task<bool> CheckIfEmailExistsAsync(string email)
+        {
+            var usuario = await _usuarioCollection.Find(x => x.Email == email).FirstOrDefaultAsync();
+            return usuario != null;
+        }
+        
     }
 }

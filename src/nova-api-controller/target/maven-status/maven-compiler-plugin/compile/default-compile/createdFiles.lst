@@ -8,10 +8,12 @@ br\puc\novaapicontroller\dto\Login\LoginResponse.class
 br\puc\novaapicontroller\controller\PontoUsuarioController.class
 br\puc\novaapicontroller\service\LoginService.class
 br\puc\novaapicontroller\dto\CadastroUsuarioDto$CadastroUsuarioDtoBuilder.class
+br\puc\novaapicontroller\dto\usuario\AlteracaoSenhaRetorno.class
 br\puc\novaapicontroller\controller\RegistroPontoController.class
 br\puc\novaapicontroller\client\RegistroPontoClient.class
 br\puc\novaapicontroller\dto\registroponto\HoleriteDto.class
 br\puc\novaapicontroller\dto\CadastroUsuarioDto.class
+br\puc\novaapicontroller\dto\AlteracaoSenhaDto$AlteracaoSenhaDtoBuilder.class
 br\puc\novaapicontroller\dto\registroponto\PontoDto.class
 br\puc\novaapicontroller\util\LogUtil.class
 br\puc\novaapicontroller\dto\Login\LoginRequest.class
@@ -21,8 +23,10 @@ br\puc\novaapicontroller\util\DateUtil.class
 br\puc\novaapicontroller\util\enums\StatusUsuarioEnum.class
 br\puc\novaapicontroller\dto\Login\LoginBasic.class
 br\puc\novaapicontroller\dto\registroponto\HoleriteDto$HoleriteDtoBuilder.class
+br\puc\novaapicontroller\dto\usuario\AlteracaoSenhaRetorno$AlteracaoSenhaRetornoBuilder.class
 br\puc\novaapicontroller\dto\registroponto\PontoSiteResponse.class
 br\puc\novaapicontroller\NovaApiControllerApplication.class
+br\puc\novaapicontroller\dto\EmailVerificacaoResponse$EmailVerificacaoResponseBuilder.class
 br\puc\novaapicontroller\dto\Login\LoginSiteResponse.class
 br\puc\novaapicontroller\dto\registroponto\SaldoDiario.class
 br\puc\novaapicontroller\dto\usuario\EnderecoDto.class
@@ -30,11 +34,13 @@ br\puc\novaapicontroller\dto\JwtPayload.class
 br\puc\novaapicontroller\dto\usuario\EnderecoDto$EnderecoDtoBuilder.class
 br\puc\novaapicontroller\util\ClientUtil.class
 br\puc\novaapicontroller\client\RegistroPontoClient$1.class
+br\puc\novaapicontroller\dto\EmailVerificacaoResponse.class
 br\puc\novaapicontroller\util\CriptografiaUtil.class
 br\puc\novaapicontroller\dto\usuario\SetorDto$SetorDtoBuilder.class
 br\puc\novaapicontroller\util\JWTUtil.class
 br\puc\novaapicontroller\controller\LoginController.class
 br\puc\novaapicontroller\client\UsuarioPontoClient$1.class
+br\puc\novaapicontroller\dto\AlteracaoSenhaDto.class
 br\puc\novaapicontroller\config\WebConfig$1.class
 br\puc\novaapicontroller\dto\registroponto\PontoSiteResponse$PontoSiteResponseBuilder.class
 br\puc\novaapicontroller\service\RegistroPontoService.class

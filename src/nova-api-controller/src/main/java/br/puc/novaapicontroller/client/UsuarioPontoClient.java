@@ -1,6 +1,8 @@
 package br.puc.novaapicontroller.client;
 
+import br.puc.novaapicontroller.dto.AlteracaoSenhaDto;
 import br.puc.novaapicontroller.dto.CadastroUsuarioDto;
+import br.puc.novaapicontroller.dto.usuario.AlteracaoSenhaRetorno;
 import br.puc.novaapicontroller.dto.usuario.UsuarioDto;
 import br.puc.novaapicontroller.util.ClientUtil;
 import br.puc.novaapicontroller.util.LogUtil;
@@ -84,11 +86,21 @@ public class UsuarioPontoClient {
     }
 
     public UsuarioDto removerUsuario(String id) {
-        String erroPadrao = "Erro ao editar usuario ";
+        String erroPadrao = "Erro ao remover usuario ";
 
         Request requisicao = construirRequisicaoDelete(id);
 
         return executarRequisicao(erroPadrao, requisicao);
+    }
+
+    public AlteracaoSenhaRetorno alterarSenha(String id, String token, AlteracaoSenhaDto novaSenha) throws JsonProcessingException {
+        String erroPadrao = "Erro ao alterar senha do usuario ";
+
+        String corpo = objectMapper.writeValueAsString(novaSenha);
+        RequestBody corpoRequisicao = ClientUtil.converterCorpoRequisicao(corpo);
+        Request requisicao = construirRequisicaoPut("change-password/"+ id, corpoRequisicao, token);
+
+        return executarRequisicaoAlterarSenha(erroPadrao, requisicao);
     }
 
     @Nullable
@@ -98,6 +110,25 @@ public class UsuarioPontoClient {
                 String corpoResposta = resposta.body().string();
                 if (!corpoResposta.trim().isEmpty()) {
                     return objectMapper.readValue(corpoResposta, UsuarioDto.class);
+                }
+            }
+        } catch (IOException e) {
+            String erro = erroPadrao + ". Erro: " + e.getMessage();
+            LogUtil.buscarLinhaExcecaoEImprimirLogErro(e, erro, "UsuarioPontoClient.java");
+            return null;
+        }
+
+        logger.log(Level.SEVERE, erroPadrao);
+        return null;
+    }
+
+    @Nullable
+    private AlteracaoSenhaRetorno executarRequisicaoAlterarSenha(String erroPadrao, Request requisicao) {
+        try (Response resposta = ClientUtil.obterClient(okHttpClient).newCall(requisicao).execute()) {
+            if (resposta.isSuccessful() && resposta.body() != null) {
+                String corpoResposta = resposta.body().string();
+                if (!corpoResposta.trim().isEmpty()) {
+                    return objectMapper.readValue(corpoResposta, AlteracaoSenhaRetorno.class);
                 }
             }
         } catch (IOException e) {
