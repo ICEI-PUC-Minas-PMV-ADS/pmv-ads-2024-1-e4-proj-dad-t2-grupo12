@@ -36,6 +36,10 @@ const RegistroPonto = () => {
                     registroSelecionado = await saveRegistroPonto(novoHorario);
                 }
 
+                let saldoPrefixo = registroSelecionado && registroSelecionado.isPositivo ? '+' : '-';
+
+                setSaldoDiario(saldoPrefixo + registroSelecionado.saldo);
+
                 setRegistro(registroSelecionado);
                 setLastAddedRegistro(registroSelecionado);
             } catch (error) {
@@ -168,7 +172,9 @@ const RegistroPonto = () => {
                 </View>
                 <View style={styles.totals}>
                     <Text style={styles.summaryText}>Saldo do dia</Text>
-                    <Text style={styles.summaryText}>{saldoDiario}</Text>
+                    <Text style={[styles.summaryText, { color: registro && registro.isPositivo ? 'green' : 'red' }]}>
+                        {saldoDiario}
+                    </Text>
                 </View>
                 <View style={styles.totals}>
                     <Text style={styles.summaryText}>Saldo total</Text>
