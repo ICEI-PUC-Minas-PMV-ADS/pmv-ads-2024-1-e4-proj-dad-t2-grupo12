@@ -10,6 +10,8 @@ builder.Services.Configure<PontoDatabaseSettings>(builder.Configuration.GetSecti
 builder.Services.AddSingleton<PontoService>();
 builder.Services.Configure<HoleriteDatabaseSettings>(builder.Configuration.GetSection("PontoDatabase"));
 builder.Services.AddSingleton<HoleriteService>();
+builder.Services.Configure<RegistroSolicitacaoDatabaseSettings>(builder.Configuration.GetSection("PontoDatabase"));
+builder.Services.AddSingleton<RegistroSolicitacaoService>();
 
 builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
