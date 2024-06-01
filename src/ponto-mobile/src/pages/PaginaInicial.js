@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import HeaderMenu from "../components/HeaderMenu";
+import React, {useEffect, useState} from 'react';
+import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
 const PaginaInicial = () => {
     const [currentDate, setCurrentDate] = useState('');
@@ -22,12 +21,18 @@ const PaginaInicial = () => {
         return () => clearInterval(interval);
     }, []);
 
-    const userName = 'Leo'; // Substitua pelo nome do usuário
+    const userName = 'Leo';
 
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <HeaderMenu />
+                <TouchableOpacity>
+                    <Image
+                        source={require('../../assets/image15.png')}
+                        style={styles.headerImage}
+                    />
+                </TouchableOpacity>
+                <Text style={styles.welcome}>Bem vindo, {userName}</Text>
             </View>
             <View style={styles.body}>
                 <View style={styles.dateTimeContainer}>
@@ -96,25 +101,25 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     header: {
-        backgroundColor: '#fff', // Fundo branco
+        backgroundColor: '#fff',
         padding: 20,
         alignItems: 'center',
     },
     welcome: {
         fontSize: 26,
-        color: 'rgba(252, 163, 17, 1)', // Amarelo
+        color: 'rgba(252, 163, 17, 1)',
         textAlign: 'center',
         fontFamily: 'Inter',
     },
     body: {
         flex: 1,
-        backgroundColor: 'rgba(19, 33, 60, 1)', // Azul-marinho
+        backgroundColor: 'rgba(19, 33, 60, 1)',
         padding: 20,
-        justifyContent: 'flex-start', // Alinhamento no topo
+        justifyContent: 'flex-start',
         alignItems: 'center',
-        borderTopLeftRadius: 25, // Raio de canto superior esquerdo
-        borderTopRightRadius: 25, // Raio de canto superior direito
-        overflow: 'hidden', // Para garantir que o raio de canto seja exibido corretamente
+        borderTopLeftRadius: 25,
+        borderTopRightRadius: 25,
+        overflow: 'hidden',
     },
     dateTimeContainer: {
         marginBottom: 20,
@@ -122,13 +127,13 @@ const styles = StyleSheet.create({
     },
     date: {
         fontSize: 26,
-        color: '#fff', // Branco
+        color: '#fff',
         marginBottom: 1,
         fontFamily: 'Inter',
     },
     time: {
         fontSize: 26,
-        color: '#fff', // Branco
+        color: '#fff',
         fontFamily: 'Inter',
     },
     menu: {
@@ -143,11 +148,11 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
     },
     menuItem: {
-        backgroundColor: '#fff', // Fundo branco
+        backgroundColor: '#fff',
         padding: 35,
         margin: 10,
         borderRadius: 15,
-        width: '45%', // Ajuste a largura para caber lado a lado
+        width: '45%',
         alignItems: 'center',
     },
     menuItemImage: {
@@ -156,11 +161,11 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     menuItemText: {
-        color: 'rgba(19, 33, 60, 1)', // Azul-marinho
-        fontSize: 14, // Tamanho da fonte ligeiramente maior para melhor legibilidade
-        fontWeight: '500', // Fonte semi-negrito para destaque
-        textAlign: 'center', // Centraliza o texto
-        marginTop: 5, // Espaçamento entre a imagem e o texto
+        color: 'rgba(19, 33, 60, 1)',
+        fontSize: 14,
+        fontWeight: '500',
+        textAlign: 'center',
+        marginTop: 5,
         fontFamily: 'DM Sans Medium',
     },
     sloganContainer: {
@@ -168,7 +173,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     footer: {
-        backgroundColor: '#fff', // Fundo branco
+        backgroundColor: '#fff',
         padding: 25,
     },
     headerImage: {
