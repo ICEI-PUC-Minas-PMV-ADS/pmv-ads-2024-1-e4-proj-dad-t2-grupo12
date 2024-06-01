@@ -7,9 +7,9 @@ const TelaPonto = () => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.header}>
-                <HeaderMenu></HeaderMenu>
-            </View>
+            {/*<View style={styles.header}>*/}
+            {/*    <HeaderMenu></HeaderMenu>*/}
+            {/*</View>*/}
             <View style={styles.content}>
                 <View style={styles.contentHeader}>
                     <Text style={styles.contentTextEspelho}>Espelho de ponto</Text>

@@ -49,8 +49,8 @@ const PaginaInicial = () => {
                                 style={styles.menuItemImage}
                             />
                             <Text style={styles.menuItemText}>Registrar ponto</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.menuItem}>
+                        </TouchableOpacity >
+                        <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate('Profile')}>
                             <Image
                                 source={require('../../assets/image12.png')}
                                 style={styles.menuItemImage}
@@ -66,7 +66,7 @@ const PaginaInicial = () => {
                             />
                             <Text style={styles.menuItemText}>Saldos e holerite</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.menuItem}>
+                        <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate('TabelaPonto')}>
                             <Image
                                 source={require('../../assets/image14.png')}
                                 style={styles.menuItemImage}
