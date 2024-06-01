@@ -1,9 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const PaginaInicial = () => {
     const [currentDate, setCurrentDate] = useState('');
     const [currentTime, setCurrentTime] = useState('');
+    const navigation = useNavigation();
 
     useEffect(() => {
         const date = new Date().toLocaleDateString('pt-BR', {
@@ -41,7 +43,7 @@ const PaginaInicial = () => {
                 </View>
                 <View style={styles.menu}>
                     <View style={styles.menuRow}>
-                        <TouchableOpacity style={styles.menuItem}>
+                        <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate('RegistroPonto')}>
                             <Image
                                 source={require('../../assets/image11.png')}
                                 style={styles.menuItemImage}
