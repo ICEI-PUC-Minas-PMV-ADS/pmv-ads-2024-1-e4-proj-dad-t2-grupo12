@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Pressable, Modal, Button, FlatList } from 'react-native';
 import { getRegistrosPonto, saveRegistroPonto, updateRegistroPonto } from "../services/Api";
 
-const TabelaPontosSemanais = () => {
-    const [horario, setHorario] = useState(null);
+const RegistroPonto = () => {
+    const [registro, setRegistro] = useState(null);
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [successMessage, setSuccessMessage] = useState('');
@@ -36,7 +36,11 @@ const TabelaPontosSemanais = () => {
                     registroSelecionado = await saveRegistroPonto(novoHorario);
                 }
 
-                setHorario(registroSelecionado);
+                let saldoPrefixo = registroSelecionado && registroSelecionado.isPositivo ? '+' : '-';
+
+                setSaldoDiario(saldoPrefixo + registroSelecionado.saldo);
+
+                setRegistro(registroSelecionado);
                 setLastAddedRegistro(registroSelecionado);
             } catch (error) {
                 console.error('Erro ao buscar dados da API:', error);
@@ -58,7 +62,7 @@ const TabelaPontosSemanais = () => {
         try {
             if (lastAddedRegistro) {
                 await deleteUltimoRegistroPonto(lastAddedRegistro.id);
-                setHorario(null);
+                setRegistro(null);
                 setSuccessMessage('');
                 setLastAddedRegistro(null);
                 setConfirmModalVisible(false);
@@ -81,29 +85,41 @@ const TabelaPontosSemanais = () => {
     };
 
     const addHorario = async () => {
-        const currentDateTime = new Date().toISOString();
+        const horariosPreenchidos = [
+            registro.inicioExpediente,
+            registro.inicioIntervalo,
+            registro.fimIntervalo,
+            registro.fimExpediente
+        ].filter(horario => horario !== null).length;
 
-        if (!horario) return;
-
-        if (!horario.inicioExpediente) {
-            horario.inicioExpediente = currentDateTime;
-        } else if (!horario.inicioIntervalo) {
-            horario.inicioIntervalo = currentDateTime;
-        } else if (!horario.fimIntervalo) {
-            horario.fimIntervalo = currentDateTime;
-        } else if (!horario.fimExpediente) {
-            horario.fimExpediente = currentDateTime;
+        if (horariosPreenchidos >= 4) {
+            alert('Não é possível adicionar mais horários.');
+            return;
         }
 
-        horario.isPositivo = null;
-        horario.saldo = null;
+        const currentDateTime = new Date().toISOString();
+
+        let novoRegistro = { ...registro }; // Clone the registro object
+
+        if (!novoRegistro.inicioExpediente) {
+            novoRegistro.inicioExpediente = currentDateTime;
+        } else if (!novoRegistro.inicioIntervalo) {
+            novoRegistro.inicioIntervalo = currentDateTime;
+        } else if (!novoRegistro.fimIntervalo) {
+            novoRegistro.fimIntervalo = currentDateTime;
+        } else if (!novoRegistro.fimExpediente) {
+            novoRegistro.fimExpediente = currentDateTime;
+        }
+
+        novoRegistro.isPositivo = null;
+        novoRegistro.saldo = null;
+        novoRegistro.usuarioId = '664bdc3adf17108bf6c8a689';
 
         try {
-            const updatedRegistro = await updateRegistroPonto(horario.id, horario);
-            setHorario(updatedRegistro);
+            const updatedRegistro = await updateRegistroPonto(novoRegistro.id, novoRegistro);
+            setRegistro(updatedRegistro);
             setLastAddedRegistro(updatedRegistro);
             setSuccessMessage('Ponto atualizado com sucesso.');
-            setModalVisible(true);
         } catch (error) {
             console.error('Erro ao atualizar o horário:', error);
         }
@@ -113,7 +129,7 @@ const TabelaPontosSemanais = () => {
         try {
             if (lastAddedRegistro) {
                 await deleteUltimoRegistroPonto(lastAddedRegistro.id);
-                setHorario(null);
+                setRegistro(null);
                 setSuccessMessage('');
                 setLastAddedRegistro(null);
             }
@@ -146,8 +162,8 @@ const TabelaPontosSemanais = () => {
                 <Pressable onPress={goToPreviousDay}><Text style={styles.navText}>Anterior</Text></Pressable>
                 <Pressable onPress={goToNextDay}><Text style={styles.navText}>Próximo</Text></Pressable>
             </View>
-            {horario && (
-                <Text style={styles.date}>{formatDate(horario.dataRegistro)}</Text>
+            {registro && (
+                <Text style={styles.date}>{formatDate(registro.dataRegistro)}</Text>
             )}
             <View style={styles.summary}>
                 <View style={styles.totals}>
@@ -156,16 +172,18 @@ const TabelaPontosSemanais = () => {
                 </View>
                 <View style={styles.totals}>
                     <Text style={styles.summaryText}>Saldo do dia</Text>
-                    <Text style={styles.summaryText}>{saldoDiario}</Text>
+                    <Text style={[styles.summaryText, { color: registro && registro.isPositivo ? 'green' : 'red' }]}>
+                        {saldoDiario}
+                    </Text>
                 </View>
                 <View style={styles.totals}>
                     <Text style={styles.summaryText}>Saldo total</Text>
                     <Text style={styles.summaryText}>+09h 55m</Text>
                 </View>
             </View>
-            {horario && (
+            {registro && (
                 <FlatList
-                    data={[horario]}
+                    data={[registro]}
                     renderItem={({ item }) => (
                         <View style={styles.timelineItem}>
                             <View style={styles.timelineIndicator} />
@@ -180,7 +198,17 @@ const TabelaPontosSemanais = () => {
                     keyExtractor={item => item.id}
                 />
             )}
-            <Pressable style={styles.addButton} onPress={addHorario}>
+            <Pressable
+                style={[styles.addButton, registro && [registro.inicioExpediente, registro.inicioIntervalo, registro.fimIntervalo, registro.fimExpediente].filter(horario => horario !== null).length >= 4 ? { backgroundColor: 'gray' } : {}]}
+                onPress={() => {
+                    if ([registro.inicioExpediente, registro.inicioIntervalo, registro.fimIntervalo, registro.fimExpediente].filter(horario => horario !== null).length >= 4) {
+                        alert('Não é possível adicionar mais horários.');
+                    } else {
+                        setModalVisible(true);
+                    }
+                }}
+                disabled={registro && [registro.inicioExpediente, registro.inicioIntervalo, registro.fimIntervalo, registro.fimExpediente].filter(horario => horario !== null).length >= 4}
+            >
                 <Text style={styles.addButtonText}>+</Text>
             </Pressable>
 
@@ -188,15 +216,15 @@ const TabelaPontosSemanais = () => {
                 <View style={styles.modalContainer}>
                     <View style={styles.modalContent}>
                         <Text>{successMessage}</Text>
-                        {successMessage && (
-                            <Button title="Desfazer" onPress={openConfirmModal} />
-                        )}
-                        <Button title="Ok" onPress={() => setModalVisible(false)} />
+                        <Button title="Desfazer" onPress={() => setModalVisible(false)} />
+                        <Button title="Ok" onPress={() => {
+                            addHorario();
+                            setModalVisible(false);
+                        }} />
                     </View>
                 </View>
             </Modal>
 
-            {/* Modal de confirmação para desfazer a ação */}
             <Modal visible={confirmModalVisible} transparent={true}>
                 <View style={styles.modalContainer}>
                     <View style={styles.modalContent}>
@@ -314,4 +342,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default TabelaPontosSemanais;
+export default RegistroPonto;
