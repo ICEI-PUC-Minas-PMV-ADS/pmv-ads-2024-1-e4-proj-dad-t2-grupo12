@@ -59,7 +59,7 @@ const PaginaInicial = () => {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.menuRow}>
-                        <TouchableOpacity style={styles.menuItem}>
+                        <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate('Holerite')}>
                             <Image
                                 source={require('../../assets/image13.png')}
                                 style={styles.menuItemImage}
