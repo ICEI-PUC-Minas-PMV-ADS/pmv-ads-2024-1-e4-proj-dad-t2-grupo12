@@ -1,57 +1,94 @@
-import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import HeaderMenu from "../components/HeaderMenu";
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
+import { format, startOfWeek, endOfWeek, addDays, subDays } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 import TabelaPontosSemanais from "../components/TabelaPontosSemanais";
 
 const TelaPonto = () => {
+    const [startDate, setStartDate] = useState(new Date());
+
+    const handlePrevious = () => {
+        setStartDate(subDays(startDate, 7));
+    };
+
+    const handleNext = () => {
+        setStartDate(addDays(startDate, 7));
+    };
+
+    const startOfWeekDate = startOfWeek(startDate, { locale: ptBR });
+    const endOfWeekDate = endOfWeek(startDate, { locale: ptBR });
 
     return (
-        <View style={styles.container}>
-            {/*<View style={styles.header}>*/}
-            {/*    <HeaderMenu></HeaderMenu>*/}
-            {/*</View>*/}
+        <ScrollView contentContainerStyle={styles.container}>
             <View style={styles.content}>
                 <View style={styles.contentHeader}>
                     <Text style={styles.contentTextEspelho}>Espelho de ponto</Text>
-                    <Text style={styles.contentTextData}>Semana 07/04/2024</Text>
+                    <Text style={styles.contentTextData}>
+                        Semana {format(startOfWeekDate, 'dd/MM/yyyy', { locale: ptBR })} - {format(endOfWeekDate, 'dd/MM/yyyy', { locale: ptBR })}
+                    </Text>
+                </View>
+                <View style={styles.navigation}>
+                    <Pressable onPress={handlePrevious} style={styles.navButtonLeft}>
+                        <Text style={styles.navButton}>Anterior</Text>
+                    </Pressable>
+                    <Pressable onPress={handleNext} style={styles.navButtonRight}>
+                        <Text style={styles.navButton}>Próximo</Text>
+                    </Pressable>
                 </View>
                 <View style={styles.contentTabela}>
-                    <TabelaPontosSemanais></TabelaPontosSemanais>
+                    <TabelaPontosSemanais startDate={startDate} />
                 </View>
             </View>
-        </View>
+        </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flexGrow: 1,
         backgroundColor: '#fff',
     },
     content: {
         flex: 1,
-        justifyContent: 'center',
         alignItems: 'center',
-        display: 'row',
-        paddingTop: 100
+        paddingTop: 20,
+        paddingHorizontal: 10,
     },
     contentHeader: {
-        paddingTop: 100,
         alignItems: 'center',
+        marginBottom: 20,
     },
     contentTabela: {
         width: '100%',
-        height: '100%',
-        paddingTop: 20,
     },
     contentTextEspelho: {
-        fontSize: 27,
+        fontSize: 24,
         paddingBottom: 10,
         color: '#faa211',
     },
     contentTextData: {
-        fontSize: 20,
+        fontSize: 18,
         color: '#170f75',
+    },
+    navigation: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 10,
+        marginBottom: 10,
+        width: '100%',
+    },
+    navButtonLeft: {
+        flex: 1,
+        alignItems: 'flex-start',
+    },
+    navButtonRight: {
+        flex: 1,
+        alignItems: 'flex-end',
+    },
+    navButton: {
+        color: 'rgba(23, 15, 118, 1)',
+        fontSize: 16,
+        marginHorizontal: 10,
     },
 });
 
