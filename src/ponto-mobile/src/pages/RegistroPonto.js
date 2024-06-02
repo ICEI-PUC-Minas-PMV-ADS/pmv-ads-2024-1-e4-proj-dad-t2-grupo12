@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import {View, Text, StyleSheet, Pressable, Modal, Button, FlatList, TouchableOpacity} from 'react-native';
 import { getRegistrosPonto, saveRegistroPonto, updateRegistroPonto } from "../services/Api";
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import {useNavigation} from "@react-navigation/native";
 
 const RegistroPonto = () => {
     const [registro, setRegistro] = useState(null);
@@ -10,6 +12,7 @@ const RegistroPonto = () => {
     const [confirmModalVisible, setConfirmModalVisible] = useState(false);
     const [saldoDiario, setSaldoDiario] = useState('00:00');
     const [horasTrabalhadas, setHorasTrabalhadas] = useState('00h 00m');
+    const navigation = useNavigation();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -182,6 +185,13 @@ const RegistroPonto = () => {
                 <Text style={styles.addButtonText}>+</Text>
             </Pressable>
 
+            <Pressable
+                style={styles.editButton}
+                onPress={() => navigation.navigate('SocilitarAlteracao')}
+            >
+                <Icon name="edit" size={30} color="#fff" />
+            </Pressable>
+
             <Modal visible={modalVisible} transparent={true}>
                 <View style={styles.modalContainer}>
                     <View style={styles.modalContent}>
@@ -316,7 +326,18 @@ const styles = StyleSheet.create({
     },
     totals: {
         alignItems: "center"
-    }
+    },
+    editButton: {
+        position: 'absolute',
+        bottom: 30,
+        left: 30,  // Position the edit button to the left
+        backgroundColor: '#FFD700',
+        width: 60,
+        height: 60,
+        borderRadius: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 });
 
 export default RegistroPonto;
