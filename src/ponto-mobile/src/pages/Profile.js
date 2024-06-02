@@ -1,9 +1,71 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image, Button, Dimensions } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, Image, Button, Dimensions, TextInput, TouchableOpacity } from 'react-native';
+import Modal from 'react-native-modal';
+import { obterUsuario, editarSenha } from "../services/Api";
+
 
 const { width, height } = Dimensions.get('window');
 
 const Profile = () => {
+  const [dadosUsuario, setDadosUsuario] = useState(null);
+  const [nomeUsuario, setNomeUsuario] = useState(null);
+  const [cpfUsuario, setCpfUsuario] = useState(null);
+  const [setorNomeUsuario, setSetorNomeUsuario] = useState(null);
+  const [setorCategoriaUsuario, setSetorCategoriaUsuario] = useState(null);
+  const [dataNascimentoUsuario, setDataNascimentoUsuario] = useState(null);
+  const [enderecoUsuarioRua, setEnderecoUsuarioRua] = useState(null);
+  const [enderecoUsuarioNumero, setEnderecoUsuarioNumero] = useState(null);
+  const [enderecoUsuarioCep, setEnderecoUsuarioCep] = useState(null);
+  const [enderecoUsuarioCidade, setEnderecoUsuarioCidade] = useState(null);
+  const [enderecoUsuarioEstado, setEnderecoUsuarioEstado] = useState(null);
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [novaSenha, setNovaSenha] = useState('');
+  const [confirmarSenha, setConfirmarSenha] = useState('');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        let dados = await obterUsuario();
+        setDadosUsuario(dados.email);
+        setNomeUsuario(dados.nome);
+        setCpfUsuario(dados.cpf);
+        setSetorNomeUsuario(dados.setores[0].nome);
+        setSetorCategoriaUsuario(dados.setores[0].categoria);
+        setDataNascimentoUsuario(dados.dataNascimento);
+        setEnderecoUsuarioRua(dados.endereco.rua);
+        setEnderecoUsuarioNumero(dados.endereco.numero);
+        setEnderecoUsuarioCep(dados.endereco.cep);
+        setEnderecoUsuarioCidade(dados.endereco.cidade);
+        setEnderecoUsuarioEstado(dados.endereco.estado);
+        console.log(dados.setores[0].nome);
+
+      } catch (error) {
+        console.error('Erro ao buscar dados da API:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+
+  const handleTrocarSenha = async () => {
+    if (novaSenha === confirmarSenha) {
+      const request = {
+        novaSenha: novaSenha
+      }
+      senhaResposta = await editarSenha(request);
+      console.log(senhaResposta)
+      // Lógica para trocar a senha do usuário
+      alert('Senha alterada com sucesso!');
+      toggleModal();
+    } else {
+      alert('As senhas não coincidem!');
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -11,25 +73,52 @@ const Profile = () => {
         <Text style={styles.headerText}>Profile</Text>
         <Text style={styles.headerText}>Logout</Text>
       </View>
-      <Image 
-        source={{ uri: 'https://example.com/user-photo.jpg' }} 
-        style={styles.profileImage} 
+      <Image
+        source={{ uri: '' }}
+        style={styles.profileImage}
       />
-      <Text style={styles.name}>John Doe</Text>
-      <Text style={styles.department}>Technology Department</Text>
+      <Text style={styles.name}>{nomeUsuario}</Text>
+      <Text style={styles.department}>{setorNomeUsuario}, {setorCategoriaUsuario}</Text>
       <View style={styles.userInfo}>
-        <Text style={styles.label}>Email: john.doe@example.com</Text>
-        <Text style={styles.label}>CPF: 123.456.789-00</Text>
-        <Text style={styles.label}>Data de Nascimento: 01/01/1990</Text>
-        <Text style={styles.label}>Endereço: Rua Exemplo, 123</Text>
+        <Text style={styles.label}>Email: {dadosUsuario}</Text>
+        <Text style={styles.label}>CPF: {cpfUsuario}</Text>
+        <Text style={styles.label}>Data de Nascimento: {dataNascimentoUsuario}</Text>
+        <Text style={styles.label}>Endereço: {enderecoUsuarioRua}, {enderecoUsuarioNumero}, {enderecoUsuarioCep}, {enderecoUsuarioCidade}, {enderecoUsuarioEstado}</Text>
       </View>
       <View style={styles.buttonContainer}>
-        <Button 
-          title="Trocar Senha" 
-          onPress={() => alert('Trocar Senha')} 
-          color="#841584"
+        <Button
+          title="Trocar Senha"
+          onPress={toggleModal}
+          color="#0B1ABB"
         />
       </View>
+      <Modal isVisible={isModalVisible}>
+        <View style={styles.modalContent}>
+          <Text style={styles.modalTitle}>Trocar Senha</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Nova Senha"
+            secureTextEntry
+            value={novaSenha}
+            onChangeText={setNovaSenha}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Confirmar Nova Senha"
+            secureTextEntry
+            value={confirmarSenha}
+            onChangeText={setConfirmarSenha}
+          />
+          <View style={styles.modalButtons}>
+            <TouchableOpacity style={styles.button} onPress={handleTrocarSenha}>
+              <Text style={styles.buttonText}>Salvar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={toggleModal}>
+              <Text style={styles.buttonText}>Cancelar</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -78,6 +167,41 @@ const styles = StyleSheet.create({
   buttonContainer: {
     width: '100%',
     paddingHorizontal: '10%',
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  input: {
+    width: '100%',
+    padding: 10,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    marginBottom: 10,
+  },
+  modalButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+  button: {
+    backgroundColor: '#0B1ABB',
+    padding: 10,
+    borderRadius: 5,
+    width: '45%',
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
   },
 });
 
