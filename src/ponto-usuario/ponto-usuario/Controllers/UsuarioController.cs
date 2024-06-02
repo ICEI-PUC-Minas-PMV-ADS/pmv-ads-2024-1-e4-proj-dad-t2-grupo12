@@ -104,7 +104,7 @@ namespace ponto_usuario.Controllers
                 email = usuarioDb.Email,
                 endereco = usuarioDb.Endereco,
                 setores = usuarioDb.Setores,
-                dataNacimento = usuarioDb.DataNaciemnto,
+                dataNacimento = usuarioDb.DataNascimento,
                 salario = usuarioDb.Salario,
                 jwtToken = jwt
             });

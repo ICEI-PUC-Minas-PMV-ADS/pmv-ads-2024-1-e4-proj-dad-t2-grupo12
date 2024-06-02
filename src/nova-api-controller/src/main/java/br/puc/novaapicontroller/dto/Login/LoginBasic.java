@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,7 +17,7 @@ public class LoginBasic {
 
     private EnderecoDto endereco;
 
-    private SetorDto setores;
+    private List<SetorDto> setores;
 
     private String dataNacimento;
 

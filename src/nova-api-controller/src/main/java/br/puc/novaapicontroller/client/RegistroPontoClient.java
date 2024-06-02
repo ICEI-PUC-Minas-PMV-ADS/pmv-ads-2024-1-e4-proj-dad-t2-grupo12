@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static br.puc.novaapicontroller.util.ClientUtil.*;
+
 @Component
 @RequiredArgsConstructor
 public class RegistroPontoClient {
@@ -35,7 +37,7 @@ public class RegistroPontoClient {
 
     public List<PontoDto> obterListagemRegistroPontos() {
         String erroPadrao = "Erro ao buscar listagem de registro de pontos ";
-        Request requisicao = construirRequisicaoGet("");
+        Request requisicao = construirRequisicaoGet(url);
 
         try (Response resposta = ClientUtil.obterClient(okHttpClient).newCall(requisicao).execute()) {
             if (resposta.isSuccessful() && resposta.body() != null) {
@@ -57,7 +59,7 @@ public class RegistroPontoClient {
 
     public PontoDto obterRegistros(String id) throws Exception {
         String erroPadrao = "Erro ao buscar registro de ponto";
-        Request requisicao = construirRequisicaoGet(id);
+        Request requisicao = construirRequisicaoGet(url + id);
 
         return executarRequisicaoPonto(erroPadrao, requisicao);
     }
@@ -67,7 +69,7 @@ public class RegistroPontoClient {
 
         String corpo = objectMapper.writeValueAsString(pontoDto);
         RequestBody corpoRequisicao = ClientUtil.converterCorpoRequisicao(corpo);
-        Request requisicao = construirRequisicaoPost("", corpoRequisicao);
+        Request requisicao = construirRequisicaoPost(url, corpoRequisicao);
 
         return executarRequisicaoPonto(erroPadrao, requisicao);
     }
@@ -77,7 +79,7 @@ public class RegistroPontoClient {
 
         String corpo = objectMapper.writeValueAsString(pontoDto);
         RequestBody corpoRequisicao = ClientUtil.converterCorpoRequisicao(corpo);
-        Request requisicao = construirRequisicaoPut(id, corpoRequisicao);
+        Request requisicao = construirRequisicaoPut(url + id, corpoRequisicao);
         executarRequisicaoPonto(erroPadrao, requisicao);
         return pontoDto;
     }
@@ -85,7 +87,7 @@ public class RegistroPontoClient {
     public PontoDto removerPonto(String id) throws Exception {
         String erroPadrao = "Erro ao remover registro de ponto ";
 
-        Request requisicao = construirRequisicaoDelete(id);
+        Request requisicao = construirRequisicaoDelete(url + id);
 
         return executarRequisicaoPonto(erroPadrao, requisicao);
     }
@@ -121,31 +123,4 @@ public class RegistroPontoClient {
         }
     }
 
-    private Request construirRequisicaoGet(String urlComplemento) {
-        return new Request.Builder()
-                .url(url + urlComplemento)
-                .get()
-                .build();
-    }
-
-    private Request construirRequisicaoPost(String urlComplemento, RequestBody corpoRequisicao) {
-        return new Request.Builder()
-                .url(url + urlComplemento)
-                .post(corpoRequisicao)
-                .build();
-    }
-
-    private Request construirRequisicaoPut(String urlComplemento, RequestBody corpoRequisicao) {
-        return new Request.Builder()
-                .url(url + urlComplemento)
-                .put(corpoRequisicao)
-                .build();
-    }
-
-    private Request construirRequisicaoDelete(String urlComplemento) {
-        return new Request.Builder()
-                .url(url + urlComplemento)
-                .delete()
-                .build();
-    }
 }

@@ -1,32 +1,41 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Pressable, ScrollView } from 'react-native';
 import { getRegistrosPonto } from "../services/Api";
+import { addDays, subDays, format, startOfWeek, endOfWeek } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 
-const TabelaPontosSemanais = () => {
+const TabelaPontosSemanais = ({ startDate }) => {
     const [dados, setDados] = useState([]);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await getRegistrosPonto();
-                setDados(response);
-            } catch (error) {
-                console.error('Erro ao buscar dados da API:', error);
-            }
-        };
+        fetchData(startDate);
+    }, [startDate]);
 
-        fetchData();
-    }, []);
+    const fetchData = async (startDate) => {
+        try {
+            const response = await getRegistrosPonto(startDate);
+            const startOfWeekDate = startOfWeek(startDate);
+            const endOfWeekDate = endOfWeek(startDate);
+            const filteredData = response.filter(registro =>
+                new Date(registro.dataRegistro) >= startOfWeekDate &&
+                new Date(registro.dataRegistro) <= endOfWeekDate
+            );
+            setDados(filteredData);
+        } catch (error) {
+            console.error('Erro ao buscar dados da API:', error);
+        }
+    };
 
     const renderizarLinhas = () => {
         return dados.map((registro, index) => (
             <Pressable
                 key={index}
-                style={[styles.row]}
+                style={styles.row}
                 onPress={() => console.log('clicou', registro)}
             >
-                <Text style={styles.cell}>{registro.inicioExpediente}</Text>
-                <Text style={styles.cell}>{registro.fimExpediente}</Text>
+                <Text style={styles.cell}>{format(new Date(registro.dataRegistro), 'dd/MM/yyyy')}</Text>
+                <Text style={styles.cell}>{registro.inicioExpediente ? format(new Date(registro.inicioExpediente), 'HH:mm') : '-'}</Text>
+                <Text style={styles.cell}>{registro.fimExpediente ? format(new Date(registro.fimExpediente), 'HH:mm') : '-'}</Text>
                 <Text style={styles.cell}>{registro.saldo}</Text>
             </Pressable>
         ));
@@ -34,27 +43,36 @@ const TabelaPontosSemanais = () => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.principalRow}>
-                <Text style={[styles.cellPrincipal, styles.header]}>Data</Text>
-                <Text style={[styles.cellPrincipal, styles.header]}>Entrada/Saída</Text>
-                <Text style={[styles.cellPrincipal, styles.header]}>Saldo Diário</Text>
+            <View style={styles.tableContainer}>
+                <View style={styles.principalRow}>
+                    <Text style={[styles.cellPrincipal, styles.header]}>Data</Text>
+                    <Text style={[styles.cellPrincipal, styles.header]}>Entrada</Text>
+                    <Text style={[styles.cellPrincipal, styles.header]}>Saída</Text>
+                    <Text style={[styles.cellPrincipal, styles.header]}>Saldo Diário</Text>
+                </View>
+                <ScrollView>
+                    {renderizarLinhas()}
+                </ScrollView>
             </View>
-            {renderizarLinhas()}
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 20,
+        flex: 1,
+        backgroundColor: '#fff',
+        paddingHorizontal: 10,
+    },
+    tableContainer: {
+        flex: 1,
+        marginBottom: 20,
     },
     principalRow: {
         flexDirection: 'row',
         borderBottomWidth: 1,
         borderBottomColor: '#e3e3e3',
-        paddingVertical: 10,
-        paddingTop: 15,
-        paddingBottom: 15,
+        paddingVertical: 15,
         backgroundColor: '#14213d',
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
@@ -63,26 +81,24 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         borderBottomWidth: 1,
         borderBottomColor: '#e3e3e3',
-        paddingVertical: 10,
-        paddingTop: 15,
-        paddingBottom: 15,
+        paddingVertical: 15,
         backgroundColor: '#ffffff',
     },
     cell: {
         flex: 1,
         textAlign: 'center',
         color: '#7e7d7d',
-        fontSize: 15
+        fontSize: 14,
     },
     cellPrincipal: {
         flex: 1,
         textAlign: 'center',
         color: '#fdfdfd',
-        fontSize: 15
+        fontSize: 14,
     },
     header: {
         fontWeight: 'bold',
-        fontSize: 17
+        fontSize: 16,
     },
 });
 

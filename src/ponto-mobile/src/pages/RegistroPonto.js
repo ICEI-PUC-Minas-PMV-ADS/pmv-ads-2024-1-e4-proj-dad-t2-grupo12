@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Pressable, Modal, Button, FlatList } from 'react-native';
+import {View, Text, StyleSheet, Pressable, Modal, Button, FlatList, TouchableOpacity} from 'react-native';
 import { getRegistrosPonto, saveRegistroPonto, updateRegistroPonto } from "../services/Api";
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import {useNavigation} from "@react-navigation/native";
 
 const RegistroPonto = () => {
     const [registro, setRegistro] = useState(null);
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedDate, setSelectedDate] = useState(new Date());
-    const [successMessage, setSuccessMessage] = useState('');
     const [lastAddedRegistro, setLastAddedRegistro] = useState(null);
     const [confirmModalVisible, setConfirmModalVisible] = useState(false);
     const [saldoDiario, setSaldoDiario] = useState('00:00');
     const [horasTrabalhadas, setHorasTrabalhadas] = useState('00h 00m');
+    const navigation = useNavigation();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -50,28 +52,6 @@ const RegistroPonto = () => {
         fetchData();
     }, [selectedDate]);
 
-    const openConfirmModal = () => {
-        setConfirmModalVisible(true);
-    };
-
-    const cancelConfirmAction = () => {
-        setConfirmModalVisible(false);
-    };
-
-    const confirmDesfazerAcao = async () => {
-        try {
-            if (lastAddedRegistro) {
-                await deleteUltimoRegistroPonto(lastAddedRegistro.id);
-                setRegistro(null);
-                setSuccessMessage('');
-                setLastAddedRegistro(null);
-                setConfirmModalVisible(false);
-            }
-        } catch (error) {
-            console.error('Erro ao desfazer a ação:', error);
-        }
-    };
-
     const goToPreviousDay = () => {
         const previousDay = new Date(selectedDate);
         previousDay.setDate(selectedDate.getDate() - 1);
@@ -93,22 +73,23 @@ const RegistroPonto = () => {
         ].filter(horario => horario !== null).length;
 
         if (horariosPreenchidos >= 4) {
-            alert('Não é possível adicionar mais horários.');
             return;
         }
 
-        const currentDateTime = new Date().toISOString();
+        const currentDateTime = new Date();
+        currentDateTime.setHours(currentDateTime.getHours() - 3);
+        const currentDateTimeString = currentDateTime.toISOString();
 
-        let novoRegistro = { ...registro }; // Clone the registro object
+        let novoRegistro = { ...registro };
 
         if (!novoRegistro.inicioExpediente) {
-            novoRegistro.inicioExpediente = currentDateTime;
+            novoRegistro.inicioExpediente = currentDateTimeString;
         } else if (!novoRegistro.inicioIntervalo) {
-            novoRegistro.inicioIntervalo = currentDateTime;
+            novoRegistro.inicioIntervalo = currentDateTimeString;
         } else if (!novoRegistro.fimIntervalo) {
-            novoRegistro.fimIntervalo = currentDateTime;
+            novoRegistro.fimIntervalo = currentDateTimeString;
         } else if (!novoRegistro.fimExpediente) {
-            novoRegistro.fimExpediente = currentDateTime;
+            novoRegistro.fimExpediente = currentDateTimeString;
         }
 
         novoRegistro.isPositivo = null;
@@ -119,22 +100,12 @@ const RegistroPonto = () => {
             const updatedRegistro = await updateRegistroPonto(novoRegistro.id, novoRegistro);
             setRegistro(updatedRegistro);
             setLastAddedRegistro(updatedRegistro);
-            setSuccessMessage('Ponto atualizado com sucesso.');
+
+            let saldoPrefixo = updatedRegistro && updatedRegistro.isPositivo ? '+' : '-';
+
+            setSaldoDiario(saldoPrefixo + updatedRegistro.saldo)
         } catch (error) {
             console.error('Erro ao atualizar o horário:', error);
-        }
-    };
-
-    const desfazerAcao = async () => {
-        try {
-            if (lastAddedRegistro) {
-                await deleteUltimoRegistroPonto(lastAddedRegistro.id);
-                setRegistro(null);
-                setSuccessMessage('');
-                setLastAddedRegistro(null);
-            }
-        } catch (error) {
-            console.error('Erro ao desfazer a ação:', error);
         }
     };
 
@@ -144,6 +115,7 @@ const RegistroPonto = () => {
         }
 
         const date = new Date(dateString);
+        date.setHours(date.getHours() + 3);
         return date.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
     };
 
@@ -153,6 +125,7 @@ const RegistroPonto = () => {
         }
 
         const date = new Date(timeString);
+        date.setHours(date.getHours() + 3);
         return date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
     };
 
@@ -212,25 +185,26 @@ const RegistroPonto = () => {
                 <Text style={styles.addButtonText}>+</Text>
             </Pressable>
 
+            <Pressable
+                style={styles.editButton}
+                onPress={() => navigation.navigate('SocilitarAlteracao')}
+            >
+                <Icon name="edit" size={30} color="#fff" />
+            </Pressable>
+
             <Modal visible={modalVisible} transparent={true}>
                 <View style={styles.modalContainer}>
                     <View style={styles.modalContent}>
-                        <Text>{successMessage}</Text>
-                        <Button title="Desfazer" onPress={() => setModalVisible(false)} />
-                        <Button title="Ok" onPress={() => {
+                        <Text>Ponto atualizado com sucesso!</Text>
+                        <TouchableOpacity style={styles.button} onPress={() => {
                             addHorario();
                             setModalVisible(false);
-                        }} />
-                    </View>
-                </View>
-            </Modal>
-
-            <Modal visible={confirmModalVisible} transparent={true}>
-                <View style={styles.modalContainer}>
-                    <View style={styles.modalContent}>
-                        <Text>Deseja realmente desfazer a ação?</Text>
-                        <Button title="Sim" onPress={confirmDesfazerAcao} />
-                        <Button title="Não" onPress={cancelConfirmAction} />
+                        }}>
+                            <Text style={styles.buttonText}>Ok</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.button} onPress={() => setModalVisible(false)}>
+                            <Text style={styles.buttonText}>Desfazer</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </Modal>
@@ -246,7 +220,7 @@ const styles = StyleSheet.create({
     },
     header: {
         flexDirection: 'row',
-        paddingTop: 70,
+        paddingTop: 10,
         justifyContent: 'space-between',
         alignItems: 'center',
         marginBottom: 10,
@@ -260,10 +234,11 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     date: {
-        fontSize: 20,
+        fontSize: 25,
+        paddingTop: 10,
         textAlign: 'center',
         marginVertical: 10,
-        paddingBottom: 10,
+        paddingBottom: 20,
     },
     summary: {
         flexDirection: 'row',
@@ -299,7 +274,8 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     timelineDesc: {
-        fontSize: 16,
+        paddingBottom: 20,
+        fontSize: 20,
         color: '#555',
         marginTop: 5,
     },
@@ -317,6 +293,17 @@ const styles = StyleSheet.create({
     addButtonText: {
         fontSize: 30,
         color: '#fff',
+    },
+    button: {
+        backgroundColor: '#007BFF',
+        padding: 10,
+        borderRadius: 5,
+        marginTop: 10,
+        alignItems: 'center',
+    },
+    buttonText: {
+        color: '#fff',
+        fontSize: 16,
     },
     modalContainer: {
         flex: 1,
@@ -339,7 +326,18 @@ const styles = StyleSheet.create({
     },
     totals: {
         alignItems: "center"
-    }
+    },
+    editButton: {
+        position: 'absolute',
+        bottom: 30,
+        left: 30,  // Position the edit button to the left
+        backgroundColor: '#FFD700',
+        width: 60,
+        height: 60,
+        borderRadius: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 });
 
 export default RegistroPonto;

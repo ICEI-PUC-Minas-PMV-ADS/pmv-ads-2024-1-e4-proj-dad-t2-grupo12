@@ -1,5 +1,3 @@
-
-
 using registro_ponto.Models;
 using registro_ponto.Services;
 
@@ -10,27 +8,27 @@ builder.Services.Configure<PontoDatabaseSettings>(builder.Configuration.GetSecti
 builder.Services.AddSingleton<PontoService>();
 builder.Services.Configure<HoleriteDatabaseSettings>(builder.Configuration.GetSection("PontoDatabase"));
 builder.Services.AddSingleton<HoleriteService>();
+builder.Services.Configure<RegistroSolicitacaoDatabaseSettings>(builder.Configuration.GetSection("PontoDatabase"));
+builder.Services.AddSingleton<RegistroSolicitacaoService>();
 
 builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
-            var app = builder.Build();
+builder.Services.AddHostedService<RotinaHostedService>();
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+var app = builder.Build();
 
-            app.UseHttpsRedirection();
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
-            app.UseAuthorization();
+app.UseHttpsRedirection();
 
+app.UseAuthorization();
 
-            app.MapControllers();
+app.MapControllers();
 
-            app.Run();
-
+app.Run();

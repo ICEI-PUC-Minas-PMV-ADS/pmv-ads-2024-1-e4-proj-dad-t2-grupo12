@@ -32,7 +32,7 @@ namespace ponto_usuario.Models
         public DateTime DataCadastro { get; set; }
 
         [Required]
-        public DateTime DataNaciemnto { get; set; }
+        public DateTime DataNascimento { get; set; }
 
         [Required]
         public Endereco Endereco { get; set; }
