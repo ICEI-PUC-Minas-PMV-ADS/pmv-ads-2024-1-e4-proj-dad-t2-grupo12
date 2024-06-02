@@ -53,5 +53,4 @@ public class RegistroPontoController {
         return ResponseEntity.ok(service.removerPonto(id));
     }
 
-
 }

@@ -14,7 +14,9 @@ C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-gr
 C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\dto\EmailVerificacaoResponse.java
 C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\dto\CadastroUsuarioDto.java
 C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\util\LogUtil.java
+C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\client\SolicitacaoAlteracaoClient.java
 C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\dto\registroponto\PontoDto.java
+C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\dto\registroponto\SolicitacaoDto.java
 C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\config\WebConfig.java
 C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\controller\PontoUsuarioController.java
 C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\dto\usuario\SetorDto.java
@@ -25,8 +27,10 @@ C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-gr
 C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\util\DateUtil.java
 C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\util\CriptografiaUtil.java
 C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\dto\registroponto\PontoSiteResponse.java
+C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\service\SolicitacaoService.java
 C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\client\UsuarioPontoClient.java
 C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\dto\registroponto\SaldoDiario.java
+C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\controller\SolicitacaoController.java
 C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\dto\JwtPayload.java
 C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\util\JWTUtil.java
 C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\dto\Login\LoginBasic.java
