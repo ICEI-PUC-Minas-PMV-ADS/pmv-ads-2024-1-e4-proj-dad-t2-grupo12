@@ -24,4 +24,13 @@ public class LoginController {
         }
     }
 
+    @GetMapping(value = "/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> verificarSeEmailJaCadastrado(@PathVariable String email) {
+        try {
+            return ResponseEntity.ok(service.verificarSeEmailJaCadastrado(email));
+        } catch (Exception ex) {
+            return ResponseEntity.status(500).body(ex.getMessage());
+        }
+    }
+
 }

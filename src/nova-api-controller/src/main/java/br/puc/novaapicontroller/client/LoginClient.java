@@ -1,5 +1,6 @@
 package br.puc.novaapicontroller.client;
 
+import br.puc.novaapicontroller.dto.EmailVerificacaoResponse;
 import br.puc.novaapicontroller.dto.Login.LoginRequest;
 import br.puc.novaapicontroller.dto.Login.LoginResponse;
 import br.puc.novaapicontroller.util.ClientUtil;
@@ -42,6 +43,12 @@ public class LoginClient {
         return executarRequisicaoLogin(erroPadrao, requisicao);
     }
 
+    public EmailVerificacaoResponse verificarSeEmailExiste(String email) {
+        String erroPadrao = "Erro ao verificar email. ";
+        Request requisicao = construirRequisicaoGet("check-email-exists/" + email);
+        return executarRequisicaoVerificarEmail(erroPadrao, requisicao);
+    }
+
     @Nullable
     private LoginResponse executarRequisicaoLogin(String erroPadrao, Request requisicao) {
         try (Response resposta = ClientUtil.obterClient(okHttpClient).newCall(requisicao).execute()) {
@@ -53,7 +60,26 @@ public class LoginClient {
             }
         } catch (IOException e) {
             String erro = erroPadrao + ". Erro: " + e.getMessage();
-            LogUtil.buscarLinhaExcecaoEImprimirLogErro(e, erro, "UsuarioPontoClient.java");
+            LogUtil.buscarLinhaExcecaoEImprimirLogErro(e, erro, "LoginClient.java");
+            return null;
+        }
+
+        logger.log(Level.SEVERE, erroPadrao);
+        return null;
+    }
+
+    @Nullable
+    private EmailVerificacaoResponse executarRequisicaoVerificarEmail(String erroPadrao, Request requisicao) {
+        try (Response resposta = ClientUtil.obterClient(okHttpClient).newCall(requisicao).execute()) {
+            if (resposta.isSuccessful() && resposta.body() != null) {
+                String corpoResposta = resposta.body().string();
+                if (!corpoResposta.trim().isEmpty()) {
+                    return objectMapper.readValue(corpoResposta, EmailVerificacaoResponse.class);
+                }
+            }
+        } catch (IOException e) {
+            String erro = erroPadrao + ". Erro: " + e.getMessage();
+            LogUtil.buscarLinhaExcecaoEImprimirLogErro(e, erro, "LoginClient.java");
             return null;
         }
 
@@ -65,6 +91,13 @@ public class LoginClient {
         return new Request.Builder()
                 .url(url + urlComplemento)
                 .post(corpoRequisicao)
+                .build();
+    }
+
+    private Request construirRequisicaoGet(String urlComplemento) {
+        return new Request.Builder()
+                .url(url + urlComplemento)
+                .get()
                 .build();
     }
 }

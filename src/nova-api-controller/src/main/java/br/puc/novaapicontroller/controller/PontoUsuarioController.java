@@ -1,5 +1,6 @@
 package br.puc.novaapicontroller.controller;
 
+import br.puc.novaapicontroller.dto.AlteracaoSenhaDto;
 import br.puc.novaapicontroller.dto.CadastroUsuarioDto;
 import br.puc.novaapicontroller.dto.usuario.UsuarioDto;
 import br.puc.novaapicontroller.service.UsuarioPontoService;
@@ -45,11 +46,21 @@ public class PontoUsuarioController {
         }
     }
 
-    @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> editarUsuario(@RequestBody UsuarioDto usuario, HttpServletRequest requisicao) {
         String token = requisicao.getHeader("Authorization");
         try {
             return ResponseEntity.ok(service.editarUsuario(usuario, token));
+        } catch (Exception ex) {
+            return ResponseEntity.status(500).body(ex.getMessage());
+        }
+    }
+
+    @PutMapping(value = "/alterarSenha", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> alterarSenha(@RequestBody AlteracaoSenhaDto novaSenha, HttpServletRequest requisicao) {
+        String token = requisicao.getHeader("Authorization");
+        try {
+            return ResponseEntity.ok(service.alterarSenha(novaSenha, token));
         } catch (Exception ex) {
             return ResponseEntity.status(500).body(ex.getMessage());
         }

@@ -3,12 +3,15 @@ C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-gr
 C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\service\UsuarioPontoService.java
 C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\service\LoginService.java
 C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\client\RegistroPontoClient.java
+C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\dto\AlteracaoSenhaDto.java
 C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\client\LoginClient.java
 C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\controller\RegistroPontoController.java
 C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\dto\usuario\UsuarioDto.java
 C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\dto\Login\LoginRequest.java
 C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\controller\LoginController.java
+C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\dto\usuario\AlteracaoSenhaRetorno.java
 C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\dto\Login\LoginResponse.java
+C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\dto\EmailVerificacaoResponse.java
 C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\dto\CadastroUsuarioDto.java
 C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\util\LogUtil.java
 C:\Users\Julianadm\Desenvolvimento\Repositorios\pmv-ads-2024-1-e4-proj-dad-t2-grupo12\src\nova-api-controller\src\main\java\br\puc\novaapicontroller\dto\registroponto\PontoDto.java
