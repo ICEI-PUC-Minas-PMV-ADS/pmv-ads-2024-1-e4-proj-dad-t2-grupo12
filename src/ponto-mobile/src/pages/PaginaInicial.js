@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
+import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 const PaginaInicial = () => {
     const [currentDate, setCurrentDate] = useState('');
@@ -28,7 +28,7 @@ const PaginaInicial = () => {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('Login')}>
                     <Image
                         source={require('../../assets/image15.png')}
                         style={styles.headerImage}
@@ -49,7 +49,7 @@ const PaginaInicial = () => {
                                 style={styles.menuItemImage}
                             />
                             <Text style={styles.menuItemText}>Registrar ponto</Text>
-                        </TouchableOpacity >
+                        </TouchableOpacity>
                         <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate('Profile')}>
                             <Image
                                 source={require('../../assets/image12.png')}
@@ -103,6 +103,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     header: {
+        paddingTop: 60,
         backgroundColor: '#fff',
         padding: 20,
         alignItems: 'center',

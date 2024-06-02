@@ -7,13 +7,15 @@ import Profile from "./src/pages/Profile";
 import TabelaPonto from "./src/pages/TabelaPonto";
 import Holerite from "./src/pages/Holerite";
 import SolicitarAlteracao from "./src/pages/SolicitarAlteracao";
+import Login from "./src/pages/Login";
 
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="PaginaInicial">
+            <Stack.Navigator initialRouteName="Login">
+                <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
                 <Stack.Screen name="PaginaInicial" component={PaginaInicial} options={{ headerShown: false }} />
                 <Stack.Screen name="RegistroPonto" component={RegistroPonto} options={{ title: 'Registro de Ponto' }} />
                 <Stack.Screen name="Profile" component={Profile} options={{ title: 'Perfil' }} />
