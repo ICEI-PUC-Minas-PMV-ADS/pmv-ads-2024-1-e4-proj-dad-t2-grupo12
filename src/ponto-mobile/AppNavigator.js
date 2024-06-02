@@ -16,10 +16,10 @@ const AppNavigator = () => {
             <Stack.Navigator initialRouteName="PaginaInicial">
                 <Stack.Screen name="PaginaInicial" component={PaginaInicial} options={{ headerShown: false }} />
                 <Stack.Screen name="RegistroPonto" component={RegistroPonto} options={{ title: 'Registro de Ponto' }} />
-                <Stack.Screen name="Profile" component={Profile} options={{ title: 'Profile' }} />
-                <Stack.Screen name="TabelaPonto" component={TabelaPonto} options={{ title: 'TabelaPonto' }} />
-                <Stack.Screen name="Holerite" component={Holerite} options={{ title: 'Holerite' }} />
-                <Stack.Screen name="SocilitarAlteracao" component={SolicitarAlteracao} options={{ title: 'SocilitarAlteracao' }} />
+                <Stack.Screen name="Profile" component={Profile} options={{ title: 'Perfil' }} />
+                <Stack.Screen name="TabelaPonto" component={TabelaPonto} options={{ title: 'Espelho de Ponto' }} />
+                <Stack.Screen name="Holerite" component={Holerite} options={{ title: 'Saldos e holerite' }} />
+                <Stack.Screen name="SocilitarAlteracao" component={SolicitarAlteracao} options={{ title: 'Solicitar alteração' }} />
             </Stack.Navigator>
         </NavigationContainer>
     );
