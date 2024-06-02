@@ -4,6 +4,7 @@ br\puc\novaapicontroller\controller\SolicitacaoController.class
 br\puc\novaapicontroller\config\WebConfig.class
 br\puc\novaapicontroller\dto\usuario\SetorDto.class
 br\puc\novaapicontroller\service\UsuarioPontoService.class
+br\puc\novaapicontroller\client\HoleriteClient$1.class
 br\puc\novaapicontroller\dto\Login\LoginResponse.class
 br\puc\novaapicontroller\service\LoginService.class
 br\puc\novaapicontroller\dto\CadastroUsuarioDto$CadastroUsuarioDtoBuilder.class
@@ -28,6 +29,7 @@ br\puc\novaapicontroller\client\UsuarioPontoClient$1.class
 br\puc\novaapicontroller\dto\AlteracaoSenhaDto.class
 br\puc\novaapicontroller\controller\RotinaController.class
 br\puc\novaapicontroller\client\SolicitacaoAlteracaoClient.class
+br\puc\novaapicontroller\client\HoleriteClient.class
 br\puc\novaapicontroller\service\RegistroPontoService.class
 br\puc\novaapicontroller\dto\usuario\UsuarioDto$UsuarioDtoBuilder.class
 br\puc\novaapicontroller\service\SolicitacaoService.class
@@ -43,6 +45,8 @@ br\puc\novaapicontroller\dto\registroponto\SolicitacaoDto.class
 br\puc\novaapicontroller\dto\usuario\UsuarioDto.class
 br\puc\novaapicontroller\NovaApiControllerApplication.class
 br\puc\novaapicontroller\dto\registroponto\SaldoDiario.class
+br\puc\novaapicontroller\service\HoleriteService.class
+br\puc\novaapicontroller\controller\HoleriteController.class
 br\puc\novaapicontroller\dto\JwtPayload.class
 br\puc\novaapicontroller\client\RegistroPontoClient$1.class
 br\puc\novaapicontroller\dto\EmailVerificacaoResponse.class
