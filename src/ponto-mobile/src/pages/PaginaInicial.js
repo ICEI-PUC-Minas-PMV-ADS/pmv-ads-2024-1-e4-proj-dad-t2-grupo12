@@ -23,7 +23,7 @@ const PaginaInicial = () => {
         return () => clearInterval(interval);
     }, []);
 
-    const userName = 'Leo';
+    const userName = 'Leonardo';
 
     return (
         <View style={styles.container}>
