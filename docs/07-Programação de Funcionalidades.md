@@ -28,5 +28,15 @@ A tela do usuário exibe o perfil com informações detalhadas como e-mail, CPF,
 
 ![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-grupo12/assets/86340530/40bfa51f-77f2-4ee5-92d2-33e01e048662)![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-grupo12/assets/86340530/eaa6695d-598d-4147-b66b-d1c089d0a58a)
 
+## Tela de solicitar alteração
 
+A tela de solicitar alteração permite o usuário acessar as informações de horários registrados em seu perfil e solicitar alteração dessas informações. O colaborador, ao escolher a data no calendário, pode alterar os horários, escrever o motivo da alteração, anexar um arquivo e enviar a solicitação ao administrador.
+
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-grupo12/blob/Leo/src/inicial-usuario/assets/Sa1.png)![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-grupo12/blob/Leo/src/inicial-usuario/assets/Sa2.png)
+
+## Tela de saldos e holerite
+
+A tela de saldos e holerite exibe várias informações sobre o registro de ponto do colaborador. Nela, podemos visualizar uma tabela com os dados de entrada e saída do colaborador e seu saldo diário de horas extras. Além disso, podemos ver os cálculos do saldo final mensal de horas com o seu valor final em dinheiro, as horas extras totais e seu valor em dinheiro, e também as horas devidas totais e seu valor em dinheiro.
+
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-grupo12/blob/Leo/src/inicial-usuario/assets/Sh1.png)![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-grupo12/blob/Leo/src/inicial-usuario/assets/Sh2.png)
 
