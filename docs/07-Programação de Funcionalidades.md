@@ -22,5 +22,11 @@ A funcionalidade de clicar no dia e ser encaminhado para a tela de registro com 
 
 ![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-grupo12/assets/114538749/4ab44f3b-0813-46c3-bff7-e021d0046cbd) ![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-grupo12/assets/114538749/097d33d9-28e1-4417-b001-7f269f3e62b6)
 
+## Tela do usuário
+
+A tela do usuário exibe o perfil com informações detalhadas como e-mail, CPF, endereço e data de nascimento. Além disso, oferece a importante funcionalidade de troca de senha, caso o usuário necessite realizar essa alteração.
+
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-grupo12/assets/86340530/40bfa51f-77f2-4ee5-92d2-33e01e048662)![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-grupo12/assets/86340530/eaa6695d-598d-4147-b66b-d1c089d0a58a)
+
 
 
