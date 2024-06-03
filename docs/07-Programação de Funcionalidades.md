@@ -44,6 +44,10 @@ A tela de saldos e holerite exibe várias informações sobre o registro de pont
 
 ## Funcionalidade de Login por E-mail e Senha
 
+![Login-Ds](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-grupo12/assets/100534402/19cf3e5d-dd2a-4867-b815-9fefbedce311)
+
+
+
 ### Objetivo
 
 Permitir que usuários cadastrados acessem sua conta usando um endereço de e-mail e senha válidos.
