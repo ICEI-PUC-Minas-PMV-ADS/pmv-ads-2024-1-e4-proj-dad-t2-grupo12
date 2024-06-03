@@ -40,3 +40,38 @@ A tela de saldos e holerite exibe várias informações sobre o registro de pont
 
 ![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-grupo12/blob/Leo/src/inicial-usuario/assets/Sh1.png) ![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-grupo12/blob/Leo/src/inicial-usuario/assets/Sh2.png)
 
+
+
+## Funcionalidade de Login por E-mail e Senha
+
+### Objetivo
+
+Permitir que usuários cadastrados acessem sua conta usando um endereço de e-mail e senha válidos.
+
+### Descrição
+
+1. Tela de Login
+
+| Campo | Descrição |
+|---|---|
+| E-mail | Insira seu endereço de e-mail cadastrado. | `input type="email" placeholder="Seu e-mail"` |
+| Senha | Insira sua senha. | `input type="password" placeholder="Sua senha"` |
+ Entrar | Botão para submeter os dados e realizar o login. | `button type="submit">Entrar</button>` |
+
+2. Validação de Credenciais
+
+* O sistema verifica se o e-mail informado existe na base de dados.
+* Se o e-mail for encontrado, o sistema valida a senha digitada.
+* Em caso de sucesso, o usuário é autenticado e direcionado para a área interna da conta.
+
+3. Autenticação e Controle de Acesso
+
+* Após a autenticação, o sistema:
+    * O usuário acessa suas funcionalidades de acordo com o perfil do usuário.
+    * Redireciona o usuário para a página inicial ou área restrita adequada.
+
+### Observações
+
+* A funcionalidade de login por e-mail e senha é um recurso essencial para diversos sistemas online, como sites, plataformas digitais e aplicativos.
+* É importante que a implementação dessa funcionalidade siga as melhores práticas de segurança para proteger os dados dos usuários.
+
