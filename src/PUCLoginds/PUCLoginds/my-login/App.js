@@ -10,7 +10,7 @@ import Cadastro from './screens/Cadastro';
 
 const Stack = createStackNavigator();
 
-function MyStack(){
+function MyStack( ){
   return(
     <Stack.Navigator>
         <Stack.Screen name= "LoginDs" component={LoginDs} />
