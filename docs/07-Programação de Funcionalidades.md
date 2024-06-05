@@ -22,5 +22,60 @@ A funcionalidade de clicar no dia e ser encaminhado para a tela de registro com 
 
 ![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-grupo12/assets/114538749/4ab44f3b-0813-46c3-bff7-e021d0046cbd) ![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-grupo12/assets/114538749/097d33d9-28e1-4417-b001-7f269f3e62b6)
 
+## Tela do usuário
 
+A tela do usuário exibe o perfil com informações detalhadas como e-mail, CPF, endereço e data de nascimento. Além disso, oferece a importante funcionalidade de troca de senha, caso o usuário necessite realizar essa alteração.
+
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-grupo12/assets/86340530/40bfa51f-77f2-4ee5-92d2-33e01e048662) ![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-grupo12/assets/86340530/eaa6695d-598d-4147-b66b-d1c089d0a58a)
+
+## Tela de solicitar alteração
+
+A tela de solicitar alteração permite o usuário acessar as informações de horários registrados em seu perfil e solicitar alteração dessas informações. O colaborador, ao escolher a data no calendário, pode alterar os horários, escrever o motivo da alteração, anexar um arquivo e enviar a solicitação ao administrador.
+
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-grupo12/blob/Leo/src/inicial-usuario/assets/Sa1.png) ![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-grupo12/blob/Leo/src/inicial-usuario/assets/Sa2.png)
+
+## Tela de saldos e holerite
+
+A tela de saldos e holerite exibe várias informações sobre o registro de ponto do colaborador. Nela, podemos visualizar uma tabela com os dados de entrada e saída do colaborador e seu saldo diário de horas extras. Além disso, podemos ver os cálculos do saldo final mensal de horas com o seu valor final em dinheiro, as horas extras totais e seu valor em dinheiro, e também as horas devidas totais e seu valor em dinheiro.
+
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-grupo12/blob/Leo/src/inicial-usuario/assets/Sh1.png) ![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-grupo12/blob/Leo/src/inicial-usuario/assets/Sh2.png)
+
+
+
+## Funcionalidade de Login por E-mail e Senha
+
+![Login-Ds](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-grupo12/assets/100534402/19cf3e5d-dd2a-4867-b815-9fefbedce311)
+
+
+
+### Objetivo
+
+Permitir que usuários cadastrados acessem sua conta usando um endereço de e-mail e senha válidos.
+
+### Descrição
+
+1. Tela de Login
+
+| Campo | Descrição |
+|---|---|
+| E-mail | Insira seu endereço de e-mail cadastrado. | `input type="email" placeholder="Seu e-mail"` |
+| Senha | Insira sua senha. | `input type="password" placeholder="Sua senha"` |
+ Entrar | Botão para submeter os dados e realizar o login. | `button type="submit">Entrar</button>` |
+
+2. Validação de Credenciais
+
+* O sistema verifica se o e-mail informado existe na base de dados.
+* Se o e-mail for encontrado, o sistema valida a senha digitada.
+* Em caso de sucesso, o usuário é autenticado e direcionado para a área interna da conta.
+
+3. Autenticação e Controle de Acesso
+
+* Após a autenticação, o sistema:
+    * O usuário acessa suas funcionalidades de acordo com o perfil do usuário.
+    * Redireciona o usuário para a página inicial ou área restrita adequada.
+
+### Observações
+
+* A funcionalidade de login por e-mail e senha é um recurso essencial para diversos sistemas online, como sites, plataformas digitais e aplicativos.
+* É importante que a implementação dessa funcionalidade siga as melhores práticas de segurança para proteger os dados dos usuários.
 
