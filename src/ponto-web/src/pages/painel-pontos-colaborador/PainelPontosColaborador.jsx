@@ -2,8 +2,24 @@ import './PainelPontosColaborador.css';
 import MenuLateral from "../../components/menu-lateral/MenuLateral.jsx";
 import PainelCentral from "../../components/painel-central/PainelCentral.jsx";
 import Header from "../../components/header/Header.jsx";
+import {useEffect} from "react";
+import {getRegistrosPonto} from "../../services/api.jsx";
 
 const PainelPontosColaborador = () => {
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const result = await getRegistrosPonto();
+                console.log(result.data)
+            } catch (error) {
+                console.error('Erro ao buscar dados', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
     return (
         <div className="app">
             <Header></Header>
