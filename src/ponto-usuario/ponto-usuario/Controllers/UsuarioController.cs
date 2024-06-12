@@ -100,6 +100,12 @@ namespace ponto_usuario.Controllers
 
             return Ok(new
             {
+                id = usuarioDb.Id,
+                email = usuarioDb.Email,
+                endereco = usuarioDb.Endereco,
+                setores = usuarioDb.Setores,
+                dataNacimento = usuarioDb.DataNascimento,
+                salario = usuarioDb.Salario,
                 jwtToken = jwt
             });
         }
@@ -116,13 +122,36 @@ namespace ponto_usuario.Controllers
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = claims,
-                Expires = DateTime.UtcNow.AddHours(2),
+                Expires = DateTime.UtcNow.AddHours(24),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature)
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+        
+        [HttpPut("change-password/{id:length(24)}")]
+        public async Task<IActionResult> ChangePassword(string id, ChangePasswordDto changePasswordDto)
+        {
+            var usuario = await _usuarioService.GetAsync(id);
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+
+            usuario.SenhaCriptografada = BCrypt.Net.BCrypt.HashPassword(changePasswordDto.NovaSenha);
+            await _usuarioService.UpdatePasswordAsync(id, usuario.SenhaCriptografada);
+
+            return Ok(new { Message = "Senha atualizada com sucesso!" });
+        }
+        
+        [AllowAnonymous]
+        [HttpGet("check-email-exists/{email}")]
+        public async Task<IActionResult> CheckEmailExists(string email)
+        {
+            var emailExists = await _usuarioService.CheckIfEmailExistsAsync(email);
+            return Ok(new { EmailExists = emailExists });
         }
     }
 }
