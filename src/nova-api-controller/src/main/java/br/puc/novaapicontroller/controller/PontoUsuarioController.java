@@ -27,6 +27,11 @@ public class PontoUsuarioController {
         return ResponseEntity.ok(service.obterListaUsarios());
     }
 
+    @GetMapping(value = "/{nome}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> filtrarPorNome(@PathVariable String nome) {
+        return ResponseEntity.ok(service.filtrarPorNome(nome));
+    }
+
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> obterUsuario(HttpServletRequest requisicao) {
         String token = requisicao.getHeader("Authorization");

@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -92,6 +93,12 @@ public class UsuarioPontoService {
         }
 
         throw new Exception("Não foi possível exlcuir usuário. Usuário não encontrado");
+    }
+
+    public List<UsuarioDto> filtrarPorNome(String nome) {
+        List<UsuarioDto> usuarioDtos = obterListaUsarios();
+
+        return usuarioDtos.stream().filter(usuarioDto -> usuarioDto.getNome().toLowerCase().contains(nome.toLowerCase())).collect(Collectors.toList());
     }
 
 }
