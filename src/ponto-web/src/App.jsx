@@ -16,6 +16,7 @@ function App() {
         <Route path='/inicio' element={<PaginaInicial />} />
         <Route path='painel-colaborador' element={<PainelPontosColaborador />} />
         <Route path='painel-colaborador/registro-dia' element={<RegistroDiarioColaborador />} />
+        <Route path='/painel-colaborador/:id' element={<PainelPontosColaborador />} />
         <Route path='cadastro-usuario' element={<CadastroUsuario />} />
         <Route path='perfil' element={<PaginaPerfil/>}/>
     </Routes>

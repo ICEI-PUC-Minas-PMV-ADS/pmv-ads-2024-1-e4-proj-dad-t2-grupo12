@@ -4,13 +4,15 @@ import PainelCentral from "../../components/painel-central/PainelCentral.jsx";
 import Header from "../../components/header/Header.jsx";
 import {useEffect} from "react";
 import {getRegistrosPonto} from "../../services/api.jsx";
+import {useParams} from "react-router-dom";
 
 const PainelPontosColaborador = () => {
+    const { id } = useParams();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const result = await getRegistrosPonto();
+                const result = await getRegistrosPonto(id);
                 console.log(result.data)
             } catch (error) {
                 console.error('Erro ao buscar dados', error);
@@ -18,7 +20,7 @@ const PainelPontosColaborador = () => {
         };
 
         fetchData();
-    }, []);
+    }, [id]);
 
     return (
         <div className="app">

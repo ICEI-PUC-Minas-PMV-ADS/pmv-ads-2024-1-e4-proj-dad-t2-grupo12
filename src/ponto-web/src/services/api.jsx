@@ -23,3 +23,23 @@ export const logar = async (dadosLogin) => {
         throw error;
     }
 };
+
+export const listarColaboradores = async () => {
+    try {
+        const response = await api.get('/v1/public/usuario/');
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao buscar dados da API:', error);
+        throw error;
+    }
+};
+
+export const obterColaboradorPeloNome = async (nome) => {
+    try {
+        const response = await api.get('/v1/public/usuario/' + nome);
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao buscar dados da API:', error);
+        throw error;
+    }
+};
