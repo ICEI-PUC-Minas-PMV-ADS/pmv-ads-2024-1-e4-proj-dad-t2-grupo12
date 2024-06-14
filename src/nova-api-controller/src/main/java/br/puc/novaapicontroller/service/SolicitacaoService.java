@@ -1,7 +1,6 @@
 package br.puc.novaapicontroller.service;
 
 import br.puc.novaapicontroller.client.SolicitacaoAlteracaoClient;
-import br.puc.novaapicontroller.dto.registroponto.PontoDto;
 import br.puc.novaapicontroller.dto.registroponto.SolicitacaoDto;
 import br.puc.novaapicontroller.util.DateUtil;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +23,7 @@ public class SolicitacaoService {
     }
 
     public SolicitacaoDto registrarSolicitacaoPonto(SolicitacaoDto solicitacaoDto) throws Exception {
-        solicitacaoDto.setDataRegistro(DateUtil.formatarDataISO(solicitacaoDto.getDataRegistro()));
+        solicitacaoDto.setDataSolicitacao(DateUtil.formatarDataISO(solicitacaoDto.getDataSolicitacao()));
         return alteracaoClient.registrarSolicitacaoPonto(solicitacaoDto);
     }
 

@@ -16,10 +16,13 @@ public class RegistroSolicitacao
     public string? Motivo { get; set; }
     
     [Required]
-    public DateTime DataAlteracao { get; set; }
+    public DateTime NovaData { get; set; }
+    
+    [Required]
+    public string tipoPeriodo { get; set; }
 
     [Required]
-    public DateTime DataRegistro { get; set; }
+    public DateTime DataSolicitacao { get; set; }
 
     public bool? Aprovado { get; set; }
 
@@ -27,5 +30,8 @@ public class RegistroSolicitacao
     
     [Required]
     public string UsuarioId { get; set; }
+    
+    [Required]
+    public string PontoId { get; set; }
 
 }
