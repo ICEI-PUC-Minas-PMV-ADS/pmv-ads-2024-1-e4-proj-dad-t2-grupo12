@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static br.puc.novaapicontroller.util.DateUtil.stringToLocalDteTime;
 
@@ -23,6 +24,12 @@ public class RegistroPontoService {
 
     public List<PontoDto> obterListagemRegistroPontos() {
         return registroPontoClient.obterListagemRegistroPontos();
+    }
+
+    public List<PontoDto> obterPontosUsuario(String usuarioId) {
+        List<PontoDto> pontoDtos = registroPontoClient.obterListagemRegistroPontos();
+
+        return pontoDtos.stream().filter(ponto -> ponto.getUsuarioId().equalsIgnoreCase(usuarioId)).collect(Collectors.toList());
     }
 
     public PontoDto obterRegistroPonto(String registroId) throws Exception {

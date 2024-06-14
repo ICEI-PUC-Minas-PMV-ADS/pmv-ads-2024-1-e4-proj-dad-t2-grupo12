@@ -21,6 +21,11 @@ public class RegistroPontoController {
         return ResponseEntity.ok(service.obterListagemRegistroPontos());
     }
 
+    @GetMapping(value = "usuario/{usuarioId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> obterPontosUsuario(@PathVariable String usuarioId) {
+        return ResponseEntity.ok(service.obterPontosUsuario(usuarioId));
+    }
+
     @GetMapping(value = "/{registroId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> obterRegistroPonto(@PathVariable String registroId) {
         try {
