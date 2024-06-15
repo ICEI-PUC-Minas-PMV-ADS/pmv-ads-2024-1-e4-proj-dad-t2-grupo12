@@ -35,6 +35,16 @@ public class RegistroPontoController {
         }
     }
 
+    @GetMapping(value = "/sinalizar/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> sinalizarAlteracao(@PathVariable String id) {
+        try {
+            service.sinalizarSolicitacaoAlteracaoPonto(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception ex) {
+            return ResponseEntity.status(500).body(ex.getMessage());
+        }
+    }
+
     @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> registrarPonto(@RequestBody PontoDto pontoDto) throws JsonProcessingException {
         try {

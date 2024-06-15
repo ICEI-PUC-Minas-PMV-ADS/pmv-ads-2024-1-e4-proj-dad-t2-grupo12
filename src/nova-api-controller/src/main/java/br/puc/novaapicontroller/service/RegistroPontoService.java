@@ -38,7 +38,18 @@ public class RegistroPontoService {
 
     public PontoDto registrarPonto(PontoDto pontoDto) throws Exception {
         pontoDto.setDataRegistro(DateUtil.formatarDataISO(pontoDto.getDataRegistro()));
+        pontoDto.setTemSolicitacaoAlteracao(false);
         return registroPontoClient.registrarPonto(pontoDto);
+    }
+
+    public void sinalizarSolicitacaoAlteracaoPonto(String id) throws Exception {
+        PontoDto pontoDto = obterRegistroPonto(id);
+        if (pontoDto != null) {
+            pontoDto.setTemSolicitacaoAlteracao(true);
+            return;
+        }
+
+        throw new Exception("Registro de ponto não encontrado");
     }
 
     public PontoSiteResponse editarRegistroPonto(String id, PontoDto pontoDto) throws Exception {

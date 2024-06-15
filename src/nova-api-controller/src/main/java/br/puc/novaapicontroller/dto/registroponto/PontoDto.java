@@ -35,4 +35,6 @@ public class PontoDto {
 
     private String usuarioId;
 
+    private boolean temSolicitacaoAlteracao;
+
 }
