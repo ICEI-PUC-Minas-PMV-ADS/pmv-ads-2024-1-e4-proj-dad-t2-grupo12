@@ -1,8 +1,9 @@
 package br.puc.novaapicontroller.client;
 
 import br.puc.novaapicontroller.dto.AlteracaoSenhaDto;
-import br.puc.novaapicontroller.dto.CadastroUsuarioDto;
+import br.puc.novaapicontroller.dto.usuario.CadastroUsuarioDto;
 import br.puc.novaapicontroller.dto.usuario.AlteracaoSenhaRetorno;
+import br.puc.novaapicontroller.dto.usuario.CadastroUsuarioResponse;
 import br.puc.novaapicontroller.dto.usuario.UsuarioDto;
 import br.puc.novaapicontroller.util.ClientUtil;
 import br.puc.novaapicontroller.util.LogUtil;
@@ -27,12 +28,12 @@ import java.util.logging.Logger;
 @RequiredArgsConstructor
 public class UsuarioPontoClient {
 
-    @Value("${usuario-ponto.url}")
+    @Value("${usuario-ponto-url}")
     private String url;
 
     private final OkHttpClient okHttpClient = new OkHttpClient();
 
-    private static final Logger logger = Logger.getLogger(UsuarioPontoClient.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(UsuarioPontoClient.class.getName());
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -54,25 +55,25 @@ public class UsuarioPontoClient {
             return null;
         }
 
-        logger.log(Level.SEVERE, erroPadrao);
+        LOGGER.log(Level.SEVERE, erroPadrao);
         return null;
     }
 
     public UsuarioDto obterUsario(String id, String token ) {
         String erroPadrao = "Erro ao buscar usuario ";
-        Request requisicao = construirRequisicaoGet(id, "Authorization", token);
+        Request requisicao = construirRequisicaoGet("/" + id, "Authorization", token);
 
         return executarRequisicao(erroPadrao, requisicao);
     }
 
-    public UsuarioDto cadastrarUsuario(CadastroUsuarioDto cadastroUsuario) throws JsonProcessingException {
+    public CadastroUsuarioResponse cadastrarUsuario(CadastroUsuarioDto cadastroUsuario) throws JsonProcessingException {
         String erroPadrao = "Erro ao cadastrar usuario ";
 
         String corpo = objectMapper.writeValueAsString(cadastroUsuario);
         RequestBody corpoRequisicao = ClientUtil.converterCorpoRequisicao(corpo);
         Request requisicao = construirRequisicaoPost("", corpoRequisicao);
 
-        return executarRequisicao(erroPadrao, requisicao);
+        return executarRequisicaoCriar(erroPadrao, requisicao);
     }
 
     public UsuarioDto editarUsuario(String id, UsuarioDto usuario, String token) throws JsonProcessingException {
@@ -80,7 +81,7 @@ public class UsuarioPontoClient {
 
         String corpo = objectMapper.writeValueAsString(usuario);
         RequestBody corpoRequisicao = ClientUtil.converterCorpoRequisicao(corpo);
-        Request requisicao = construirRequisicaoPut(id, corpoRequisicao, token);
+        Request requisicao = construirRequisicaoPut("/" + id, corpoRequisicao, token);
 
         return executarRequisicao(erroPadrao, requisicao);
     }
@@ -88,7 +89,7 @@ public class UsuarioPontoClient {
     public UsuarioDto removerUsuario(String id) {
         String erroPadrao = "Erro ao remover usuario ";
 
-        Request requisicao = construirRequisicaoDelete(id);
+        Request requisicao = construirRequisicaoDelete("/" + id);
 
         return executarRequisicao(erroPadrao, requisicao);
     }
@@ -98,7 +99,7 @@ public class UsuarioPontoClient {
 
         String corpo = objectMapper.writeValueAsString(novaSenha);
         RequestBody corpoRequisicao = ClientUtil.converterCorpoRequisicao(corpo);
-        Request requisicao = construirRequisicaoPut("change-password/"+ id, corpoRequisicao, token);
+        Request requisicao = construirRequisicaoPut("/change-password/"+ id, corpoRequisicao, token);
 
         return executarRequisicaoAlterarSenha(erroPadrao, requisicao);
     }
@@ -117,8 +118,29 @@ public class UsuarioPontoClient {
             LogUtil.buscarLinhaExcecaoEImprimirLogErro(e, erro, "UsuarioPontoClient.java");
             return null;
         }
+        LOGGER.log(Level.SEVERE, erroPadrao);
+        return null;
+    }
 
-        logger.log(Level.SEVERE, erroPadrao);
+    @Nullable
+    private CadastroUsuarioResponse executarRequisicaoCriar(String erroPadrao, Request requisicao) {
+        try (Response resposta = ClientUtil.obterClient(okHttpClient).newCall(requisicao).execute()) {
+            if (resposta.isSuccessful() && resposta.body() != null) {
+                String corpoResposta = resposta.body().string();
+                if (!corpoResposta.trim().isEmpty()) {
+                    return objectMapper.readValue(corpoResposta, CadastroUsuarioResponse.class);
+                }
+            } else {
+                LOGGER.log(Level.SEVERE, erroPadrao + "- Status: " + resposta.code());
+                return null;
+            }
+        } catch (IOException e) {
+            String erro = erroPadrao + ". Erro: " + e.getMessage();
+            LogUtil.buscarLinhaExcecaoEImprimirLogErro(e, erro, "UsuarioPontoClient.java");
+            return null;
+        }
+
+        LOGGER.log(Level.SEVERE, erroPadrao);
         return null;
     }
 
@@ -137,7 +159,7 @@ public class UsuarioPontoClient {
             return null;
         }
 
-        logger.log(Level.SEVERE, erroPadrao);
+        LOGGER.log(Level.SEVERE, erroPadrao);
         return null;
     }
 

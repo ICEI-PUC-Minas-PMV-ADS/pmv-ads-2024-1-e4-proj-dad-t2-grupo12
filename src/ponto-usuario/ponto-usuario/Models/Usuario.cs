@@ -1,6 +1,7 @@
-﻿using MongoDB.Bson;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Globalization;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using System.ComponentModel.DataAnnotations;
 
 namespace ponto_usuario.Models
 {
@@ -9,7 +10,7 @@ namespace ponto_usuario.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         [Required]
         public string Nome { get; set; }
@@ -26,7 +27,7 @@ namespace ponto_usuario.Models
         public List<Setor> Setores { get; set; }
 
         [Required]
-        public StatusUsuario StatusUsuario { get; set; }
+        public string StatusUsuario { get; set; }
 
         [Required]
         public DateTime DataCadastro { get; set; }
@@ -50,17 +51,14 @@ namespace ponto_usuario.Models
             CPF = registerDto.Cpf;
             SenhaCriptografada = registerDto.Senha;
             Endereco = registerDto.Endereco;
+            StatusUsuario = registerDto.StatusUsuario;
+            Setores = registerDto.Setores;
+
+            DataNascimento = DateTime.Parse(registerDto.DataNascimento, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind);
+            DataCadastro = DateTime.Parse(registerDto.DataCadastro, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind);
+
+            UsuarioAdmin = registerDto.UsuarioAdmin;
         }
-
-    }
-
-    public enum StatusUsuario
-    {
-        [Display(Name = "Ativo")]
-        Ativo,
-
-        [Display(Name = "Inativo")]
-        Inativo
     }
 
     [BsonIgnoreExtraElements]

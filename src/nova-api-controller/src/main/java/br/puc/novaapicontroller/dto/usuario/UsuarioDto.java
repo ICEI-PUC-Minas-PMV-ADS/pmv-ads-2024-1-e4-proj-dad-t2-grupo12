@@ -30,7 +30,7 @@ public class UsuarioDto {
 
     private String dataCadastro;
 
-    private String DataNascimento;
+    private String dataNascimento;
 
     private EnderecoDto endereco;
 

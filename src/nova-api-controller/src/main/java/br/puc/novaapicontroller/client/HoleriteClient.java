@@ -25,7 +25,7 @@ import static br.puc.novaapicontroller.util.ClientUtil.*;
 @RequiredArgsConstructor
 public class HoleriteClient {
 
-    @Value("${holerite-ponto.url}")
+    @Value("${holerite-ponto-url}")
     private String url;
 
     private final OkHttpClient okHttpClient = new OkHttpClient();
