@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import './PainelCentral.css';
 import DropdownButtonAction from "../dropdown-button-action/DropdownButtonAction.jsx";
 import { Badge, Table } from "react-bootstrap";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function PainelCentral({ registros }) {
     const [currentPage, setCurrentPage] = useState(1);
@@ -12,16 +12,26 @@ function PainelCentral({ registros }) {
     const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
     const currentRecords = registros.slice(indexOfFirstRecord, indexOfLastRecord);
 
-    const renderizarStatus = (isPositivo) => {
-        return isPositivo ? (
-            <Badge className="aprovacao-badge" bg="">
-                Aprovado
-            </Badge>
-        ) : (
-            <Badge className="incompleto-badge" bg="">
-                Incompleto
-            </Badge>
-        );
+    const renderizarStatus = (registro) => {
+        if (registro.temSolicitacaoAlteracao) {
+            return (
+                <Badge className="solicitacao-badge" bg="warning">
+                    Solicitação
+                </Badge>
+            );
+        } else if ([registro.inicioExpediente, registro.inicioIntervalo, registro.fimIntervalo, registro.fimExpediente].filter(horario => horario !== null).length < 4) {
+            return (
+                <Badge className="incompleto-badge" bg="">
+                    Incompleto
+                </Badge>
+            );
+        } else {
+            return (
+                <Badge className="aprovacao-badge" bg="">
+                    Aprovado
+                </Badge>
+            );
+        }
     };
 
     const handleNextPage = () => {
@@ -58,7 +68,7 @@ function PainelCentral({ registros }) {
                         ) : "-"}</td>
                         <td>{registro.saldo}</td>
                         <td>{registro.saldo}</td>
-                        <td>{renderizarStatus(registro.isPositivo)}</td>
+                        <td>{renderizarStatus(registro)}</td>
                         <td><DropdownButtonAction status={registro.isPositivo ? "Aprovado" : "Incompleto"} /></td>
                     </tr>
                 ))}
