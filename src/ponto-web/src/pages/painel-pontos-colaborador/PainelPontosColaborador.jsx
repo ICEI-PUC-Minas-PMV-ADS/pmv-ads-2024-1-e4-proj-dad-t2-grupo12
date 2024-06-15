@@ -2,18 +2,19 @@ import './PainelPontosColaborador.css';
 import MenuLateral from "../../components/menu-lateral/MenuLateral.jsx";
 import PainelCentral from "../../components/painel-central/PainelCentral.jsx";
 import Header from "../../components/header/Header.jsx";
-import {useEffect} from "react";
-import {getRegistrosPonto} from "../../services/api.jsx";
-import {useParams} from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getRegistrosPontoUsuario } from "../../services/api.jsx";
+import { useParams } from "react-router-dom";
 
 const PainelPontosColaborador = () => {
     const { id } = useParams();
+    const [registros, setRegistros] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const result = await getRegistrosPonto(id);
-                console.log(result.data)
+                const result = await getRegistrosPontoUsuario(id);
+                setRegistros(result || []);
             } catch (error) {
                 console.error('Erro ao buscar dados', error);
             }
@@ -24,10 +25,10 @@ const PainelPontosColaborador = () => {
 
     return (
         <div className="app">
-            <Header></Header>
+            <Header />
             <div className="container">
                 <div className="menu-lateral">
-                    <MenuLateral></MenuLateral>
+                    <MenuLateral />
                 </div>
                 <div className="conteudo-central">
                     <div className="top-table">
@@ -48,7 +49,7 @@ const PainelPontosColaborador = () => {
                     </div>
                     <div className="main-painel-pontos">
                         <div className="painel-table-pontos">
-                        <PainelCentral></PainelCentral>
+                            <PainelCentral registros={registros} />
                         </div>
                     </div>
                 </div>

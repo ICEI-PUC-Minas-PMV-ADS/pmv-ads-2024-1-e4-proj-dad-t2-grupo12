@@ -4,9 +4,9 @@ const api = axios.create({
     baseURL: "https://nova-api-controller.onrender.com"
 });
 
-export const getRegistrosPonto = async () => {
+export const getRegistrosPontoUsuario = async (id) => {
     try {
-        const response = await api.get('/v1/public/registroponto/listar');
+        const response = await api.get('/v1/public/registroponto/usuario/' + id);
         return response.data;
     } catch (error) {
         console.error('Erro ao buscar dados da API:', error);
