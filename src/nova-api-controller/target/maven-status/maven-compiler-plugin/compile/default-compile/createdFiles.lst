@@ -12,7 +12,6 @@ br\puc\novaapicontroller\dto\registroponto\HoleriteDto.class
 br\puc\novaapicontroller\util\LogUtil.class
 br\puc\novaapicontroller\dto\registroponto\PontoDto$PontoDtoBuilder.class
 br\puc\novaapicontroller\util\DateUtil.class
-br\puc\novaapicontroller\util\enums\StatusUsuarioEnum.class
 br\puc\novaapicontroller\dto\Login\LoginBasic.class
 br\puc\novaapicontroller\dto\registroponto\HoleriteDto$HoleriteDtoBuilder.class
 br\puc\novaapicontroller\dto\usuario\AlteracaoSenhaRetorno$AlteracaoSenhaRetornoBuilder.class

@@ -1,6 +1,5 @@
 package br.puc.novaapicontroller.dto.usuario;
 
-import br.puc.novaapicontroller.util.enums.StatusUsuarioEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,7 +25,7 @@ public class UsuarioDto {
 
     private List<SetorDto> setores;
 
-    private StatusUsuarioEnum statusUsuario;
+    private String statusUsuario;
 
     private String dataCadastro;
 
