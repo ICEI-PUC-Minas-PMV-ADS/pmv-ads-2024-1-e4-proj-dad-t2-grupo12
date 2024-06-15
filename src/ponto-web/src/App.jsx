@@ -7,6 +7,7 @@ import RegistroDiarioColaborador from "./pages/registro-diario-colaborador/Regis
 import Login from "./pages/login/Login.jsx";
 import CadastroUsuario from "./pages/cadastro-usuario/CadastroUsuario.jsx";
 import PaginaPerfil from './pages/pagina-perfil/PaginaPerfil.jsx';
+import BuscarColaborador from "./pages/buscar-colaborador/BuscarColaborador.jsx";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path='painel-colaborador' element={<PainelPontosColaborador />} />
         <Route path='painel-colaborador/registro-dia' element={<RegistroDiarioColaborador />} />
         <Route path='/painel-colaborador/:id' element={<PainelPontosColaborador />} />
+        <Route path='/buscar-colaborador' element={<BuscarColaborador />} />
         <Route path='cadastro-usuario' element={<CadastroUsuario />} />
         <Route path='perfil' element={<PaginaPerfil/>}/>
     </Routes>

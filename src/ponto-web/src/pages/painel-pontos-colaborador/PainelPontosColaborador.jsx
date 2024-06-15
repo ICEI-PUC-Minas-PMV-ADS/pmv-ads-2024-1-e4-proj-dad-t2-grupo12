@@ -1,27 +1,40 @@
 import './PainelPontosColaborador.css';
+import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getRegistrosPontoUsuario } from "../../services/api.jsx";
 import MenuLateral from "../../components/menu-lateral/MenuLateral.jsx";
 import PainelCentral from "../../components/painel-central/PainelCentral.jsx";
 import Header from "../../components/header/Header.jsx";
-import { useEffect, useState } from "react";
-import { getRegistrosPontoUsuario } from "../../services/api.jsx";
-import { useParams } from "react-router-dom";
 
 const PainelPontosColaborador = () => {
-    const { id } = useParams();
-    const [registros, setRegistros] = useState([]);
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const colaborador = location.state?.colaborador;
+    console.log()
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const result = await getRegistrosPontoUsuario(id);
-                setRegistros(result || []);
-            } catch (error) {
-                console.error('Erro ao buscar dados', error);
-            }
-        };
+        if (!colaborador) {
+            navigate("/buscar-colaborador");
+        } else {
+            const fetchData = async () => {
+                try {
+                    const result = await getRegistrosPontoUsuario(colaborador.id);
+                    setRegistros(result || []);
+                } catch (error) {
+                    console.error('Erro ao buscar dados', error);
+                }
+            };
 
-        fetchData();
-    }, [id]);
+            fetchData();
+        }
+    }, [colaborador, navigate]);
+
+    const [registros, setRegistros] = useState([]);
+
+    if (!colaborador) {
+        return null;
+    }
 
     return (
         <div className="app">
@@ -38,12 +51,12 @@ const PainelPontosColaborador = () => {
                         <div className="name-top-table">
                             <div className="setor-name">
                                 <span>Setor:</span>
-                                <span>Comercial</span>
+                                <span>{colaborador.setores[0].nome}</span>
                             </div>
                             <div className="vertical-line"></div>
                             <div className="employee-name">
-                                <span>RAMON RIDWAN</span>
-                                <span>Vendedor</span>
+                                <span>{(colaborador.nome).toUpperCase()}</span>
+                                <span>{colaborador.setores[0].categoria}</span>
                             </div>
                         </div>
                     </div>

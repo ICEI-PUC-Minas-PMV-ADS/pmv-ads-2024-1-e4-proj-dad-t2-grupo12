@@ -2,7 +2,6 @@ import './PaginaInicial.css';
 import logogrande from "/src/assets/logogrande.png";
 import MenuLateral from "../../components/menu-lateral/MenuLateral.jsx";
 import Header from "../../components/header/Header.jsx";
-import logotransparente from "../../assets/logotransparente.png";
 
 const PaginaInicial = () => {
     return (

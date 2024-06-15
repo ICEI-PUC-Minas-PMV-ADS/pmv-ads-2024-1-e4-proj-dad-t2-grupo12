@@ -1,44 +1,21 @@
 .header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     background-color: #fdfdfd;
-    color: white;
+    color: #4f5656;
     padding: 20px;
     border-bottom: 1px solid rgb(229, 226, 226);
 }
 
-.barra-pesquisa {
-    width: 600px;
-    margin-left: auto;
-    margin-right: 50px;
+.usuario-logado {
+    font-size: 20px;
+    padding-right: 0px;
+    display: flex;
+    align-items: center;
 }
 
-.user-name-div {
-    margin-right: 50px;
-    margin-left: 10px;
-    margin-top: 8px;
-}
-
-.user-name {
-    color: #4f5656;
+.imagem-perfil {
     margin-right: 30px;
 }
 
-.autocomplete-list {
-    position: absolute;
-    z-index: 1000;
-    width: 100%;
-    max-height: 200px;
-    overflow-y: auto;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-top: none;
-}
-
-.autocomplete-item {
-    cursor: pointer;
-}
-
-.autocomplete-item:hover {
-    background-color: #f1f1f1;
-}
