@@ -3,7 +3,7 @@ package br.puc.novaapicontroller.client;
 import br.puc.novaapicontroller.dto.AlteracaoSenhaDto;
 import br.puc.novaapicontroller.dto.usuario.CadastroUsuarioDto;
 import br.puc.novaapicontroller.dto.usuario.AlteracaoSenhaRetorno;
-import br.puc.novaapicontroller.dto.usuario.CadastroUsuarioResponse;
+import br.puc.novaapicontroller.dto.usuario.RespostaGenerica;
 import br.puc.novaapicontroller.dto.usuario.UsuarioDto;
 import br.puc.novaapicontroller.util.ClientUtil;
 import br.puc.novaapicontroller.util.LogUtil;
@@ -66,7 +66,7 @@ public class UsuarioPontoClient {
         return executarRequisicao(erroPadrao, requisicao);
     }
 
-    public CadastroUsuarioResponse cadastrarUsuario(CadastroUsuarioDto cadastroUsuario) throws JsonProcessingException {
+    public RespostaGenerica cadastrarUsuario(CadastroUsuarioDto cadastroUsuario) throws JsonProcessingException {
         String erroPadrao = "Erro ao cadastrar usuario ";
 
         String corpo = objectMapper.writeValueAsString(cadastroUsuario);
@@ -123,12 +123,12 @@ public class UsuarioPontoClient {
     }
 
     @Nullable
-    private CadastroUsuarioResponse executarRequisicaoCriar(String erroPadrao, Request requisicao) {
+    private RespostaGenerica executarRequisicaoCriar(String erroPadrao, Request requisicao) {
         try (Response resposta = ClientUtil.obterClient(okHttpClient).newCall(requisicao).execute()) {
             if (resposta.isSuccessful() && resposta.body() != null) {
                 String corpoResposta = resposta.body().string();
                 if (!corpoResposta.trim().isEmpty()) {
-                    return objectMapper.readValue(corpoResposta, CadastroUsuarioResponse.class);
+                    return objectMapper.readValue(corpoResposta, RespostaGenerica.class);
                 }
             } else {
                 LOGGER.log(Level.SEVERE, erroPadrao + "- Status: " + resposta.code());

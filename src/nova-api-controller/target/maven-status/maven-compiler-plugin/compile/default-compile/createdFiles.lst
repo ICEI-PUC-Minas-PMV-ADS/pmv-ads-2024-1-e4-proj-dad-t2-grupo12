@@ -20,7 +20,7 @@ br\puc\novaapicontroller\dto\EmailVerificacaoResponse$EmailVerificacaoResponseBu
 br\puc\novaapicontroller\controller\SetorController.class
 br\puc\novaapicontroller\dto\Login\LoginSiteResponse.class
 br\puc\novaapicontroller\dto\usuario\EnderecoDto.class
-br\puc\novaapicontroller\dto\usuario\CadastroUsuarioResponse.class
+br\puc\novaapicontroller\dto\usuario\RespostaGenerica.class
 br\puc\novaapicontroller\dto\usuario\EnderecoDto$EnderecoDtoBuilder.class
 br\puc\novaapicontroller\util\ClientUtil.class
 br\puc\novaapicontroller\controller\LoginController.class

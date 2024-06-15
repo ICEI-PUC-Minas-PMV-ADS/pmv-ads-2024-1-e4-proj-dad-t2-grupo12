@@ -16,7 +16,7 @@ export const getRegistrosPontoUsuario = async (id) => {
 
 export const logar = async (dadosLogin) => {
     try {
-        const response = await api.post('/v1/public/login/', dadosLogin);
+        const response = await api.post('/v1/public/login/admin', dadosLogin);
         return response.data;
     } catch (error) {
         console.error('Erro ao logar', error);

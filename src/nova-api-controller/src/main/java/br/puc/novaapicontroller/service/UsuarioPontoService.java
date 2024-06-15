@@ -50,7 +50,7 @@ public class UsuarioPontoService {
         throw new Exception("Não foi possível obter dados do usuário. Usuário não encontrado");
     }
 
-    public CadastroUsuarioResponse cadastrarUsuario(CadastroUsuarioDto cadastroUsuarioDto) throws Exception {
+    public RespostaGenerica cadastrarUsuario(CadastroUsuarioDto cadastroUsuarioDto) throws Exception {
         EmailVerificacaoResponse emailVerificacaoResponse = loginClient.verificarSeEmailExiste(cadastroUsuarioDto.getEmail());
 
         if (!emailVerificacaoResponse.getEmailExists()) {
