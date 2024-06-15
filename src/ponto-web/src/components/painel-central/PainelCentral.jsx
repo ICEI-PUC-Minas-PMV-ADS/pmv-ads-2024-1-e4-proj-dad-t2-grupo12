@@ -2,12 +2,53 @@ import PropTypes from 'prop-types';
 import './PainelCentral.css';
 import DropdownButtonAction from "../dropdown-button-action/DropdownButtonAction.jsx";
 import { Badge, Table } from "react-bootstrap";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+function calcularHorasTrabalhadas(inicioExpediente, fimExpediente) {
+    if (inicioExpediente && fimExpediente) {
+        const diffMs = new Date(fimExpediente) - new Date(inicioExpediente);
+        const diffDate = new Date(diffMs);
+        const hours = String(diffDate.getUTCHours()).padStart(2, '0');
+        const minutes = String(diffDate.getUTCMinutes()).padStart(2, '0');
+        return `${hours}:${minutes}`;
+    }
+    return "-";
+}
+
+function calcularSaldoDiario(registro) {
+    const horasTrabalhadas = calcularHorasTrabalhadas(registro.inicioExpediente, registro.fimExpediente);
+
+    if (horasTrabalhadas === "-") {
+        return "-";
+    }
+
+    const [hours, minutes] = horasTrabalhadas.split(":").map(Number);
+    const horasTrabalhadasMs = (hours * 3600 + minutes * 60) * 1000;
+
+    const oitoHorasEmMilissegundos = 8 * 3600 * 1000;
+    const saldoMs = horasTrabalhadasMs - oitoHorasEmMilissegundos;
+
+    const saldoNegativo = saldoMs < 0;
+    const saldoFinalMs = Math.abs(saldoMs);
+
+    const saldoDate = new Date(saldoFinalMs);
+    const saldoHours = String(saldoDate.getUTCHours()).padStart(2, '0');
+    const saldoMinutes = String(saldoDate.getUTCMinutes()).padStart(2, '0');
+    const saldoFormatado = `${saldoHours}:${saldoMinutes}`;
+
+    return saldoNegativo ? `-${saldoFormatado}` : saldoFormatado;
+}
 
 function PainelCentral({ registros }) {
-    const [currentPage, setCurrentPage] = useState(1);
     const recordsPerPage = 7;
-    
+    const totalPages = Math.ceil(registros.length / recordsPerPage);
+
+    const [currentPage, setCurrentPage] = useState(totalPages);
+
+    useEffect(() => {
+        setCurrentPage(totalPages);
+    }, [registros, totalPages]);
+
     const indexOfLastRecord = currentPage * recordsPerPage;
     const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
     const currentRecords = registros.slice(indexOfFirstRecord, indexOfLastRecord);
@@ -54,7 +95,6 @@ function PainelCentral({ registros }) {
                     <th className="linha-data">Data</th>
                     <th>Horas trabalhadas</th>
                     <th>Saldo diário</th>
-                    <th>Saldo final</th>
                     <th>Status</th>
                     <th>Ação</th>
                 </tr>
@@ -63,11 +103,8 @@ function PainelCentral({ registros }) {
                 {currentRecords.map((registro) => (
                     <tr className="linha-tabela" key={registro.id}>
                         <td className="linha-data">{new Date(registro.dataRegistro).toLocaleDateString('pt-BR')}</td>
-                        <td>{registro.inicioExpediente && registro.fimExpediente ? (
-                            new Date(new Date(registro.fimExpediente) - new Date(registro.inicioExpediente)).toISOString().substr(11, 8)
-                        ) : "-"}</td>
-                        <td>{registro.saldo}</td>
-                        <td>{registro.saldo}</td>
+                        <td>{calcularHorasTrabalhadas(registro.inicioExpediente, registro.fimExpediente)}</td>
+                        <td>{calcularSaldoDiario(registro)}</td>
                         <td>{renderizarStatus(registro)}</td>
                         <td><DropdownButtonAction status={registro.isPositivo ? "Aprovado" : "Incompleto"} /></td>
                     </tr>
