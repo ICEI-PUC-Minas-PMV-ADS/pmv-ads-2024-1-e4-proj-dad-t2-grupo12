@@ -14,7 +14,7 @@ export const getRegistrosPontoUsuario = async (id) => {
     }
 };
 
-export const logar = async (dadosLogin) => {
+export const logar = async (dadosLogin) => {dadosLogin
     try {
         const response = await api.post('/v1/public/login/admin', dadosLogin);
         return response.data;
@@ -37,6 +37,16 @@ export const listarColaboradores = async () => {
 export const obterColaboradorPeloNome = async (nome) => {
     try {
         const response = await api.get('/v1/public/usuario/' + nome);
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao buscar dados da API:', error);
+        throw error;
+    }
+};
+
+export const obterSolicitacaoAlteracao = async (idRegistro) => {
+    try {
+        const response = await api.get('/v1/public/solicitacao/registro/' + idRegistro);
         return response.data;
     } catch (error) {
         console.error('Erro ao buscar dados da API:', error);
