@@ -3,10 +3,23 @@ import MenuLateral from "../../components/menu-lateral/MenuLateral.jsx";
 import Timeline from "../../components/timeline/Timeline.jsx";
 import Header from "../../components/header/Header.jsx";
 import StatusSelector from "../../components/status-selector/StatusSelector.jsx";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
+import {useEffect} from "react";
 
 const RegistroDiarioColaborador = () => {
-    const navigateTo = useNavigate()
+    const navigateTo = useNavigate();
+    const location = useLocation();
+    const colaborador = location.state?.colaborador;
+
+    useEffect(() => {
+        if (!colaborador) {
+            navigateTo('/buscar-colaborador');
+        }
+    }, [colaborador, navigateTo]);
+
+    if (!colaborador) {
+        return null;
+    }
 
     return (
         <div className="app">
@@ -23,12 +36,12 @@ const RegistroDiarioColaborador = () => {
                         <div className="name-top-table">
                             <div className="setor-name">
                                 <span>Setor:</span>
-                                <span>Comercial</span>
+                                <span>{colaborador.setores[0].nome}</span>
                             </div>
                             <div className="vertical-line"></div>
                             <div className="employee-name">
-                                <span>RAMON RIDWAN</span>
-                                <span>Vendedor</span>
+                                <span>{(colaborador.nome).toUpperCase()}</span>
+                                <span>{colaborador.setores[0].categoria}</span>
                             </div>
                         </div>
                     </div>

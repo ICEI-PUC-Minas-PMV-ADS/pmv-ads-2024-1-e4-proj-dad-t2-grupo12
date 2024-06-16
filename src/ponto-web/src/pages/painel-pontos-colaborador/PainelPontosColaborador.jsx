@@ -11,7 +11,6 @@ const PainelPontosColaborador = () => {
     const navigate = useNavigate();
 
     const colaborador = location.state?.colaborador;
-    console.log()
 
     useEffect(() => {
         if (!colaborador) {
@@ -62,7 +61,7 @@ const PainelPontosColaborador = () => {
                     </div>
                     <div className="main-painel-pontos">
                         <div className="painel-table-pontos">
-                            <PainelCentral registros={registros} />
+                            <PainelCentral registros={registros} colaborador={colaborador}/>
                         </div>
                     </div>
                 </div>

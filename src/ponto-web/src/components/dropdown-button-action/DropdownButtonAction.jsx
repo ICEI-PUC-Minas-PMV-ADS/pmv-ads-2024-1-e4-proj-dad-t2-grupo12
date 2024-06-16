@@ -3,11 +3,11 @@ import './DropdownButtonAction.css';
 import PropTypes from "prop-types";
 import {useNavigate} from "react-router-dom";
 
-function DropdownButtonAction({ status }) {
+function DropdownButtonAction({ status, colaborador }) {
     const navigateTo = useNavigate()
 
     const handleVisualizarRegistrosClick = () => {
-        navigateTo(`registro-dia`);
+        navigateTo(`/registro-dia`, { state: { colaborador } });
     };
 
     const renderizarItensDropdown = (status) => {
@@ -23,13 +23,6 @@ function DropdownButtonAction({ status }) {
                 return (
                     <>
                         <Dropdown.Item className="button-item">Visualizar registros do dia</Dropdown.Item>
-                    </>
-                );
-            case "Incompleto":
-                return (
-                    <>
-                        <Dropdown.Item className="button-item">Visualizar registros do dia</Dropdown.Item>
-                        <Dropdown.Item className="button-item">Solicitar revisão</Dropdown.Item>
                     </>
                 );
             default:
@@ -55,7 +48,8 @@ function DropdownButtonAction({ status }) {
 }
 
 DropdownButtonAction.propTypes = {
-    status: PropTypes.string.isRequired
+    status: PropTypes.string.isRequired,
+    colaborador: PropTypes.object.isRequired
 };
 
 

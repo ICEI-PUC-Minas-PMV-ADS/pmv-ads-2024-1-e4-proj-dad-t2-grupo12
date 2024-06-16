@@ -39,7 +39,7 @@ function calcularSaldoDiario(registro) {
     return saldoNegativo ? `-${saldoFormatado}` : saldoFormatado;
 }
 
-function PainelCentral({ registros }) {
+function PainelCentral({ registros, colaborador }) {
     const recordsPerPage = 7;
     const totalPages = Math.ceil(registros.length / recordsPerPage);
 
@@ -106,7 +106,7 @@ function PainelCentral({ registros }) {
                         <td>{calcularHorasTrabalhadas(registro.inicioExpediente, registro.fimExpediente)}</td>
                         <td>{calcularSaldoDiario(registro)}</td>
                         <td>{renderizarStatus(registro)}</td>
-                        <td><DropdownButtonAction status={registro.isPositivo ? "Aprovado" : "Incompleto"} /></td>
+                        <td><DropdownButtonAction status={registro.temSolicitacaoAlteracao ? "Solicitação" : "Aprovado" } colaborador={colaborador} /></td>
                     </tr>
                 ))}
                 </tbody>
@@ -120,7 +120,8 @@ function PainelCentral({ registros }) {
 }
 
 PainelCentral.propTypes = {
-    registros: PropTypes.arrayOf(PropTypes.object).isRequired
+    registros: PropTypes.arrayOf(PropTypes.object).isRequired,
+    colaborador: PropTypes.object.isRequired
 };
 
 export default PainelCentral;
