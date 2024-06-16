@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Data
 @Builder
 @NoArgsConstructor
@@ -17,14 +15,18 @@ public class SolicitacaoDto {
 
     private String motivo;
     
-    private String dataAlteracao;
+    private String novaData;
 
-    private String dataRegistro;
+    private String dataSolicitacao;
+
+    private String tipoPeriodo;
 
     private Boolean aprovado;
 
     private String status;
     
     private String usuarioId;
+
+    private String pontoId;
 
 }

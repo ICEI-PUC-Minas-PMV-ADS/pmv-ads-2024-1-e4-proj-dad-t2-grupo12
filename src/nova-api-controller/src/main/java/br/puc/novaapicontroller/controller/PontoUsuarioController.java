@@ -1,19 +1,14 @@
 package br.puc.novaapicontroller.controller;
 
 import br.puc.novaapicontroller.dto.AlteracaoSenhaDto;
-import br.puc.novaapicontroller.dto.CadastroUsuarioDto;
+import br.puc.novaapicontroller.dto.usuario.CadastroUsuarioDto;
 import br.puc.novaapicontroller.dto.usuario.UsuarioDto;
 import br.puc.novaapicontroller.service.UsuarioPontoService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Enumeration;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,6 +22,11 @@ public class PontoUsuarioController {
         return ResponseEntity.ok(service.obterListaUsarios());
     }
 
+    @GetMapping(value = "/{nome}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> filtrarPorNome(@PathVariable String nome) {
+        return ResponseEntity.ok(service.filtrarPorNome(nome));
+    }
+
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> obterUsuario(HttpServletRequest requisicao) {
         String token = requisicao.getHeader("Authorization");
@@ -38,7 +38,7 @@ public class PontoUsuarioController {
     }
 
     @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> cadastrarUsuario(@RequestBody CadastroUsuarioDto cadastro) throws JsonProcessingException {
+    public ResponseEntity<?> cadastrarUsuario(@RequestBody CadastroUsuarioDto cadastro) {
         try {
             return ResponseEntity.ok(service.cadastrarUsuario(cadastro));
         } catch (Exception ex) {

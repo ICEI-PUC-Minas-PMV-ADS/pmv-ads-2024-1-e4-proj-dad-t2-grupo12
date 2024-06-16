@@ -21,10 +21,25 @@ public class RegistroPontoController {
         return ResponseEntity.ok(service.obterListagemRegistroPontos());
     }
 
+    @GetMapping(value = "usuario/{usuarioId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> obterPontosUsuario(@PathVariable String usuarioId) {
+        return ResponseEntity.ok(service.obterPontosUsuario(usuarioId));
+    }
+
     @GetMapping(value = "/{registroId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> obterRegistroPonto(@PathVariable String registroId) {
         try {
             return ResponseEntity.ok(service.obterRegistroPonto(registroId));
+        } catch (Exception ex) {
+            return ResponseEntity.status(500).body(ex.getMessage());
+        }
+    }
+
+    @GetMapping(value = "/sinalizar/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> sinalizarAlteracao(@PathVariable String id) {
+        try {
+            service.sinalizarSolicitacaoAlteracaoPonto(id);
+            return ResponseEntity.ok().build();
         } catch (Exception ex) {
             return ResponseEntity.status(500).body(ex.getMessage());
         }

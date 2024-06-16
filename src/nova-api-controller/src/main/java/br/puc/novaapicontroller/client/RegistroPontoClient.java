@@ -3,7 +3,6 @@ package br.puc.novaapicontroller.client;
 import br.puc.novaapicontroller.dto.registroponto.PontoDto;
 import br.puc.novaapicontroller.util.ClientUtil;
 import br.puc.novaapicontroller.util.LogUtil;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +25,7 @@ import static br.puc.novaapicontroller.util.ClientUtil.*;
 @RequiredArgsConstructor
 public class RegistroPontoClient {
 
-    @Value("${registro-ponto.url}")
+    @Value("${registro-ponto-url}")
     private String url;
 
     private final OkHttpClient okHttpClient = new OkHttpClient();

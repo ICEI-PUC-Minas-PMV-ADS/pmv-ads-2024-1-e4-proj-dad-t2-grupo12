@@ -30,6 +30,8 @@ namespace registro_ponto.Models
         [Required]
         public string UsuarioId { get; set; }
 
+        public bool? TemSolicitacaoAlteracao { get; set; }
+
     }
 
 }

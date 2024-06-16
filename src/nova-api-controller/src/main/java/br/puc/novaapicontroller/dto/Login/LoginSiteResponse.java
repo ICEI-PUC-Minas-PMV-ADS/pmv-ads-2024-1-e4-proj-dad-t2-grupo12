@@ -13,6 +13,8 @@ public class LoginSiteResponse extends LoginBasic {
 
     private int matricula;
 
+    private String mensagem;
+
 }
 
 

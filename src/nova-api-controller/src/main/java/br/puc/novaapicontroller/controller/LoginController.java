@@ -24,6 +24,15 @@ public class LoginController {
         }
     }
 
+    @PostMapping(value = "/admin", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> loginAdmin(@RequestBody LoginRequest request) throws JsonProcessingException {
+        try {
+            return ResponseEntity.ok(service.loginAdmin(request));
+        } catch (Exception ex) {
+            return ResponseEntity.status(500).body(ex.getMessage());
+        }
+    }
+
     @GetMapping(value = "/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> verificarSeEmailJaCadastrado(@PathVariable String email) {
         try {

@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 @RequiredArgsConstructor
 public class LoginClient {
 
-    @Value("${usuario-ponto.url}")
+    @Value("${usuario-ponto-url}")
     private String url;
 
     private final OkHttpClient okHttpClient = new OkHttpClient();
@@ -38,14 +38,14 @@ public class LoginClient {
 
         String corpo = objectMapper.writeValueAsString(request);
         RequestBody corpoRequisicao = ClientUtil.converterCorpoRequisicao(corpo);
-        Request requisicao = construirRequisicaoPost("authenticate", corpoRequisicao);
+        Request requisicao = construirRequisicaoPost("/authenticate", corpoRequisicao);
 
         return executarRequisicaoLogin(erroPadrao, requisicao);
     }
 
     public EmailVerificacaoResponse verificarSeEmailExiste(String email) {
         String erroPadrao = "Erro ao verificar email. ";
-        Request requisicao = construirRequisicaoGet("check-email-exists/" + email);
+        Request requisicao = construirRequisicaoGet("/check-email-exists/" + email);
         return executarRequisicaoVerificarEmail(erroPadrao, requisicao);
     }
 

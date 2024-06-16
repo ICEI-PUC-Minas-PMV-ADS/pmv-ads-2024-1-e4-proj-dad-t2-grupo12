@@ -1,35 +1,89 @@
+import PropTypes from 'prop-types';
 import './PainelCentral.css';
 import DropdownButtonAction from "../dropdown-button-action/DropdownButtonAction.jsx";
-import {Badge, Table} from "react-bootstrap";
+import { Badge, Table } from "react-bootstrap";
+import { useState, useEffect } from "react";
 
-function PainelCentral() {
+function calcularHorasTrabalhadas(inicioExpediente, fimExpediente) {
+    if (inicioExpediente && fimExpediente) {
+        const diffMs = new Date(fimExpediente) - new Date(inicioExpediente);
+        const diffDate = new Date(diffMs);
+        const hours = String(diffDate.getUTCHours()).padStart(2, '0');
+        const minutes = String(diffDate.getUTCMinutes()).padStart(2, '0');
+        return `${hours}:${minutes}`;
+    }
+    return "-";
+}
 
-    const renderizarStatus = (status) => {
-        switch (status) {
-            case "Solicitação":
-                return (
-                    <Badge className="solicitacao-badge" bg="">
-                        Solicitação
-                    </Badge>
-                );
-            case "Aprovado":
-                return (
-                    <Badge className="aprovacao-badge" bg="">
-                        Aprovado
-                    </Badge>
-                );
-            case "Incompleto":
-                return (
-                    <Badge className="incompleto-badge" bg="">
-                        Incompleto
-                    </Badge>
-                );
-            default:
-                return (
-                    <Badge pill bg="success">
-                        Aprovado
-                    </Badge>
-                );
+function calcularSaldoDiario(registro) {
+    const horasTrabalhadas = calcularHorasTrabalhadas(registro.inicioExpediente, registro.fimExpediente);
+
+    if (horasTrabalhadas === "-") {
+        return "-";
+    }
+
+    const [hours, minutes] = horasTrabalhadas.split(":").map(Number);
+    const horasTrabalhadasMs = (hours * 3600 + minutes * 60) * 1000;
+
+    const oitoHorasEmMilissegundos = 8 * 3600 * 1000;
+    const saldoMs = horasTrabalhadasMs - oitoHorasEmMilissegundos;
+
+    const saldoNegativo = saldoMs < 0;
+    const saldoFinalMs = Math.abs(saldoMs);
+
+    const saldoDate = new Date(saldoFinalMs);
+    const saldoHours = String(saldoDate.getUTCHours()).padStart(2, '0');
+    const saldoMinutes = String(saldoDate.getUTCMinutes()).padStart(2, '0');
+    const saldoFormatado = `${saldoHours}:${saldoMinutes}`;
+
+    return saldoNegativo ? `-${saldoFormatado}` : saldoFormatado;
+}
+
+function PainelCentral({ registros, colaborador }) {
+    const recordsPerPage = 7;
+    const totalPages = Math.ceil(registros.length / recordsPerPage);
+
+    const [currentPage, setCurrentPage] = useState(totalPages);
+
+    useEffect(() => {
+        setCurrentPage(totalPages);
+    }, [registros, totalPages]);
+
+    const indexOfLastRecord = currentPage * recordsPerPage;
+    const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+    const currentRecords = registros.slice(indexOfFirstRecord, indexOfLastRecord);
+
+    const renderizarStatus = (registro) => {
+        if (registro.temSolicitacaoAlteracao) {
+            return (
+                <Badge className="solicitacao-badge" bg="warning">
+                    Solicitação
+                </Badge>
+            );
+        } else if ([registro.inicioExpediente, registro.inicioIntervalo, registro.fimIntervalo, registro.fimExpediente].filter(horario => horario !== null).length < 4) {
+            return (
+                <Badge className="incompleto-badge" bg="">
+                    Incompleto
+                </Badge>
+            );
+        } else {
+            return (
+                <Badge className="aprovacao-badge" bg="">
+                    Aprovado
+                </Badge>
+            );
+        }
+    };
+
+    const handleNextPage = () => {
+        if (indexOfLastRecord < registros.length) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    const handlePrevPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
         }
     };
 
@@ -41,72 +95,33 @@ function PainelCentral() {
                     <th className="linha-data">Data</th>
                     <th>Horas trabalhadas</th>
                     <th>Saldo diário</th>
-                    <th>Saldo final</th>
                     <th>Status</th>
                     <th>Ação</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr className="linha-tabela">
-                    <td className="linha-data">Sex, 12/04/2024</td>
-                    <td>08:00:00</td>
-                    <td>00:00:00</td>
-                    <td>03:00:00</td>
-                    <td>{renderizarStatus("Solicitação")}</td>
-                    <td><DropdownButtonAction status="Solicitação"/></td>
-                </tr>
-                <tr className="linha-tabela">
-                    <td className="linha-data">Quin, 11/04/2024</td>
-                    <td>04:50:00</td>
-                    <td>-03:10:00</td>
-                    <td>03:00:00</td>
-                    <td>{renderizarStatus("Incompleto")}</td>
-                    <td><DropdownButtonAction status="Incompleto"/></td>
-                </tr>
-                <tr className="linha-tabela">
-                    <td className="linha-data">Qua, 10/04/2024</td>
-                    <td>08:00:00</td>
-                    <td>00:00:00</td>
-                    <td>03:00:00</td>
-                    <td>{renderizarStatus("Aprovado")}</td>
-                    <td><DropdownButtonAction status="Aprovado"/></td>
-                </tr>
-                <tr className="linha-tabela">
-                    <td className="linha-data">Ter, 09/04/2024</td>
-                    <td>08:00:00</td>
-                    <td>00:00:00</td>
-                    <td>03:00:00</td>
-                    <td>{renderizarStatus("Aprovado")}</td>
-                    <td><DropdownButtonAction status="Aprovado"/></td>
-                </tr>
-                <tr className="linha-tabela">
-                    <td className="linha-data">Seg, 05/04/2024</td>
-                    <td>08:30:00</td>
-                    <td>00:30:00</td>
-                    <td>03:00:00</td>
-                    <td>{renderizarStatus("Aprovado")}</td>
-                    <td><DropdownButtonAction status="Aprovado"/></td>
-                </tr>
-                <tr className="linha-tabela">
-                    <td className="linha-data">Dom, 04/04/2024</td>
-                    <td>-</td>
-                    <td>00:00:00</td>
-                    <td>02:30:00</td>
-                    <td>{renderizarStatus("Aprovado")}</td>
-                    <td><DropdownButtonAction status="Aprovado"/></td>
-                </tr>
-                <tr className="linha-tabela">
-                    <td className="linha-data">Sab, 03/04/2024</td>
-                    <td>-</td>
-                    <td>00:00:00</td>
-                    <td>02:30:00</td>
-                    <td>{renderizarStatus("Aprovado")}</td>
-                    <td><DropdownButtonAction status="Aprovado"/></td>
-                </tr>
+                {currentRecords.map((registro) => (
+                    <tr className="linha-tabela" key={registro.id}>
+                        <td className="linha-data">{new Date(registro.dataRegistro).toLocaleDateString('pt-BR')}</td>
+                        <td>{calcularHorasTrabalhadas(registro.inicioExpediente, registro.fimExpediente)}</td>
+                        <td>{calcularSaldoDiario(registro)}</td>
+                        <td>{renderizarStatus(registro)}</td>
+                        <td><DropdownButtonAction status={registro.temSolicitacaoAlteracao ? "Solicitação" : "Aprovado" } colaborador={colaborador} /></td>
+                    </tr>
+                ))}
                 </tbody>
             </Table>
+            <div className="pagination">
+                <button onClick={handlePrevPage} disabled={currentPage === 1}>Anterior</button>
+                <button onClick={handleNextPage} disabled={indexOfLastRecord >= registros.length}>Próximo</button>
+            </div>
         </div>
     );
 }
+
+PainelCentral.propTypes = {
+    registros: PropTypes.arrayOf(PropTypes.object).isRequired,
+    colaborador: PropTypes.object.isRequired
+};
 
 export default PainelCentral;

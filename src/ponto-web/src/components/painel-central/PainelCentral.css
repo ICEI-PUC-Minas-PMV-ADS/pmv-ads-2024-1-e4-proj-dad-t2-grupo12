@@ -1,5 +1,7 @@
 .table-div {
     background: #fdfdfd;
+    padding: 20px;
+    border-radius: 8px;
 }
 
 .tr-cabecalho {
@@ -71,4 +73,31 @@ tr.tr-cabecalho-primeira-linha {
     align-content: center;
     width: 150px;
     height: 30px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.pagination button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.pagination button:not(:disabled):hover {
+    background-color: #0056b3;
 }

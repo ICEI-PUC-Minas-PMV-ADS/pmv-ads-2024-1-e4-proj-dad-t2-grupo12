@@ -20,4 +20,10 @@ public class DateUtil {
         return LocalDateTime.parse(data, formatter);
     }
 
+
+    public static String localDateTimeToString(LocalDateTime dateTime, String formato) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formato);
+        return dateTime.format(formatter);
+    }
+
 }

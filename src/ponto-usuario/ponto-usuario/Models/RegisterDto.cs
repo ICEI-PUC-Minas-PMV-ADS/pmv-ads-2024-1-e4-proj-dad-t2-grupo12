@@ -12,14 +12,22 @@ namespace ponto_usuario.Models
 
         [Required]
         public string Email { get; set; }
-
-        [Required]
+        
         public string Senha { get; set; }
 
-        [Required]
         public string ConfirmacaoSenha { get; set; }
 
-        [Required]
         public Endereco Endereco { get; set; }
+        
+        public string StatusUsuario { get; set; }
+        
+        public List<Setor> Setores { get; set; }
+        
+        public string DataCadastro { get; set; }
+
+        public string DataNascimento { get; set; }
+        
+        public bool UsuarioAdmin { get; set; }
+        
     }
 }
