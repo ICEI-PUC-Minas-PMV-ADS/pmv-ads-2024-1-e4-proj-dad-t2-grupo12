@@ -3,23 +3,72 @@ import MenuLateral from "../../components/menu-lateral/MenuLateral.jsx";
 import Timeline from "../../components/timeline/Timeline.jsx";
 import Header from "../../components/header/Header.jsx";
 import StatusSelector from "../../components/status-selector/StatusSelector.jsx";
-import {useLocation, useNavigate} from "react-router-dom";
-import {useEffect} from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { obterSolicitacaoAlteracao } from "../../services/api.jsx";
 
 const RegistroDiarioColaborador = () => {
     const navigateTo = useNavigate();
     const location = useLocation();
     const colaborador = location.state?.colaborador;
+    const registro = location.state?.registro;
+    const [solicitacaoAlteracao, setSolicitacaoAlteracao] = useState(null);
 
     useEffect(() => {
-        if (!colaborador) {
-            navigateTo('/buscar-colaborador');
-        }
-    }, [colaborador, navigateTo]);
+        const fetchData = async () => {
+            if (!colaborador || !registro) {
+                navigateTo('/buscar-colaborador');
+            } else {
+                try {
+                    const result = await obterSolicitacaoAlteracao(registro.id);
+                    setSolicitacaoAlteracao(result);
+                } catch (error) {
+                    console.error('Erro ao buscar dados', error);
+                }
+            }
+        };
+
+        fetchData();
+    }, [colaborador, navigateTo, registro.id]);
 
     if (!colaborador) {
         return null;
     }
+
+    const renderizarTipoSolicitacao = (tipoSolicitacao) => {
+        switch (tipoSolicitacao) {
+            case "InicioExpediente":
+                return (
+                    <>
+                        <span className="saldo-valor">Início expediente</span>
+                    </>
+                );
+            case "InicioIntervalo":
+                return (
+                    <>
+                        <span className="saldo-valor">Início Intervalo</span>
+                    </>
+                );
+            case "FimIntervalo":
+                return (
+                    <>
+                        <span className="saldo-valor">Fim Intervalo</span>
+                    </>
+                );
+            case "FimExpediente":
+                return (
+                    <>
+                        <span className="saldo-valor">Fim Expediente</span>
+                    </>
+                );
+            default:
+                return (
+                    <>
+                        <span className="saldo-valor">Intervalo</span>
+                    </>
+                );
+        }
+    };
 
     return (
         <div className="app">
@@ -49,24 +98,24 @@ const RegistroDiarioColaborador = () => {
                         <div className="central-card">
                             <div className="timeline-div">
                                 <span className="timeline-titulo">Registro de horários do dia:</span>
-                                <Timeline></Timeline>
+                                <Timeline registro={registro} solicitacaoAlteracao={solicitacaoAlteracao} />
                             </div>
                             <div className="vertical-line-painel"></div>
                             <div className="div-central">
                                 <div className="motivo-div">
                                     <span className="motivo-titulo">Motivo da solicitação:</span>
                                     <div className="card-motivo">
-                                        <span className="motivo-texto">Esqueci de registrar a volta do almoço</span>
+                                        <span className="motivo-texto">{solicitacaoAlteracao.motivo}</span>
                                     </div>
                                 </div>
                                 <div className="saldo-informacao">
                                     <div className="saldo-item">
-                                        <span className="saldo-label">Saldo diário:</span>
-                                        <span className="saldo-valor">+02h 20m</span>
+                                        <span className="saldo-label">Registro a alterar:</span>
+                                        <span className="saldo-valor">{solicitacaoAlteracao && renderizarTipoSolicitacao(solicitacaoAlteracao.tipoPeriodo)}</span>
                                     </div>
                                     <div className="saldo-item">
-                                        <span className="saldo-label">Saldo diário:</span>
-                                        <span className="saldo-valor">+02h 20m</span>
+                                        <span className="saldo-label">Hora a ser modificada:</span>
+                                        <span className="saldo-valor">12:42</span>
                                     </div>
                                 </div>
                             </div>
@@ -88,8 +137,7 @@ const RegistroDiarioColaborador = () => {
                 </div>
             </div>
         </div>
-    )
-        ;
+    );
 }
 
 export default RegistroDiarioColaborador;

@@ -33,8 +33,6 @@ const StatusSelector = () => {
     return (
         <div className="botoes-status">
             <StatusButton status="Aprovado" onClick={handleStatusChange} selectedStatus={selectedStatus} />
-            <StatusButton status="Incompleto" onClick={handleStatusChange} selectedStatus={selectedStatus} />
-            <StatusButton status="Solicitar revisão" onClick={handleStatusChange} selectedStatus={selectedStatus} />
             <StatusButton status="Recusado" onClick={handleStatusChange} selectedStatus={selectedStatus} />
             <StatusButton status="Abono" onClick={handleStatusChange} selectedStatus={selectedStatus} />
         </div>

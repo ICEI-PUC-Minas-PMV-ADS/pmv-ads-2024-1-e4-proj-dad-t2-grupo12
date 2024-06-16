@@ -106,7 +106,7 @@ function PainelCentral({ registros, colaborador }) {
                         <td>{calcularHorasTrabalhadas(registro.inicioExpediente, registro.fimExpediente)}</td>
                         <td>{calcularSaldoDiario(registro)}</td>
                         <td>{renderizarStatus(registro)}</td>
-                        <td><DropdownButtonAction status={registro.temSolicitacaoAlteracao ? "Solicitação" : "Aprovado" } colaborador={colaborador} /></td>
+                        <td><DropdownButtonAction status={registro.temSolicitacaoAlteracao ? "Solicitação" : "Aprovado" } registro={registro} colaborador={colaborador} /></td>
                     </tr>
                 ))}
                 </tbody>

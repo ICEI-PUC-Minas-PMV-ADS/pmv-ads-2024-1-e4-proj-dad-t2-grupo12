@@ -3,11 +3,11 @@ import './DropdownButtonAction.css';
 import PropTypes from "prop-types";
 import {useNavigate} from "react-router-dom";
 
-function DropdownButtonAction({ status, colaborador }) {
+function DropdownButtonAction({ status, registro, colaborador }) {
     const navigateTo = useNavigate()
 
     const handleVisualizarRegistrosClick = () => {
-        navigateTo(`/registro-dia`, { state: { colaborador } });
+        navigateTo(`/registro-dia`, { state: { registro, colaborador } });
     };
 
     const renderizarItensDropdown = (status) => {
@@ -49,7 +49,8 @@ function DropdownButtonAction({ status, colaborador }) {
 
 DropdownButtonAction.propTypes = {
     status: PropTypes.string.isRequired,
-    colaborador: PropTypes.object.isRequired
+    colaborador: PropTypes.object.isRequired,
+    registro: PropTypes.object.isRequired
 };
 
 

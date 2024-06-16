@@ -43,3 +43,13 @@ export const obterColaboradorPeloNome = async (nome) => {
         throw error;
     }
 };
+
+export const obterSolicitacaoAlteracao = async (idRegistro) => {
+    try {
+        const response = await api.get('/v1/public/solicitacao/registro/' + idRegistro);
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao buscar dados da API:', error);
+        throw error;
+    }
+};
