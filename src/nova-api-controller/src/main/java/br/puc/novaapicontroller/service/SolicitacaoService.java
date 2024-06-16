@@ -18,11 +18,16 @@ public class SolicitacaoService {
         return alteracaoClient.obterRegistrosAlteracaoListagem();
     }
 
-    public SolicitacaoDto obterRegistroAlteracao(String registroId) throws Exception {
-        return alteracaoClient.obterRegistroAlteracao(registroId);
+    public SolicitacaoDto obterRegistroAlteracao(String solicitacaoId) throws Exception {
+        return alteracaoClient.obterRegistroAlteracao(solicitacaoId);
     }
 
-    public SolicitacaoDto registrarSolicitacaoPonto(SolicitacaoDto solicitacaoDto) throws Exception {
+    public SolicitacaoDto obterSolicitacaoAlteracaoPeloRegistro(String registroId) throws Exception {
+        List<SolicitacaoDto> solicitacoesList = obterRegistrosAlteracaoListagem();
+        return solicitacoesList.stream().filter(solicitacao -> solicitacao.getPontoId().equalsIgnoreCase(registroId)).findFirst().orElse(null);
+    }
+
+    public SolicitacaoDto registrarSolicitacaoAlteracao(SolicitacaoDto solicitacaoDto) throws Exception {
         solicitacaoDto.setDataSolicitacao(DateUtil.formatarDataISO(solicitacaoDto.getDataSolicitacao()));
         return alteracaoClient.registrarSolicitacaoPonto(solicitacaoDto);
     }
