@@ -14,7 +14,7 @@ export const getRegistrosPontoUsuario = async (id) => {
     }
 };
 
-export const logar = async (dadosLogin) => {dadosLogin
+export const logar = async (dadosLogin) => {
     try {
         const response = await api.post('/v1/public/login/admin', dadosLogin);
         return response.data;
