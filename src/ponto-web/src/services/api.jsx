@@ -53,3 +53,23 @@ export const obterSolicitacaoAlteracao = async (idRegistro) => {
         throw error;
     }
 };
+
+export const editarEAprovarSolicitacao = async (idSolicitacao, solicitacaoBory) => {
+    try {
+        const response = await api.put('/v1/public/solicitacao/' + idSolicitacao, solicitacaoBory);
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao buscar dados da API:', error);
+        throw error;
+    }
+};
+
+export const editarRegistroPonto = async (idRegistro, registroBory) => {
+    try {
+        const response = await api.put('/v1/public/registroponto/' + idRegistro, registroBory);
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao buscar dados da API:', error);
+        throw error;
+    }
+};

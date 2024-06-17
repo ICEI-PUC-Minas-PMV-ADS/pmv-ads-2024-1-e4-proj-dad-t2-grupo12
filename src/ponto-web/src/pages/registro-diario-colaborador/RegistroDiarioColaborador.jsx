@@ -5,7 +5,7 @@ import Header from "../../components/header/Header.jsx";
 import StatusSelector from "../../components/status-selector/StatusSelector.jsx";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { obterSolicitacaoAlteracao } from "../../services/api.jsx";
+import {editarEAprovarSolicitacao, editarRegistroPonto, obterSolicitacaoAlteracao} from "../../services/api.jsx";
 
 const RegistroDiarioColaborador = () => {
     const navigateTo = useNavigate();
@@ -13,6 +13,7 @@ const RegistroDiarioColaborador = () => {
     const colaborador = location.state?.colaborador;
     const registro = location.state?.registro;
     const [solicitacaoAlteracao, setSolicitacaoAlteracao] = useState(null);
+    const [selectedStatus, setSelectedStatus] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -70,6 +71,39 @@ const RegistroDiarioColaborador = () => {
         }
     };
 
+    const handleSave = async () => {
+        if (selectedStatus === "Aprovado") {
+            if (solicitacaoAlteracao.tipoPeriodo === 'InicioExpediente') {
+                registro.inicioExpediente = solicitacaoAlteracao.novaData;
+            } else if (solicitacaoAlteracao.tipoPeriodo === 'InicioIntervalo') {
+                registro.inicioIntervalo = solicitacaoAlteracao.novaData;
+            } else if (solicitacaoAlteracao.tipoPeriodo === 'FimIntervalo') {
+                registro.fimIntervalo = solicitacaoAlteracao.novaData;
+            } else {
+                registro.fimExpediente = solicitacaoAlteracao.novaData;
+            }
+            registro.temSolicitacaoAlteracao = false;
+
+            try {
+                await editarRegistroPonto(registro.id, registro);
+            } catch (error) {
+                console.error('Erro ao buscar dados', error);
+            }
+
+            try {
+                solicitacaoAlteracao.aprovado = true;
+                solicitacaoAlteracao.status = "aprovado"
+                const result = await editarEAprovarSolicitacao(solicitacaoAlteracao.id, solicitacaoAlteracao);
+                setSolicitacaoAlteracao(result);
+
+            } catch (error) {
+                console.error('Erro ao buscar dados', error);
+            }
+        }
+
+        navigateTo(-1)
+    };
+
     return (
         <div className="app">
             <Header></Header>
@@ -105,7 +139,7 @@ const RegistroDiarioColaborador = () => {
                                 <div className="motivo-div">
                                     <span className="motivo-titulo">Motivo da solicitação:</span>
                                     <div className="card-motivo">
-                                        <span className="motivo-texto">{solicitacaoAlteracao.motivo}</span>
+                                        <span className="motivo-texto">{solicitacaoAlteracao?.motivo}</span>
                                     </div>
                                 </div>
                                 <div className="saldo-informacao">
@@ -125,12 +159,12 @@ const RegistroDiarioColaborador = () => {
                                     <span className="motivo-titulo">Alterar Status:</span>
                                 </div>
                                 <div className="botoes-select-status botoes-container">
-                                    <StatusSelector></StatusSelector>
+                                    <StatusSelector selectedStatus={selectedStatus} setSelectedStatus={setSelectedStatus} />
                                 </div>
                             </div>
                             <div className="options-button">
                                 <button type="button" onClick={() => navigateTo(-1)} className="btn btn-warning btn-cancel">Cancelar</button>
-                                <button type="button" onClick={() => navigateTo(-1)} className="btn btn-warning btn-save">Salvar</button>
+                                <button type="button" onClick={handleSave} className="btn btn-warning btn-save">Salvar</button>
                             </div>
                         </div>
                     </div>
