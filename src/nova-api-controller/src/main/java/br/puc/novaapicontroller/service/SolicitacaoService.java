@@ -6,6 +6,8 @@ import br.puc.novaapicontroller.util.DateUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -28,7 +30,8 @@ public class SolicitacaoService {
     }
 
     public SolicitacaoDto registrarSolicitacaoAlteracao(SolicitacaoDto solicitacaoDto) throws Exception {
-        solicitacaoDto.setDataSolicitacao(DateUtil.formatarDataISO(solicitacaoDto.getDataSolicitacao()));
+        solicitacaoDto.setNovaData(DateUtil.formatarDataISO(solicitacaoDto.getNovaData()));
+        solicitacaoDto.setDataSolicitacao(DateUtil.localDateTimeToString(LocalDateTime.now(), "yyyy-MM-dd'T'HH:mm:ss.SSS"));
         return alteracaoClient.registrarSolicitacaoPonto(solicitacaoDto);
     }
 
