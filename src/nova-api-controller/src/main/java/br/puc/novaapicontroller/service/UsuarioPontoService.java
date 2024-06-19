@@ -7,6 +7,7 @@ import br.puc.novaapicontroller.dto.CadastroUsuarioDto;
 import br.puc.novaapicontroller.dto.EmailVerificacaoResponse;
 import br.puc.novaapicontroller.dto.JwtPayload;
 import br.puc.novaapicontroller.dto.usuario.AlteracaoSenhaRetorno;
+import br.puc.novaapicontroller.dto.usuario.SetorDto;
 import br.puc.novaapicontroller.dto.usuario.UsuarioDto;
 import br.puc.novaapicontroller.util.JWTUtil;
 import com.auth0.jwt.interfaces.DecodedJWT;
@@ -15,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -33,7 +35,19 @@ public class UsuarioPontoService {
         JwtPayload usuarioId = JWTUtil.decodeJwt(token);
 
         if (usuarioId != null) {
-            return usuarioClient.obterUsario(usuarioId.getNameid(), token);
+            UsuarioDto usuarioDto = usuarioClient.obterUsario(usuarioId.getNameid(), token);
+
+            if (usuarioDto != null && (usuarioDto.getSetores() == null || usuarioDto.getSetores().isEmpty())) {
+                List<SetorDto> setorDtoList = new ArrayList<>();
+                SetorDto setorDto = new SetorDto();
+                setorDto.setId("66021f97260c3669d68a29ca");
+                setorDto.setNome("TI");
+                setorDto.setCategoria("desenvolvedor");
+                setorDtoList.add(setorDto);
+                usuarioDto.setSetores(setorDtoList);
+            }
+
+            return usuarioDto;
         }
 
         throw new Exception("Não foi possível obter dados do usuário. Usuário não encontrado");

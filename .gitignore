@@ -362,3 +362,7 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /src/api-usuario/.idea
+*.class
+*.class
+src/nova-api-controller/target/classes/br/puc/novaapicontroller/dto/registroponto/PontoSiteResponse.class
+src/nova-api-controller/target/classes/br/puc/novaapicontroller/dto/registroponto/PontoDto.class

@@ -7,17 +7,17 @@ import lombok.Data;
 @Builder
 public class PontoSiteResponse {
 
-    public String id;
+    private String id;
 
-    public String dataRegistro;
+    private String dataRegistro;
 
-    public String inicioExpediente;
+    private String inicioExpediente;
 
-    public String inicioIntervalo;
+    private String inicioIntervalo;
 
-    public String fimIntervalo;
+    private String fimIntervalo;
 
-    public String fimExpediente;
+    private String fimExpediente;
 
     private String saldo;
 

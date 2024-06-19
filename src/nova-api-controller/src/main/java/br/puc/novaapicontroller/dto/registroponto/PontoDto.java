@@ -14,25 +14,25 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PontoDto {
 
-    public String id;
+    private String id;
 
-    public String dataRegistro;
+    private String dataRegistro;
 
-    public String inicioExpediente;
+    private String inicioExpediente;
 
-    public String inicioIntervalo;
+    private String inicioIntervalo;
 
-    public String fimIntervalo;
+    private String fimIntervalo;
 
-    public String fimExpediente;
+    private String fimExpediente;
 
-    public String saldo;
+    private String saldo;
 
     @JsonProperty("isPositivo")
     private boolean positivo;
 
 //    public HoleriteDto holerite;
 
-    public String usuarioId;
+    private String usuarioId;
 
 }

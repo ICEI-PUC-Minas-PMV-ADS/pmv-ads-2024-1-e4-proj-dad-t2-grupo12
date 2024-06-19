@@ -30,7 +30,7 @@ public class RegistroPontoService {
     }
 
     public PontoDto registrarPonto(PontoDto pontoDto) throws Exception {
-        pontoDto.setDataRegistro(DateUtil.formatarDataISO(pontoDto.dataRegistro));
+        pontoDto.setDataRegistro(DateUtil.formatarDataISO(pontoDto.getDataRegistro()));
         return registroPontoClient.registrarPonto(pontoDto);
     }
 
