@@ -28,7 +28,7 @@ export const editarSenha = async (senha) => {
     try {
         const response = await Api.put('/v1/public/usuario/alterarSenha', senha, {
             headers: {
-                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI2NjU4YzQ1MGQ4MTEwYjVkN2ViM2Q2ZjMiLCJuYmYiOjE3MTczNTAwMjUsImV4cCI6MTcxNzQzNjQyNSwiaWF0IjoxNzE3MzUwMDI1fQ.fcxrOdK0EVjeAr1dZ7ygbEqliVZu_pa38xJeWuet4Pw'
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI2NjU4YzQ1MGQ4MTEwYjVkN2ViM2Q2ZjMiLCJuYmYiOjE3MTczNzMwNzcsImV4cCI6MTcxNzQ1OTQ3NywiaWF0IjoxNzE3MzczMDc3fQ.s2e4Xnr8qOkcW4q54MASQb5oAtXkpzZ-YSG7SnWQEJ0w'
             }
         });
         return response.data;
@@ -42,7 +42,7 @@ export const obterUsuario = async () => {
     try {
         const response = await Api.get('/v1/public/usuario/', {
             headers: {
-                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI2NjU4YzQ1MGQ4MTEwYjVkN2ViM2Q2ZjMiLCJuYmYiOjE3MTczNTAwMjUsImV4cCI6MTcxNzQzNjQyNSwiaWF0IjoxNzE3MzUwMDI1fQ.fcxrOdK0EVjeAr1dZ7ygbEqliVZu_pa38xJeWuet4Pw'
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI2NjU4YzQ1MGQ4MTEwYjVkN2ViM2Q2ZjMiLCJuYmYiOjE3MTczNzMwNzcsImV4cCI6MTcxNzQ1OTQ3NywiaWF0IjoxNzE3MzczMDc3fQ.s2e4Xnr8qOkcW4q54MASQb5oAtXkpzZ-YSG7SnWQEJ0'
             }
         });
         return response.data;
