@@ -37,7 +37,6 @@ const Profile = () => {
         setEnderecoUsuarioCep(dados.endereco.cep);
         setEnderecoUsuarioCidade(dados.endereco.cidade);
         setEnderecoUsuarioEstado(dados.endereco.estado);
-        console.log(dados.setores[0].nome);
 
       } catch (error) {
         console.error('Erro ao buscar dados da API:', error);

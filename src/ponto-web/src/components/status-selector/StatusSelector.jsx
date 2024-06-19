@@ -1,13 +1,10 @@
 import PropTypes from "prop-types";
-import {useState} from "react";
 import "./StatusSelector.css";
 
 const StatusButton = ({ status, onClick, selectedStatus }) => {
     const isSelected = status === selectedStatus;
     const statusColors = {
         Aprovado: "btn-success",
-        Incompleto: "btn-warning",
-        "Solicitar revisão": "btn-info",
         Recusado: "btn-danger",
         Abono: "btn-secondary"
     };
@@ -23,8 +20,7 @@ const StatusButton = ({ status, onClick, selectedStatus }) => {
     );
 };
 
-const StatusSelector = () => {
-    const [selectedStatus, setSelectedStatus] = useState(null);
+const StatusSelector = ({ selectedStatus, setSelectedStatus }) => {
 
     const handleStatusChange = (status) => {
         setSelectedStatus(status);
@@ -43,6 +39,11 @@ StatusButton.propTypes = {
     status: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired,
     selectedStatus: PropTypes.string
+};
+
+StatusSelector.propTypes = {
+    selectedStatus: PropTypes.string,
+    setSelectedStatus: PropTypes.func.isRequired
 };
 
 export default StatusSelector;

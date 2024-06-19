@@ -1,12 +1,10 @@
 .perfil-container {
     display: flex;
     justify-content: space-around;
-    
 }
 
-.perfil-dados-editaveis{
+.perfil-dados-editaveis {
     justify-content: center;
-
 }
 
 .perfil-dados-fixo, .perfil-dados-editaveis {
@@ -57,15 +55,69 @@
     background-color: #45a049; /* Escurece o botão ao passar o mouse */
 }
 
-.painel-table-principal{
+.painel-table-principal {
     width: 96%; 
-     height: 100%; 
-     padding: 20px; 
-     border-radius: 10px; 
-     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-     background-color: #ffffff;
+    height: 100%; 
+    padding: 20px; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    background-color: #ffffff;
 }
 
 .label-perfil {
     width: 400px;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+.modal-title {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+.input-modal {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-modal {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #0B1ABB; /* Azul para os botões */
+    color: white;
+    cursor: pointer;
+    flex: 1;
+    margin: 5px;
+}
+
+.btn-modal:hover {
+    background-color: #0a19a3; /* Escurece o botão ao passar o mouse */
 }

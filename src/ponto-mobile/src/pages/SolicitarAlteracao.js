@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Dimensions, TouchableOpacity, TextInput, Alert, Modal } from 'react-native';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import * as DocumentPicker from 'expo-document-picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Image } from 'react-native';
+import {useRoute} from "@react-navigation/native";
+import {editarRegistroPonto, registrarSolicitacaoAlteracao} from "../services/Api";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -20,21 +21,17 @@ const dayAbbreviations = {
 };
 
 const SolicitarAlteracao = () => {
+    const route = useRoute();
+    const { registro } = route.params;
+
     const [currentDate, setCurrentDate] = useState(new Date());
     const [motivo, setMotivo] = useState('');
-    const [file, setFile] = useState(null);
     const [selectedTime, setSelectedTime] = useState(null);
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [showTimeModal, setShowTimeModal] = useState(false);
     const [newTime, setNewTime] = useState('');
     const [timeToChange, setTimeToChange] = useState('');
-
-    const [times, setTimes] = useState({
-        entryTime: "09:10",
-        breakStartTime: "12:05",
-        breakEndTime: "13:05",
-        exitTime: "18:22",
-    });
+    const [motivoError, setMotivoError] = useState(false);
 
     useEffect(() => {
         const timerID = setInterval(() => tick(), 1000);
@@ -47,29 +44,35 @@ const SolicitarAlteracao = () => {
         setCurrentDate(new Date());
     };
 
-    const handleFilePicker = async () => {
-        try {
-            const result = await DocumentPicker.getDocumentAsync({});
-            if (result.type === 'success') {
-                setFile(result);
-            }
-        } catch (error) {
-            console.error('Error picking document:', error);
-        }
-    };
-
     const handleTimeChange = (key) => {
         setShowTimeModal(true);
         setTimeToChange(key);
     };
 
+    const formatTime = (dateTime) => {
+        if (!dateTime) return '';
+        const date = new Date(dateTime);
+        date.setHours(date.getHours() + 3);
+        return date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    };
+
     const handleTimeChangeConfirm = () => {
-        setTimes((prevTimes) => ({
-            ...prevTimes,
-            [timeToChange]: newTime,
-        }));
-        setShowTimeModal(false);
-        setSelectedTime(timeToChange);
+        try {
+            const [hours, minutes] = newTime.split(':').map(Number);
+            const updatedDate = new Date(registro.dataRegistro);
+            updatedDate.setHours(hours);
+            updatedDate.setMinutes(minutes);
+            updatedDate.setHours(updatedDate.getHours() - 3);
+
+            const formattedDate = updatedDate.toISOString();
+
+            console.log(formattedDate);
+            setNewTime(formattedDate)
+            setShowTimeModal(false);
+            setSelectedTime(timeToChange);
+        } catch (error) {
+            console.error('Erro ao buscar dados da API:', error);
+        }
     };
 
     const calculateDuration = (start, end) => {
@@ -85,28 +88,60 @@ const SolicitarAlteracao = () => {
         return `${diffHours}h ${diffMinutes}m`;
     };
 
-    const workDuration = `Turno de ${calculateDuration(times.entryTime, times.breakStartTime)}`;
-    const breakDuration = `Intervalo de ${calculateDuration(times.breakStartTime, times.breakEndTime)}`;
-    const postBreakWorkDuration = `Turno de ${calculateDuration(times.breakEndTime, times.exitTime)}`;
-
     const handleSubmit = () => {
-        if (!motivo) {
-            Alert.alert('Erro', 'Por favor, insira um motivo para a solicitação.');
+        if (!motivo.trim()) {
+            setMotivoError(true);
             return;
         }
 
-        const requestData = {
-            motivo,
-            file,
-            times,
-            currentDate,
+        let tipoPeriodo;
+
+        if (timeToChange === 'entryTime') {
+            tipoPeriodo = 'InicioExpediente';
+        } else if (timeToChange === 'breakStartTime') {
+            tipoPeriodo = 'InicioIntervalo';
+        } else if (timeToChange === 'breakEndTime') {
+            tipoPeriodo = 'FimIntervalo';
+        } else {
+            tipoPeriodo = 'FimExpediente';
+        }
+
+        const solicitacao = {
+            motivo: motivo,
+            novaData: newTime,
+            tipoPeriodo: tipoPeriodo,
+            aprovado: false,
+            status: 'solicitado',
+            usuarioId: '664bdc3adf17108bf6c8a689',
+            pontoId: registro.id,
         };
 
-        console.log('Dados da solicitação:', requestData);
-        Alert.alert('Sucesso', 'Solicitação enviada com sucesso.');
+        registrarSolicitacaoAlteracao(solicitacao).then(() => {
+            console.log('Solicitação registrada com sucesso');
+        }).catch(error => {
+            console.error('Erro ao registrar solicitação:', error);
+        });
+
+        const editarPonto = {
+            id: registro.id,
+            dataRegistro: registro.dataRegistro,
+            inicioExpediente: registro.inicioExpediente,
+            inicioIntervalo : registro.inicioIntervalo,
+            fimIntervalo: registro.fimIntervalo,
+            fimExpediente: registro.fimExpediente,
+            usuarioId: registro.usuarioId,
+            temSolicitacaoAlteracao: true,
+        };
+
+        editarRegistroPonto(registro.id, editarPonto).then(() => {
+            console.log('Solicitação registrada com sucesso');
+        }).catch(error => {
+            console.error('Erro ao registrar solicitação:', error);
+        });
+
     };
 
-    const formattedDate = format(currentDate, 'EEE, dd/MM/yyyy', { locale: ptBR });
+    const formattedDate = format(new Date(registro.dataRegistro), 'EEE, dd/MM/yyyy', { locale: ptBR });
     const formattedDay = formattedDate.split(',')[0].toLowerCase();
     const abbreviatedDay = dayAbbreviations[formattedDay];
 
@@ -141,44 +176,40 @@ const SolicitarAlteracao = () => {
                 <TouchableOpacity onPress={() => handleTimeChange('entryTime')}>
                     <Text style={[styles.timeText, { marginBottom: 10 }]}>
                         <Image source={require('../../assets/Vectorgreen.png')} style={styles.menuItemImage} />
-                        <Text style={styles.grayText}> {times.entryTime}</Text>
+                        <Text style={styles.grayText}> {formatTime(registro.inicioExpediente)}</Text>
                     </Text>
                 </TouchableOpacity>
-                <Text style={[styles.grayText, { marginBottom: 10 }]}>{workDuration}</Text>
                 <TouchableOpacity onPress={() => handleTimeChange('breakStartTime')}>
                     <Text style={[styles.timeText, { marginBottom: 10 }]}>
                         <Image source={require('../../assets/Vectorred.png')} style={styles.menuItemImage} />
-                        <Text style={styles.grayText}> {times.breakStartTime}</Text>
+                        <Text style={styles.grayText}> {formatTime(registro.inicioIntervalo)}</Text>
                     </Text>
                 </TouchableOpacity>
-                <Text style={[styles.grayText, { marginBottom: 10 }]}>{breakDuration}</Text>
                 <TouchableOpacity onPress={() => handleTimeChange('breakEndTime')}>
                     <Text style={[styles.timeText, { marginBottom: 10 }]}>
-                        <Image source={require( '../../assets/Vectorgreen.png')} style={styles.menuItemImage} />
-                        <Text style={styles.grayText}> {times.breakEndTime}</Text>
+                        <Image source={require('../../assets/Vectorgreen.png')} style={styles.menuItemImage} />
+                        <Text style={styles.grayText}> {formatTime(registro.fimIntervalo)}</Text>
                     </Text>
                 </TouchableOpacity>
-                <Text style={[styles.grayText, { marginBottom: 10 }]}>{postBreakWorkDuration}</Text>
                 <TouchableOpacity onPress={() => handleTimeChange('exitTime')}>
                     <Text style={[styles.timeText, { marginBottom: 10 }]}>
                         <Image source={require('../../assets/Vectorred.png')} style={styles.menuItemImage} />
-                        <Text style={styles.grayText}> {times.exitTime}</Text>
+                        <Text style={styles.grayText}> {formatTime(registro.fimExpediente)}</Text>
                     </Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.smallBox}>
                 <Text style={styles.motivoText}>Motivo:</Text>
                 <TextInput
-                    style={[styles.textInput, { height: 85 }]}
+                    style={[styles.textInput, { height: 85 }, motivoError ? styles.inputError : null]}
                     value={motivo}
                     onChangeText={setMotivo}
                     multiline
                 />
+                {motivoError && (
+                    <Text style={styles.errorMessage}>Motivo é obrigatório</Text>
+                )}
             </View>
-            <TouchableOpacity style={styles.button} onPress={handleFilePicker}>
-                <Text style={styles.buttonText}>Anexar um arquivo</Text>
-            </TouchableOpacity>
-            {file && <Text style={styles.fileText}>Arquivo: {file.name}</Text>}
             <Modal
                 visible={showTimeModal}
                 animationType="slide"
@@ -219,13 +250,12 @@ const styles = StyleSheet.create({
     title: {
         color: 'rgba(252, 163, 17, 1)',
         fontSize: 24,
-        bottom: -15,
+        marginBottom: 10,
     },
     date: {
         color: 'rgba(23, 15, 118, 1)',
         fontSize: 20,
         marginVertical: 5,
-        bottom: -10,
     },
     infoBox: {
         marginHorizontal: 20,
@@ -252,16 +282,26 @@ const styles = StyleSheet.create({
         color: 'rgba(133, 133, 133, 1)',
         fontWeight: 'bold',
         marginRight: 5,
-        marginTop: -68,
     },
     textInput: {
         flex: 1,
         color: '#000',
         fontSize: 13,
-        marginLeft: 0,
+        marginLeft: 10,
         paddingVertical: 0,
         marginTop: -1,
-        borderWidth: 0,
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: 5,
+        paddingHorizontal: 10,
+    },
+    inputError: {
+        borderColor: 'red', // Cor da borda vermelha quando há erro no motivo
+    },
+    errorMessage: {
+        color: 'red',
+        fontSize: 12,
+        marginTop: 5,
     },
     button: {
         marginHorizontal: 20,
@@ -339,5 +379,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
 });
+
 
 export default SolicitarAlteracao;

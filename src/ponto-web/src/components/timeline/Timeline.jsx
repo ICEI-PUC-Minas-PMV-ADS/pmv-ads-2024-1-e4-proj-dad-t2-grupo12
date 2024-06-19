@@ -16,16 +16,14 @@ const Timeline = ({ registro, solicitacaoAlteracao }) => {
     useEffect(() => {
         if (solicitacaoAlteracao) {
             const fetchData = async () => {
-                if (!registro.inicioExpediente || !registro.inicioIntervalo || !registro.fimIntervalo || !registro.fimExpediente) {
-                    if (solicitacaoAlteracao.tipoPeriodo === 'InicioExpediente') {
-                        registro.inicioExpediente = solicitacaoAlteracao.novaData;
-                    } else if (solicitacaoAlteracao.tipoPeriodo === 'InicioIntervalo') {
-                        registro.inicioIntervalo = solicitacaoAlteracao.novaData;
-                    } else if (solicitacaoAlteracao.tipoPeriodo === 'FimIntervalo') {
-                        registro.fimIntervalo = solicitacaoAlteracao.novaData;
-                    } else {
-                        registro.fimExpediente = solicitacaoAlteracao.novaData;
-                    }
+                if (solicitacaoAlteracao.tipoPeriodo === 'InicioExpediente') {
+                    registro.inicioExpediente = solicitacaoAlteracao.novaData;
+                } else if (solicitacaoAlteracao.tipoPeriodo === 'InicioIntervalo') {
+                    registro.inicioIntervalo = solicitacaoAlteracao.novaData;
+                } else if (solicitacaoAlteracao.tipoPeriodo === 'FimIntervalo') {
+                    registro.fimIntervalo = solicitacaoAlteracao.novaData;
+                } else {
+                    registro.fimExpediente = solicitacaoAlteracao.novaData;
                 }
             };
 

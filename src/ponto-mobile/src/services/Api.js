@@ -20,7 +20,7 @@ export const saveRegistroPonto = async (registro) => {
     return response.data;
 }
 
-export const updateRegistroPonto = async (id, registro) => {
+export const editarRegistroPonto = async (id, registro) => {
     const response = await Api.put('/v1/public/registroponto/' + id, registro);
     return response.data;
 }
@@ -53,7 +53,14 @@ export const obterUsuario = async () => {
     }
 };
 
-
-
+export const registrarSolicitacaoAlteracao = async (solicitacao) => {
+    try {
+        const response = await Api.post('/v1/public/solicitacao/', solicitacao);
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao buscar dados da API:', error);
+        throw error;
+    }
+};
 
 export default Api;

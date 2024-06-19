@@ -1,11 +1,10 @@
+import React, { useCallback, useEffect, useState } from "react";
+import _ from "lodash";
 import './BuscarColaborador.css';
 import MenuLateral from "../../components/menu-lateral/MenuLateral.jsx";
 import Header from "../../components/header/Header.jsx";
-import {Form, InputGroup, Button, ListGroup, ListGroupItem} from 'react-bootstrap';
-import {useCallback, useEffect, useState} from "react";
-import {obterColaboradorPeloNome} from "../../services/api.jsx";
-import _ from "lodash";
-import {Link} from "react-router-dom";
+import { obterColaboradorPeloNome } from "../../services/api.jsx";
+import BuscarInput from "../../components/buscar-input/BuscarInput.jsx"; // Adjust path if necessary
 
 const BuscarColaborador = () => {
     const [colaboradores, setColaboradores] = useState([]);
@@ -34,10 +33,10 @@ const BuscarColaborador = () => {
 
     return (
         <div className="app">
-            <Header></Header>
+            <Header />
             <div className="container">
                 <div className="menu-lateral">
-                    <MenuLateral></MenuLateral>
+                    <MenuLateral />
                 </div>
                 <div className="conteudo-central">
                     <div className="top-table">
@@ -47,34 +46,18 @@ const BuscarColaborador = () => {
                     </div>
                     <div className="main-painel-inicial-buscar">
                         <div className="painel-table-inicial-buscar">
-                            <InputGroup className="mb-3">
-                                <Form.Control
-                                    className={"input-busca"}
-                                    placeholder="Buscar colaborador"
-                                    aria-label="Recipient's username"
-                                    aria-describedby="basic-addon2"
-                                    value={searchTerm}
-                                    onChange={(e) => setSearchTerm(e.target.value)}
-                                />
-                                <Button variant="outline-secondary" id="button-addon2" onClick={() => obterPeloNome(searchTerm)}>
-                                    Pesquisar
-                                </Button>
-                            </InputGroup>
-                            <ListGroup className="autocomplete-list">
-                                {colaboradores.map((colaborador) => (
-                                    <Link key={colaborador.id} to={`/painel-colaborador/${colaborador.id}`} state={{ colaborador }}>
-                                        <ListGroupItem className="autocomplete-item">
-                                            {colaborador.nome}
-                                        </ListGroupItem>
-                                    </Link>
-                                ))}
-                            </ListGroup>
+                            <BuscarInput
+                                searchTerm={searchTerm}
+                                setSearchTerm={setSearchTerm}
+                                colaboradores={colaboradores}
+                                obterPeloNome={obterPeloNome}
+                            />
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     );
-}
+};
 
 export default BuscarColaborador;
