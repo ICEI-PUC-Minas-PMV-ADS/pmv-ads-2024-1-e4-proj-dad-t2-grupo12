@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, InputGroup, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import './BuscarInput.css';  // Make sure to include this line if you have specific styles
 
 const BuscarInput = ({ searchTerm, setSearchTerm, colaboradores, obterPeloNome }) => {
     return (
