@@ -88,3 +88,8 @@
     display: none;
 }
 
+.timeline-content-highlight {
+    background-color: yellow;
+    padding: 5px;
+    border-radius: 5px;
+}

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static br.puc.novaapicontroller.util.DateUtil.stringToLocalDteTime;
 
@@ -25,13 +26,30 @@ public class RegistroPontoService {
         return registroPontoClient.obterListagemRegistroPontos();
     }
 
+    public List<PontoDto> obterPontosUsuario(String usuarioId) {
+        List<PontoDto> pontoDtos = registroPontoClient.obterListagemRegistroPontos();
+
+        return pontoDtos.stream().filter(ponto -> ponto.getUsuarioId().equalsIgnoreCase(usuarioId)).collect(Collectors.toList());
+    }
+
     public PontoDto obterRegistroPonto(String registroId) throws Exception {
         return registroPontoClient.obterRegistros(registroId);
     }
 
     public PontoDto registrarPonto(PontoDto pontoDto) throws Exception {
         pontoDto.setDataRegistro(DateUtil.formatarDataISO(pontoDto.getDataRegistro()));
+        pontoDto.setTemSolicitacaoAlteracao(false);
         return registroPontoClient.registrarPonto(pontoDto);
+    }
+
+    public void sinalizarSolicitacaoAlteracaoPonto(String id) throws Exception {
+        PontoDto pontoDto = obterRegistroPonto(id);
+        if (pontoDto != null) {
+            pontoDto.setTemSolicitacaoAlteracao(true);
+            return;
+        }
+
+        throw new Exception("Registro de ponto não encontrado");
     }
 
     public PontoSiteResponse editarRegistroPonto(String id, PontoDto pontoDto) throws Exception {

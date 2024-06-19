@@ -16,21 +16,21 @@ public class HoleriteController {
     private final HoleriteService service;
 
     @GetMapping(value = "/listar", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> obterListagemRegistroPontos() throws Exception {
+    public ResponseEntity<?> obterListagem() throws Exception {
         return ResponseEntity.ok(service.obterListagemHolerite());
     }
 
-    @GetMapping(value = "/{registroId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> obterRegistroPonto(@PathVariable String registroId) {
+    @GetMapping(value = "/{holeriteId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> obterHolerite(@PathVariable String holeriteId) {
         try {
-            return ResponseEntity.ok(service.obterHolerite(registroId));
+            return ResponseEntity.ok(service.obterHolerite(holeriteId));
         } catch (Exception ex) {
             return ResponseEntity.status(500).body(ex.getMessage());
         }
     }
 
     @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> registrarPonto(@RequestBody HoleriteDto holeriteDto) throws JsonProcessingException {
+    public ResponseEntity<?> registrarHolerite(@RequestBody HoleriteDto holeriteDto) throws JsonProcessingException {
         try {
             return ResponseEntity.ok(service.registrarHolerite(holeriteDto));
         } catch (Exception ex) {
@@ -39,7 +39,7 @@ public class HoleriteController {
     }
 
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> editarRegistroPonto(@PathVariable String id, @RequestBody HoleriteDto holeriteDto) throws Exception {
+    public ResponseEntity<?> editarHolerite(@PathVariable String id, @RequestBody HoleriteDto holeriteDto) throws Exception {
         try {
             return ResponseEntity.ok(service.editarHolerite(id, holeriteDto));
         } catch (Exception ex) {
@@ -48,7 +48,7 @@ public class HoleriteController {
     }
 
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> removerPonto(@PathVariable String id) throws Exception {
+    public ResponseEntity<?> removerHolerite(@PathVariable String id) throws Exception {
         return ResponseEntity.ok(service.removerHolerite(id));
     }
     

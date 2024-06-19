@@ -1,10 +1,12 @@
-package br.puc.novaapicontroller.dto;
+package br.puc.novaapicontroller.dto.usuario;
 
-import br.puc.novaapicontroller.dto.usuario.EnderecoDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
@@ -23,5 +25,15 @@ public class CadastroUsuarioDto {
     private String confirmacaoSenha;
 
     private EnderecoDto endereco;
-    
+
+    private String statusUsuario;
+
+    private List<SetorDto> setores;
+
+    private String dataCadastro;
+
+    private String dataNascimento;
+
+    private boolean usuarioAdmin;
+
 }

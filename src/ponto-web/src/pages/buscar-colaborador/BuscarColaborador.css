@@ -1,0 +1,40 @@
+.painel-table-inicial-buscar {
+    height: 750px;
+}
+
+.main-painel-inicial-buscar {
+    background-color: #f6f6f6;
+    flex: 1;
+    padding: 20px;
+    height: 700px;
+}
+
+.painel-table-inicial-buscar {
+    position: relative;
+    width: 96%;
+    height: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.input-busca {
+    width: 300px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 18px;
+}
+
+.painel-table-inicial {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.mb-3 {
+    width: 100%;
+    max-width: 400px;
+}

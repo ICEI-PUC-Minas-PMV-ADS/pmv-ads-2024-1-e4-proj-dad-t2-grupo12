@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const Api = axios.create({
-    baseURL: "https://nova-api-controller.onrender.com"
+    baseURL: "https://nova-api-controller.onrender.com",
+    // baseURL: "http://localhost:8080"
 })
 
 export const getRegistrosPonto = async () => {
@@ -19,7 +20,7 @@ export const saveRegistroPonto = async (registro) => {
     return response.data;
 }
 
-export const updateRegistroPonto = async (id, registro) => {
+export const editarRegistroPonto = async (id, registro) => {
     const response = await Api.put('/v1/public/registroponto/' + id, registro);
     return response.data;
 }
@@ -28,7 +29,7 @@ export const editarSenha = async (senha) => {
     try {
         const response = await Api.put('/v1/public/usuario/alterarSenha', senha, {
             headers: {
-                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI2NjU4YzQ1MGQ4MTEwYjVkN2ViM2Q2ZjMiLCJuYmYiOjE3MTczNzMwNzcsImV4cCI6MTcxNzQ1OTQ3NywiaWF0IjoxNzE3MzczMDc3fQ.s2e4Xnr8qOkcW4q54MASQb5oAtXkpzZ-YSG7SnWQEJ0w'
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI2NjVjZTJiNjE5MjE2MjMyZjMxZDY2NDQiLCJuYmYiOjE3MTczNjM1NzksImV4cCI6MTcxODU3MzE3OSwiaWF0IjoxNzE3MzYzNTc5fQ.gxp8ZZTlMcKm2nXbd8obPMtJU-CM5Wl4E7UhlgODDCQ'
             }
         });
         return response.data;
@@ -42,7 +43,7 @@ export const obterUsuario = async () => {
     try {
         const response = await Api.get('/v1/public/usuario/', {
             headers: {
-                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI2NjU4YzQ1MGQ4MTEwYjVkN2ViM2Q2ZjMiLCJuYmYiOjE3MTczNzMwNzcsImV4cCI6MTcxNzQ1OTQ3NywiaWF0IjoxNzE3MzczMDc3fQ.s2e4Xnr8qOkcW4q54MASQb5oAtXkpzZ-YSG7SnWQEJ0'
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI2NjVjZTJiNjE5MjE2MjMyZjMxZDY2NDQiLCJuYmYiOjE3MTczNjM1NzksImV4cCI6MTcxODU3MzE3OSwiaWF0IjoxNzE3MzYzNTc5fQ.gxp8ZZTlMcKm2nXbd8obPMtJU-CM5Wl4E7UhlgODDCQ'
             }
         });
         return response.data;
@@ -52,7 +53,14 @@ export const obterUsuario = async () => {
     }
 };
 
-
-
+export const registrarSolicitacaoAlteracao = async (solicitacao) => {
+    try {
+        const response = await Api.post('/v1/public/solicitacao/', solicitacao);
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao buscar dados da API:', error);
+        throw error;
+    }
+};
 
 export default Api;

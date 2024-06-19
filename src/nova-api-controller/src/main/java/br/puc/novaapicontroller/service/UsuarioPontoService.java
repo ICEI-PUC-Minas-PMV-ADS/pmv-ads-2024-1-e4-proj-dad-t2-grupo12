@@ -3,21 +3,18 @@ package br.puc.novaapicontroller.service;
 import br.puc.novaapicontroller.client.LoginClient;
 import br.puc.novaapicontroller.client.UsuarioPontoClient;
 import br.puc.novaapicontroller.dto.AlteracaoSenhaDto;
-import br.puc.novaapicontroller.dto.CadastroUsuarioDto;
+import br.puc.novaapicontroller.dto.usuario.*;
 import br.puc.novaapicontroller.dto.EmailVerificacaoResponse;
 import br.puc.novaapicontroller.dto.JwtPayload;
-import br.puc.novaapicontroller.dto.usuario.AlteracaoSenhaRetorno;
-import br.puc.novaapicontroller.dto.usuario.SetorDto;
-import br.puc.novaapicontroller.dto.usuario.UsuarioDto;
+import br.puc.novaapicontroller.util.DateUtil;
 import br.puc.novaapicontroller.util.JWTUtil;
-import com.auth0.jwt.interfaces.DecodedJWT;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -53,15 +50,16 @@ public class UsuarioPontoService {
         throw new Exception("Não foi possível obter dados do usuário. Usuário não encontrado");
     }
 
-    public UsuarioDto cadastrarUsuario(CadastroUsuarioDto cadastroUsuario) throws Exception {
-        EmailVerificacaoResponse emailVerificacaoResponse = loginClient.verificarSeEmailExiste(cadastroUsuario.getEmail());
+    public RespostaGenerica cadastrarUsuario(CadastroUsuarioDto cadastroUsuarioDto) throws Exception {
+        EmailVerificacaoResponse emailVerificacaoResponse = loginClient.verificarSeEmailExiste(cadastroUsuarioDto.getEmail());
 
         if (!emailVerificacaoResponse.getEmailExists()) {
-            return usuarioClient.cadastrarUsuario(cadastroUsuario);
+            cadastroUsuarioDto.setDataCadastro(DateUtil.localDateTimeToString(LocalDateTime.now(), "yyyy-MM-dd'T'HH:mm:ss.SSS"));
+            cadastroUsuarioDto.setSetores(cadastroUsuarioDto.getSetores() != null ? cadastroUsuarioDto.getSetores() : new ArrayList<>());
+            return usuarioClient.cadastrarUsuario(cadastroUsuarioDto);
         }
 
         throw new Exception("Email já cadastrado por outro usuário");
-
     }
 
     public UsuarioDto editarUsuario(UsuarioDto usuario, String token) throws Exception {
@@ -92,6 +90,12 @@ public class UsuarioPontoService {
         }
 
         throw new Exception("Não foi possível exlcuir usuário. Usuário não encontrado");
+    }
+
+    public List<UsuarioDto> filtrarPorNome(String nome) {
+        List<UsuarioDto> usuarioDtos = obterListaUsarios();
+
+        return usuarioDtos.stream().filter(usuarioDto -> usuarioDto.getNome().toLowerCase().contains(nome.toLowerCase())).collect(Collectors.toList());
     }
 
 }

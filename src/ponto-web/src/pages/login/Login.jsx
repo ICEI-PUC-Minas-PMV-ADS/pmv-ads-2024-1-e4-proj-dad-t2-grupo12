@@ -1,6 +1,6 @@
 import {FaUser, FaLock} from 'react-icons/fa';
 
-import {useState} from 'react'; /*manipular os dados adicionar estado a componentes funcionais. Ele retorna um par de valores: o valor atual do estado e uma função para atualizar esse valor */
+import {useState} from 'react';
 import "./Login.css"
 import {useNavigate} from "react-router-dom";
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {View, Text, StyleSheet, Pressable, Modal, Button, FlatList, TouchableOpacity} from 'react-native';
-import { getRegistrosPonto, saveRegistroPonto, updateRegistroPonto } from "../services/Api";
+import { getRegistrosPonto, saveRegistroPonto, editarRegistroPonto } from "../services/Api";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useNavigation} from "@react-navigation/native";
 
@@ -92,12 +92,13 @@ const RegistroPonto = () => {
             novoRegistro.fimExpediente = currentDateTimeString;
         }
 
+        console.log(novoRegistro)
         novoRegistro.isPositivo = null;
         novoRegistro.saldo = null;
         novoRegistro.usuarioId = '664bdc3adf17108bf6c8a689';
 
         try {
-            const updatedRegistro = await updateRegistroPonto(novoRegistro.id, novoRegistro);
+            const updatedRegistro = await editarRegistroPonto(novoRegistro.id, novoRegistro);
             setRegistro(updatedRegistro);
             setLastAddedRegistro(updatedRegistro);
 
@@ -187,7 +188,7 @@ const RegistroPonto = () => {
 
             <Pressable
                 style={styles.editButton}
-                onPress={() => navigation.navigate('SocilitarAlteracao')}
+                onPress={() => navigation.navigate('SolicitarAlteracao', { registro: registro })}
             >
                 <Icon name="edit" size={30} color="#fff" />
             </Pressable>

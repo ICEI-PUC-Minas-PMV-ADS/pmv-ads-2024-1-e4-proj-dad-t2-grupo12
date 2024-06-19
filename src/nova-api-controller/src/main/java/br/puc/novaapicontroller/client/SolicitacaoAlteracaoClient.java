@@ -25,7 +25,7 @@ import static br.puc.novaapicontroller.util.ClientUtil.*;
 @RequiredArgsConstructor
 public class SolicitacaoAlteracaoClient {
 
-    @Value("${altercao-ponto.url}")
+    @Value("${altercao-ponto-url}")
     private String url;
 
     private final OkHttpClient okHttpClient = new OkHttpClient();
