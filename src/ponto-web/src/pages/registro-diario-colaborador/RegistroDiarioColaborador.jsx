@@ -7,6 +7,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {editarEAprovarSolicitacao, editarRegistroPonto, obterSolicitacaoAlteracao} from "../../services/api.jsx";
 
+
+
 const RegistroDiarioColaborador = () => {
     const navigateTo = useNavigate();
     const location = useLocation();
@@ -35,6 +37,13 @@ const RegistroDiarioColaborador = () => {
     if (!colaborador) {
         return null;
     }
+
+    const formatTime = (dateTime) => {
+        if (!dateTime) return '';
+        const date = new Date(dateTime);
+        date.setHours(date.getHours() + 3);
+        return date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    };
 
     const renderizarTipoSolicitacao = (tipoSolicitacao) => {
         switch (tipoSolicitacao) {
@@ -69,6 +78,10 @@ const RegistroDiarioColaborador = () => {
                     </>
                 );
         }
+    };
+
+    const renderizarDataASerAlterada = (solicitacaoAlteracao) => {
+        return formatTime(solicitacaoAlteracao.novaData)
     };
 
     const handleSave = async () => {
@@ -149,7 +162,7 @@ const RegistroDiarioColaborador = () => {
                                     </div>
                                     <div className="saldo-item">
                                         <span className="saldo-label">Hora a ser modificada:</span>
-                                        <span className="saldo-valor">12:42</span>
+                                        <span className="saldo-valor">{solicitacaoAlteracao && renderizarDataASerAlterada(solicitacaoAlteracao)}</span>
                                     </div>
                                 </div>
                             </div>

@@ -14,14 +14,14 @@ const Stack = createStackNavigator();
 const AppNavigator = () => {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="Login">
+            <Stack.Navigator initialRouteName="RegistroPonto">
                 <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
                 <Stack.Screen name="PaginaInicial" component={PaginaInicial} options={{ headerShown: false }} />
                 <Stack.Screen name="RegistroPonto" component={RegistroPonto} options={{ title: 'Registro de Ponto' }} />
                 <Stack.Screen name="Profile" component={Profile} options={{ title: 'Perfil' }} />
                 <Stack.Screen name="TabelaPonto" component={TabelaPonto} options={{ title: 'Espelho de Ponto' }} />
                 <Stack.Screen name="Holerite" component={Holerite} options={{ title: 'Saldos e holerite' }} />
-                <Stack.Screen name="SocilitarAlteracao" component={SolicitarAlteracao} options={{ title: 'Solicitar alteração' }} />
+                <Stack.Screen name="SolicitarAlteracao" component={SolicitarAlteracao} options={{ title: 'Solicitar alteração' }} />
             </Stack.Navigator>
         </NavigationContainer>
     );
