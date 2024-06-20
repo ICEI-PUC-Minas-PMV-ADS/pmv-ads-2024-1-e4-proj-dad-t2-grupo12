@@ -54,25 +54,43 @@ namespace ponto_usuario.Models
             StatusUsuario = registerDto.StatusUsuario;
             Setores = registerDto.Setores;
 
-            DataNascimento = DateTime.Parse(registerDto.DataNascimento, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind);
-            DataCadastro = DateTime.Parse(registerDto.DataCadastro, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind);
+            DataNascimento = DateTime.Parse(registerDto.DataNascimento, CultureInfo.InvariantCulture,
+                DateTimeStyles.RoundtripKind);
+            DataCadastro = DateTime.Parse(registerDto.DataCadastro, CultureInfo.InvariantCulture,
+                DateTimeStyles.RoundtripKind);
 
             UsuarioAdmin = registerDto.UsuarioAdmin;
         }
+
+        public Usuario()
+        {
+        }
+
+        public Usuario(string id, string nome, string cpf, string email, string senhaCriptografada, List<Setor> setores,
+            string statusUsuario,
+            DateTime dataCadastro, DateTime dataNascimento, Endereco endereco, decimal salario, bool usuarioAdmin)
+        {
+            Id = id;
+            Nome = nome;
+            CPF = cpf;
+            Email = email;
+            SenhaCriptografada = senhaCriptografada;
+            Setores = setores;
+            StatusUsuario = statusUsuario;
+            DataCadastro = dataCadastro;
+            DataNascimento = dataNascimento;
+            Endereco = endereco;
+            Salario = salario;
+            UsuarioAdmin = usuarioAdmin;
+        }
     }
 
-    [BsonIgnoreExtraElements]
     public class Endereco
     {
         public string Rua { get; set; }
-
         public string Numero { get; set; }
-
         public string Cep { get; set; }
-
         public string Cidade { get; set; }
-
         public string Estado { get; set; }
-
     }
 }

@@ -56,6 +56,16 @@ public class PontoUsuarioController {
         }
     }
 
+    @PutMapping(value = "/admin/{idUsuarioColaborador}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> editarUsuarioAdmin(@RequestBody UsuarioDto usuario, HttpServletRequest requisicao, @PathVariable String idUsuarioColaborador) {
+        String token = requisicao.getHeader("Authorization");
+        try {
+            return ResponseEntity.ok(service.editarUsuarioAdmin(usuario, token, idUsuarioColaborador));
+        } catch (Exception ex) {
+            return ResponseEntity.status(500).body(ex.getMessage());
+        }
+    }
+
     @PutMapping(value = "/alterarSenha", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> alterarSenha(@RequestBody AlteracaoSenhaDto novaSenha, HttpServletRequest requisicao) {
         String token = requisicao.getHeader("Authorization");

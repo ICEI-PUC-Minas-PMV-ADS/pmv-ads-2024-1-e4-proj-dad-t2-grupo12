@@ -40,18 +40,18 @@ function calcularSaldoDiario(registro) {
 }
 
 function PainelCentral({ registros, colaborador }) {
+    const [currentPage, setCurrentPage] = useState(1);
+    const registrosFiltrados = registros.filter(registro => registro.temSolicitacaoAlteracao);
     const recordsPerPage = 7;
-    const totalPages = Math.ceil(registros.length / recordsPerPage);
-
-    const [currentPage, setCurrentPage] = useState(totalPages);
+    const totalPages = Math.ceil(registrosFiltrados.length / recordsPerPage);
 
     useEffect(() => {
-        setCurrentPage(totalPages);
-    }, [registros, totalPages]);
+        setCurrentPage(1);
+    }, [registrosFiltrados]);
 
     const indexOfLastRecord = currentPage * recordsPerPage;
     const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-    const currentRecords = registros.slice(indexOfFirstRecord, indexOfLastRecord);
+    const currentRecords = registrosFiltrados.slice(indexOfFirstRecord, indexOfLastRecord);
 
     const renderizarStatus = (registro) => {
         if (registro.temSolicitacaoAlteracao) {
@@ -76,7 +76,7 @@ function PainelCentral({ registros, colaborador }) {
     };
 
     const handleNextPage = () => {
-        if (indexOfLastRecord < registros.length) {
+        if (indexOfLastRecord < registrosFiltrados.length) {
             setCurrentPage(currentPage + 1);
         }
     };
@@ -113,7 +113,7 @@ function PainelCentral({ registros, colaborador }) {
             </Table>
             <div className="pagination">
                 <button onClick={handlePrevPage} disabled={currentPage === 1}>Anterior</button>
-                <button onClick={handleNextPage} disabled={indexOfLastRecord >= registros.length}>Próximo</button>
+                <button onClick={handleNextPage} disabled={indexOfLastRecord >= registrosFiltrados.length}>Próximo</button>
             </div>
         </div>
     );

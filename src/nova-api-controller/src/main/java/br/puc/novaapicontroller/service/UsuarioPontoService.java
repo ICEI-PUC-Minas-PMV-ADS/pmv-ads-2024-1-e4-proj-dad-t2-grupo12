@@ -72,6 +72,36 @@ public class UsuarioPontoService {
         throw new Exception("Não foi possível editar dados do usuário. Usuário não encontrado");
     }
 
+    public UsuarioDto editarUsuarioAdmin(UsuarioDto usuario, String token, String idUsuarioColaborador) throws Exception {
+        try {
+            JwtPayload usuarioAdminToken = JWTUtil.decodeJwt(token);
+
+            if (usuarioAdminToken != null) {
+                List<UsuarioDto> usuarioDtos = obterListaUsarios();
+
+                if (usuarioDtos != null) {
+                    UsuarioDto usuarioAdmin = usuarioDtos.stream().filter(usuarioDto -> usuarioDto.getId().equalsIgnoreCase(usuarioAdminToken.getNameid())).findFirst().orElse(null);
+
+                    if (usuarioAdmin != null && usuarioAdmin.isUsuarioAdmin()) {
+                        UsuarioDto usuarioColaborador = usuarioDtos.stream().filter(usuarioDto -> usuarioDto.getId().equalsIgnoreCase(idUsuarioColaborador)).findFirst().orElse(null);
+
+                        if (usuarioColaborador != null) {
+                            return usuarioClient.editarUsuario(usuarioColaborador.getId(), usuario, token);
+                        }
+                    } else {
+                        throw new Exception("Este usuário não é autorizado para fazer alterações em dados de outros colaboradores");
+                    }
+                } else {
+                    throw new Exception("Erro ao buscar listagem de usuarios");
+                }
+            }
+
+            throw new Exception("Não foi possível editar dados do usuário.");
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
     public AlteracaoSenhaRetorno alterarSenha(AlteracaoSenhaDto novaSenha, String token) throws Exception {
         JwtPayload usuarioId = JWTUtil.decodeJwt(token);
 

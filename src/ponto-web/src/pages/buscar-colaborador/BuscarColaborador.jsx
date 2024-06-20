@@ -1,7 +1,7 @@
 import './BuscarColaborador.css';
 import MenuLateral from "../../components/menu-lateral/MenuLateral.jsx";
 import Header from "../../components/header/Header.jsx";
-import BuscarInput from "../../components/buscar-input/BuscarInput.jsx"; // Ajuste o caminho se necessário
+import BuscarInput from "../../components/buscar-input/BuscarInput.jsx";
 
 const BuscarColaborador = () => {
     return (
