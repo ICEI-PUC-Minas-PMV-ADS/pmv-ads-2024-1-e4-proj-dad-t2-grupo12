@@ -14,7 +14,7 @@ const Stack = createStackNavigator();
 const AppNavigator = () => {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="RegistroPonto">
+            <Stack.Navigator initialRouteName="Login">
                 <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
                 <Stack.Screen name="PaginaInicial" component={PaginaInicial} options={{ headerShown: false }} />
                 <Stack.Screen name="RegistroPonto" component={RegistroPonto} options={{ title: 'Registro de Ponto' }} />

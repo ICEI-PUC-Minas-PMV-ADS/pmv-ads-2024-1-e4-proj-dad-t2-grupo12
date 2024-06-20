@@ -1,9 +1,41 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form, InputGroup, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { obterColaboradorPeloNome } from "../../services/api.jsx";
+import _ from "lodash";
 
-const BuscarInput = ({ searchTerm, setSearchTerm, colaboradores, obterPeloNome }) => {
+const BuscarInput = ({ onColaboradorSelect, redirect }) => {
+    const [colaboradores, setColaboradores] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
+
+    const obterPeloNome = async (term) => {
+        try {
+            const response = await obterColaboradorPeloNome(term);
+            setColaboradores(response);
+        } catch (error) {
+            console.error("Erro ao buscar colaborador pelo nome:", error);
+        }
+    };
+
+    const debouncedSearch = useCallback(_.debounce((term) => {
+        if (term) {
+            obterPeloNome(term);
+        } else {
+            setColaboradores([]);
+        }
+    }, 500), []);
+
+    useEffect(() => {
+        debouncedSearch(searchTerm);
+    }, [searchTerm, debouncedSearch]);
+
+    const handleSelect = (colaborador) => {
+        if (onColaboradorSelect) {
+            onColaboradorSelect(colaborador);
+        }
+    };
+
     return (
         <div>
             <InputGroup className="mb-3">
@@ -25,11 +57,26 @@ const BuscarInput = ({ searchTerm, setSearchTerm, colaboradores, obterPeloNome }
             </InputGroup>
             <ListGroup className="autocomplete-list">
                 {colaboradores.map((colaborador) => (
-                    <Link key={colaborador.id} to={`/painel-colaborador/${colaborador.id}`} state={{ colaborador }}>
-                        <ListGroupItem className="autocomplete-item">
+                    redirect ? (
+                        <Link
+                            key={colaborador.id}
+                            to={`/painel-colaborador/${colaborador.id}`}
+                            state={{ colaborador }}
+                            onClick={() => handleSelect(colaborador)}
+                        >
+                            <ListGroupItem className="autocomplete-item">
+                                {colaborador.nome}
+                            </ListGroupItem>
+                        </Link>
+                    ) : (
+                        <ListGroupItem
+                            key={colaborador.id}
+                            className="autocomplete-item"
+                            onClick={() => handleSelect(colaborador)}
+                        >
                             {colaborador.nome}
                         </ListGroupItem>
-                    </Link>
+                    )
                 ))}
             </ListGroup>
         </div>
@@ -37,10 +84,12 @@ const BuscarInput = ({ searchTerm, setSearchTerm, colaboradores, obterPeloNome }
 };
 
 BuscarInput.propTypes = {
-    searchTerm: PropTypes.string.isRequired,
-    setSearchTerm: PropTypes.func.isRequired,
-    colaboradores: PropTypes.array.isRequired,
-    obterPeloNome: PropTypes.func.isRequired,
+    onColaboradorSelect: PropTypes.func,
+    redirect: PropTypes.bool,
+};
+
+BuscarInput.defaultProps = {
+    redirect: false,
 };
 
 export default BuscarInput;
