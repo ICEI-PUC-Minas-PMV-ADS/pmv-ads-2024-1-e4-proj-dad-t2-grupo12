@@ -2,7 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Pressable, ScrollView } from 'react-native';
 import { getRegistrosPonto } from "../services/Api";
 import { addDays, subDays, format, startOfWeek, endOfWeek } from 'date-fns';
-import { ptBR } from 'date-fns/locale';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const getUserData = async () => {
+    try {
+        const token = await AsyncStorage.getItem('userToken');
+        const userInfo = await AsyncStorage.getItem('userInfo');
+        return { token, userInfo: JSON.parse(userInfo) };
+    } catch (error) {
+        console.error('Erro ao obter dados do usuário:', error);
+        return null;
+    }
+};
 
 const TabelaPontosSemanais = ({ startDate }) => {
     const [dados, setDados] = useState([]);
@@ -13,14 +24,17 @@ const TabelaPontosSemanais = ({ startDate }) => {
 
     const fetchData = async (startDate) => {
         try {
-            const response = await getRegistrosPonto(startDate);
-            const startOfWeekDate = startOfWeek(startDate);
-            const endOfWeekDate = endOfWeek(startDate);
-            const filteredData = response.filter(registro =>
-                new Date(registro.dataRegistro) >= startOfWeekDate &&
-                new Date(registro.dataRegistro) <= endOfWeekDate
-            );
-            setDados(filteredData);
+            const userData = await getUserData();
+            if (userData) {
+                const response = await getRegistrosPonto(userData.userInfo.id);
+                const startOfWeekDate = startOfWeek(startDate);
+                const endOfWeekDate = endOfWeek(startDate);
+                const filteredData = response.filter(registro =>
+                    new Date(registro.dataRegistro) >= startOfWeekDate &&
+                    new Date(registro.dataRegistro) <= endOfWeekDate
+                );
+                setDados(filteredData);
+            }
         } catch (error) {
             console.error('Erro ao buscar dados da API:', error);
         }

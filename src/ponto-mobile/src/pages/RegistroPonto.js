@@ -3,6 +3,18 @@ import {View, Text, StyleSheet, Pressable, Modal, Button, FlatList, TouchableOpa
 import { getRegistrosPonto, saveRegistroPonto, editarRegistroPonto } from "../services/Api";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useNavigation} from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const getUserData = async () => {
+    try {
+        const token = await AsyncStorage.getItem('userToken');
+        const userInfo = await AsyncStorage.getItem('userInfo');
+        return { token, userInfo: JSON.parse(userInfo) };
+    } catch (error) {
+        console.error('Erro ao obter dados do usuário:', error);
+        return null;
+    }
+};
 
 const RegistroPonto = () => {
     const [registro, setRegistro] = useState(null);
@@ -17,33 +29,36 @@ const RegistroPonto = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                let data = await getRegistrosPonto(selectedDate);
+                const userData = await getUserData();
+                if (userData) {
+                    let data = await getRegistrosPonto(userData.userInfo.id);
 
-                const selectedDateString = selectedDate.toISOString().slice(0, 10);
-                let registroSelecionado = data.find(registro => {
-                    const registroDateString = new Date(registro.dataRegistro).toISOString().slice(0, 10);
-                    return registroDateString === selectedDateString;
-                });
+                    const selectedDateString = selectedDate.toISOString().slice(0, 10);
+                    let registroSelecionado = data.find(registro => {
+                        const registroDateString = new Date(registro.dataRegistro).toISOString().slice(0, 10);
+                        return registroDateString === selectedDateString;
+                    });
 
-                if (!registroSelecionado) {
-                    const novoHorario = {
-                        dataRegistro: selectedDate.toISOString(),
-                        inicioExpediente: null,
-                        inicioIntervalo: null,
-                        fimIntervalo: null,
-                        fimExpediente: null,
-                        saldo: 0,
-                        usuarioId: '664bdc3adf17108bf6c8a689'
-                    };
-                    registroSelecionado = await saveRegistroPonto(novoHorario);
+                    if (!registroSelecionado) {
+                        const novoHorario = {
+                            dataRegistro: selectedDate.toISOString(),
+                            inicioExpediente: null,
+                            inicioIntervalo: null,
+                            fimIntervalo: null,
+                            fimExpediente: null,
+                            saldo: 0,
+                            usuarioId: userData.userInfo.id
+                        };
+                        registroSelecionado = await saveRegistroPonto(novoHorario);
+                    }
+
+                    let saldoPrefixo = registroSelecionado && registroSelecionado.isPositivo ? '+' : '-';
+
+                    setSaldoDiario(saldoPrefixo + registroSelecionado.saldo);
+
+                    setRegistro(registroSelecionado);
+                    setLastAddedRegistro(registroSelecionado);
                 }
-
-                let saldoPrefixo = registroSelecionado && registroSelecionado.isPositivo ? '+' : '-';
-
-                setSaldoDiario(saldoPrefixo + registroSelecionado.saldo);
-
-                setRegistro(registroSelecionado);
-                setLastAddedRegistro(registroSelecionado);
             } catch (error) {
                 console.error('Erro ao buscar dados da API:', error);
             }

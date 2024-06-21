@@ -1,27 +1,31 @@
 import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native'; // Adicionado View e StyleSheet
+import { View, StyleSheet } from 'react-native';
 import { Button, Input, Text } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-// import styles from '../style/MainStyle';
-import PaginaInicial from "./PaginaInicial";
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { login } from "../services/Api";
 
 const Login = () => {
     const navigation = useNavigation();
-    const [email, setEmail] = useState(null);
-    const [password, setPassword] = useState(null);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
-    const entrar = () => {
-        navigation.reset({
-            index:0,
-            routes: [{name:"PaginaInicial"}]
-        })
+    const entrar = async () => {
+        try {
+            const userData = await login(email, password);
+
+            if (userData.jwtToken != null) {
+                await AsyncStorage.setItem('userToken', userData.jwtToken);
+                await AsyncStorage.setItem('userInfo', JSON.stringify(userData));
+                navigation.navigate('PaginaInicial')
+            }
+
+        } catch (error) {
+            setErrorMessage('Erro ao fazer login. Verifique suas credenciais.');
+        }
     };
-    //
-    // const cadastrar = () => {
-    //     navigation.navigate("Cadastro")
-    // };
-
 
     return (
         <View style={[styles.container, styles.specificContainer]}>
@@ -38,6 +42,7 @@ const Login = () => {
                 onChangeText={value => setPassword(value)}
                 secureTextEntry={true}
             />
+            {errorMessage ? <Text style={styles.errorMessage}>{errorMessage}</Text> : null}
             <Button
                 icon={
                     <Icon
@@ -48,60 +53,31 @@ const Login = () => {
                 }
                 title=" Entrar"
                 buttonStyle={styles.button}
-                onPress={() =>entrar()}
+                onPress={entrar}
             />
-
-
-            {/*<Button*/}
-            {/*    icon={*/}
-            {/*        <Icon*/}
-            {/*            name="user"*/}
-            {/*            size={15}*/}
-            {/*            color="white"*/}
-            {/*        />*/}
-            {/*    }*/}
-            {/*    title=" Cadastrar"*/}
-            {/*    buttonStyle={styles.button}*/}
-            {/*    onPress={() => cadastrar()}*/}
-            {/*/>*/}
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     specificContainer: {
         backgroundColor: '#fff'
     },
-    button:{
+    button: {
         width: "100%",
         marginTop: 10
     },
-    container:{
+    container: {
         flex: 1,
-        backgroundColor:'#fff',
-        alignItems:'center',
-        justifyContent:'center',
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
-    maskedInput:{
-        flexGrow:1,
-        height:40,
-        fontSize:18,
-        borderBottomColor:"#999",
-        borderBottomWidth:1,
-        borderStyle:"solid",
-        alignSelf:"flex-start"
-    },
-    containerMask:{
-        flexDirection:"row",
-        marginBottom:5,
-        marginLeft:10,
-        marginRight:10
-    },
-    errorMessage:{
-        alignSelf:"flex-start",
+    errorMessage: {
+        alignSelf: "flex-start",
         marginLeft: 10,
-        color:"#f00",
-        fontSize:12,
+        color: "#f00",
+        fontSize: 12,
     }
 });
 

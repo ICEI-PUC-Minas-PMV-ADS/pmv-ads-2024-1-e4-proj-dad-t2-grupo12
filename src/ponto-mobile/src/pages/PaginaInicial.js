@@ -1,13 +1,37 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const getUserData = async () => {
+    try {
+        const token = await AsyncStorage.getItem('userToken');
+        const userInfo = await AsyncStorage.getItem('userInfo');
+        return { token, userInfo: JSON.parse(userInfo) };
+    } catch (error) {
+        console.error('Erro ao obter dados do usuário:', error);
+        return null;
+    }
+};
 
 const PaginaInicial = () => {
     const [currentDate, setCurrentDate] = useState('');
     const [currentTime, setCurrentTime] = useState('');
     const navigation = useNavigation();
+    const [nome, setNome] = useState('');
+
 
     useEffect(() => {
+
+        const fetchUserData = async () => {
+            const data = await getUserData();
+            if (data && data.userInfo && data.userInfo.nome) {
+                setNome(data.userInfo.nome);
+            }
+        };
+
+        fetchUserData();
+
         const date = new Date().toLocaleDateString('pt-BR', {
             timeZone: 'America/Sao_Paulo',
         });
@@ -23,8 +47,6 @@ const PaginaInicial = () => {
         return () => clearInterval(interval);
     }, []);
 
-    const userName = 'Leonardo';
-
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -34,7 +56,7 @@ const PaginaInicial = () => {
                         style={styles.headerImage}
                     />
                 </TouchableOpacity>
-                <Text style={styles.welcome}>Bem vindo, {userName}</Text>
+                <Text style={styles.welcome}>Bem vindo, {nome}</Text>
             </View>
             <View style={styles.body}>
                 <View style={styles.dateTimeContainer}>

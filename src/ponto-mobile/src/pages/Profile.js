@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Image, Button, Dimensions, TextInput, TouchableOpacity } from 'react-native';
 import Modal from 'react-native-modal';
 import { obterUsuario, editarSenha } from "../services/Api";
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { width, height } = Dimensions.get('window');
 
@@ -25,19 +25,23 @@ const Profile = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        let dados = await obterUsuario();
-        setDadosUsuario(dados.email);
-        setNomeUsuario(dados.nome);
-        setCpfUsuario(dados.cpf);
-        setSetorNomeUsuario(dados.setores[0].nome);
-        setSetorCategoriaUsuario(dados.setores[0].categoria);
-        setDataNascimentoUsuario(dados.dataNascimento);
-        setEnderecoUsuarioRua(dados.endereco.rua);
-        setEnderecoUsuarioNumero(dados.endereco.numero);
-        setEnderecoUsuarioCep(dados.endereco.cep);
-        setEnderecoUsuarioCidade(dados.endereco.cidade);
-        setEnderecoUsuarioEstado(dados.endereco.estado);
-
+        const { token } = await getUserData();
+        if (token) {
+          const dados = await obterUsuario(token);
+          setDadosUsuario(dados.email);
+          setNomeUsuario(dados.nome);
+          setCpfUsuario(dados.cpf);
+          setSetorNomeUsuario(dados.setores[0].nome);
+          setSetorCategoriaUsuario(dados.setores[0].categoria);
+          setDataNascimentoUsuario(dados.dataNascimento);
+          setEnderecoUsuarioRua(dados.endereco.rua);
+          setEnderecoUsuarioNumero(dados.endereco.numero);
+          setEnderecoUsuarioCep(dados.endereco.cep);
+          setEnderecoUsuarioCidade(dados.endereco.cidade);
+          setEnderecoUsuarioEstado(dados.endereco.estado);
+        } else {
+          console.error('Token não encontrado');
+        }
       } catch (error) {
         console.error('Erro ao buscar dados da API:', error);
       }
@@ -52,73 +56,77 @@ const Profile = () => {
 
   const handleTrocarSenha = async () => {
     if (novaSenha === confirmarSenha) {
-      const request = {
-        novaSenha: novaSenha
+      try {
+        const { token } = await getUserData();
+        const request = {
+          senha: novaSenha
+        }
+        await editarSenha(request, token);
+        alert('Senha alterada com sucesso!');
+        toggleModal();
+      } catch (error) {
+        console.error('Erro ao trocar a senha:', error);
+        alert('Erro ao trocar a senha');
       }
-      senhaResposta = await editarSenha(request);
-      console.log(senhaResposta)
-      // Lógica para trocar a senha do usuário
-      alert('Senha alterada com sucesso!');
-      toggleModal();
     } else {
       alert('As senhas não coincidem!');
     }
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>Settings</Text>
-        <Text style={styles.headerText}>Profile</Text>
-        <Text style={styles.headerText}>Logout</Text>
-      </View>
-      <Image
-        source={{ uri: '' }}
-        style={styles.profileImage}
-      />
-      <Text style={styles.name}>{nomeUsuario}</Text>
-      <Text style={styles.department}>{setorNomeUsuario}, {setorCategoriaUsuario}</Text>
-      <View style={styles.userInfo}>
-        <Text style={styles.label}>Email: {dadosUsuario}</Text>
-        <Text style={styles.label}>CPF: {cpfUsuario}</Text>
-        <Text style={styles.label}>Data de Nascimento: {dataNascimentoUsuario}</Text>
-        <Text style={styles.label}>Endereço: {enderecoUsuarioRua}, {enderecoUsuarioNumero}, {enderecoUsuarioCep}, {enderecoUsuarioCidade}, {enderecoUsuarioEstado}</Text>
-      </View>
-      <View style={styles.buttonContainer}>
-        <Button
-          title="Trocar Senha"
-          onPress={toggleModal}
-          color="#0B1ABB"
-        />
-      </View>
-      <Modal isVisible={isModalVisible}>
-        <View style={styles.modalContent}>
-          <Text style={styles.modalTitle}>Trocar Senha</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Nova Senha"
-            secureTextEntry
-            value={novaSenha}
-            onChangeText={setNovaSenha}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Confirmar Nova Senha"
-            secureTextEntry
-            value={confirmarSenha}
-            onChangeText={setConfirmarSenha}
-          />
-          <View style={styles.modalButtons}>
-            <TouchableOpacity style={styles.button} onPress={handleTrocarSenha}>
-              <Text style={styles.buttonText}>Salvar</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={toggleModal}>
-              <Text style={styles.buttonText}>Cancelar</Text>
-            </TouchableOpacity>
-          </View>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Text style={styles.headerText}>Settings</Text>
+          <Text style={styles.headerText}>Profile</Text>
+          <Text style={styles.headerText}>Logout</Text>
         </View>
-      </Modal>
-    </View>
+        <Image
+            source={{ uri: '' }}
+            style={styles.profileImage}
+        />
+        <Text style={styles.name}>{nomeUsuario}</Text>
+        <Text style={styles.department}>{setorNomeUsuario}, {setorCategoriaUsuario}</Text>
+        <View style={styles.userInfo}>
+          <Text style={styles.label}>Email: {dadosUsuario}</Text>
+          <Text style={styles.label}>CPF: {cpfUsuario}</Text>
+          <Text style={styles.label}>Data de Nascimento: {dataNascimentoUsuario}</Text>
+          <Text style={styles.label}>Endereço: {enderecoUsuarioRua}, {enderecoUsuarioNumero}, {enderecoUsuarioCep}, {enderecoUsuarioCidade}, {enderecoUsuarioEstado}</Text>
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button
+              title="Trocar Senha"
+              onPress={toggleModal}
+              color="#0B1ABB"
+          />
+        </View>
+        <Modal isVisible={isModalVisible}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Trocar Senha</Text>
+            <TextInput
+                style={styles.input}
+                placeholder="Nova Senha"
+                secureTextEntry
+                value={novaSenha}
+                onChangeText={setNovaSenha}
+            />
+            <TextInput
+                style={styles.input}
+                placeholder="Confirmar Nova Senha"
+                secureTextEntry
+                value={confirmarSenha}
+                onChangeText={setConfirmarSenha}
+            />
+            <View style={styles.modalButtons}>
+              <TouchableOpacity style={styles.button} onPress={handleTrocarSenha}>
+                <Text style={styles.buttonText}>Salvar</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.button} onPress={toggleModal}>
+                <Text style={styles.buttonText}>Cancelar</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+      </View>
   );
 }
 
@@ -205,3 +213,14 @@ const styles = StyleSheet.create({
 });
 
 export default Profile;
+
+const getUserData = async () => {
+  try {
+    const token = await AsyncStorage.getItem('userToken');
+    const userInfo = await AsyncStorage.getItem('userInfo');
+    return { token, userInfo: JSON.parse(userInfo) };
+  } catch (error) {
+    console.error('Erro ao obter dados do usuário:', error);
+    return null;
+  }
+};

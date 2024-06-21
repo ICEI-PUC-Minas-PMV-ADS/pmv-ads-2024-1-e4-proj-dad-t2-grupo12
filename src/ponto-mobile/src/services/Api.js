@@ -5,9 +5,9 @@ const Api = axios.create({
     // baseURL: "http://localhost:8080"
 })
 
-export const getRegistrosPonto = async () => {
+export const getRegistrosPonto = async (userId) => {
     try {
-        const response = await Api.get('/v1/public/registroponto/listar');
+        const response = await Api.get('/v1/public/registroponto/usuario/' + userId);
         return response.data;
     } catch (error) {
         console.error('Erro ao buscar dados da API:', error);
@@ -25,11 +25,11 @@ export const editarRegistroPonto = async (id, registro) => {
     return response.data;
 }
 
-export const editarSenha = async (senha) => {
+export const editarSenha = async (senha, token) => {
     try {
         const response = await Api.put('/v1/public/usuario/alterarSenha', senha, {
             headers: {
-                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI2NjVjZTJiNjE5MjE2MjMyZjMxZDY2NDQiLCJuYmYiOjE3MTczNjM1NzksImV4cCI6MTcxODU3MzE3OSwiaWF0IjoxNzE3MzYzNTc5fQ.gxp8ZZTlMcKm2nXbd8obPMtJU-CM5Wl4E7UhlgODDCQ'
+                'Authorization': 'Bearer ' + token
             }
         });
         return response.data;
@@ -39,11 +39,11 @@ export const editarSenha = async (senha) => {
     }
 };
 
-export const obterUsuario = async () => {
+export const obterUsuario = async (token) => {
     try {
         const response = await Api.get('/v1/public/usuario/', {
             headers: {
-                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI2NjVjZTJiNjE5MjE2MjMyZjMxZDY2NDQiLCJuYmYiOjE3MTczNjM1NzksImV4cCI6MTcxODU3MzE3OSwiaWF0IjoxNzE3MzYzNTc5fQ.gxp8ZZTlMcKm2nXbd8obPMtJU-CM5Wl4E7UhlgODDCQ'
+                'Authorization': 'Bearer ' + token
             }
         });
         return response.data;
@@ -62,5 +62,12 @@ export const registrarSolicitacaoAlteracao = async (solicitacao) => {
         throw error;
     }
 };
+
+
+export const login = async (email, password) => {
+    const response = await Api.post('/v1/public/login/', { email, password });
+    return response.data;
+};
+
 
 export default Api;

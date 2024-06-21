@@ -76,7 +76,13 @@ export const obterColaboradorPeloNome = async (nome) => {
 
 export const editarDadosColaborador = async (idRegistro, registroBory) => {
     try {
-        const response = await api.put('/v1/public/usuario/admin/' + idRegistro, registroBory);
+        const token = localStorage.getItem('token');
+        const response = await api.put('/v1/public/usuario/admin/' + idRegistro, registroBory, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        });
+
         return response.data;
     } catch (error) {
         console.error('Erro ao buscar dados da API:', error);

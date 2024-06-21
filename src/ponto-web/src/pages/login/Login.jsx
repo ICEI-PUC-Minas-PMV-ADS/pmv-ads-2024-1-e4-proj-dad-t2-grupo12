@@ -30,10 +30,8 @@ const Login = () => {
             const dadosLogin = { email: username, senha: password };
             const responseData = await logar(dadosLogin);
 
-            // Armazenar os dados de resposta no local storage
             localStorage.setItem('user', JSON.stringify(responseData));
 
-            // Navegar para a página inicial
             navigateTo('/inicio');
         } catch (error) {
             console.error('Erro ao realizar login', error);
