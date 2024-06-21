@@ -15,13 +15,9 @@ public class LoginBasic {
 
     private String email;
 
-    private EnderecoDto endereco;
+    private String nome;
 
     private List<SetorDto> setores;
-
-    private String dataNacimento;
-
-    private String salario;
 
     private String jwtToken;
 

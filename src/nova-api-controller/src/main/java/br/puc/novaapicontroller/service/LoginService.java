@@ -30,11 +30,9 @@ public class LoginService {
 
             if (response != null) {
                 loginSiteResponse.setEmail(response.getEmail());
-                loginSiteResponse.setSalario(response.getSalario());
-                loginSiteResponse.setEndereco(response.getEndereco());
+                loginSiteResponse.setNome(response.getNome());
                 loginSiteResponse.setJwtToken(response.getJwtToken());
                 loginSiteResponse.setSetores(response.getSetores());
-                loginSiteResponse.setDataNacimento(response.getDataNacimento());
                 loginSiteResponse.setMensagem("Login realizado com sucesso");
 
                 int matricula = CriptografiaUtil.gerarHashPeloObjeto(response.getId(), response.getEmail());
