@@ -1,24 +1,45 @@
-import {FaUser, FaLock} from 'react-icons/fa';
+import { FaUser, FaLock } from 'react-icons/fa';
+import { useState } from 'react';
+import "./Login.css";
+import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
-import {useState} from 'react';
-import "./Login.css"
-import {useNavigate} from "react-router-dom";
+const api = axios.create({
+    baseURL: "https://nova-api-controller.onrender.com"
+});
 
+const logar = async (dadosLogin) => {
+    try {
+        const response = await api.post('/v1/public/login/admin', dadosLogin);
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao logar', error);
+        throw error;
+    }
+};
 
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const navigateTo = useNavigate();
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
-        alert("Envaindo os dados" + username);
+        try {
+            const dadosLogin = { email: username, senha: password };
+            const responseData = await logar(dadosLogin);
 
-        console.log(username, password);
-        console.log("Envio");
-    }
+            // Armazenar os dados de resposta no local storage
+            localStorage.setItem('user', JSON.stringify(responseData));
 
-    const navigateTo = useNavigate()
+            // Navegar para a página inicial
+            navigateTo('/inicio');
+        } catch (error) {
+            console.error('Erro ao realizar login', error);
+            alert('Erro ao realizar login. Verifique suas credenciais.');
+        }
+    };
 
     return (
         <div className="app-login">
@@ -27,30 +48,30 @@ const Login = () => {
                     <h1>Acesso ao sistema</h1>
                     <div className='input-field'>
                         <input type="email" placeholder='E-mail' required
-                               onChange={(e) => setUsername(e.target.value)}/>
-                        <FaUser className='icon'/>
+                               onChange={(e) => setUsername(e.target.value)} />
+                        <FaUser className='icon' />
                     </div>
                     <div className='input-field'>
-                        <input type="password" placeholder='Senha' onChange={(e) => setPassword(e.target.value)}/>
-                        <FaLock className='icon'/>
+                        <input type="password" placeholder='Senha' required
+                               onChange={(e) => setPassword(e.target.value)} />
+                        <FaLock className='icon' />
                     </div>
 
                     <div className='recall-forget'>
                         <a href='#'>Recuperar senha</a>
                     </div>
 
-                    <button onClick={() => navigateTo(`/inicio`)}> Entrar</button>
+                    <button type="submit">Entrar</button>
 
                     <div className='signup-link'>
                         <p className="cadastro">
                             Cadastrar novo usuário.<a href='#'>Criar conta</a>
                         </p>
                     </div>
-
                 </form>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Login
+export default Login;
