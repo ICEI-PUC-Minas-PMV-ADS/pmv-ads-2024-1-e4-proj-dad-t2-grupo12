@@ -100,6 +100,7 @@ namespace ponto_usuario.Controllers
 
             return Ok(new
             {
+                id = usuarioDb.Id,
                 nome = usuarioDb.Nome,
                 email = usuarioDb.Email,
                 setores = usuarioDb.Setores,

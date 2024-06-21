@@ -29,6 +29,7 @@ public class LoginService {
             LoginResponse response = loginClient.logar(request);
 
             if (response != null) {
+                loginSiteResponse.setId(response.getId());
                 loginSiteResponse.setEmail(response.getEmail());
                 loginSiteResponse.setNome(response.getNome());
                 loginSiteResponse.setJwtToken(response.getJwtToken());

@@ -13,6 +13,8 @@ import java.util.List;
 @AllArgsConstructor
 public class LoginBasic {
 
+    private String id;
+
     private String email;
 
     private String nome;
