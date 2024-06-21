@@ -50,7 +50,7 @@ const PaginaInicial = () => {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                <TouchableOpacity onPress={() => navigation.navigate('Logout')}>
                     <Image
                         source={require('../../assets/image15.png')}
                         style={styles.headerImage}

@@ -4,6 +4,7 @@ import { Button, Input, Text } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Modal from 'react-native-modal';
 import { login } from "../services/Api";
 
 const Login = () => {
@@ -11,19 +12,24 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [isModalVisible, setModalVisible] = useState(false);
 
     const entrar = async () => {
         try {
             const userData = await login(email, password);
 
-            if (userData.jwtToken != null) {
+            if (userData.jwtToken) {
                 await AsyncStorage.setItem('userToken', userData.jwtToken);
                 await AsyncStorage.setItem('userInfo', JSON.stringify(userData));
-                navigation.navigate('PaginaInicial')
+                navigation.navigate('PaginaInicial');
+            } else {
+                setErrorMessage(userData.mensagem);
+                setModalVisible(true);
             }
 
         } catch (error) {
             setErrorMessage('Erro ao fazer login. Verifique suas credenciais.');
+            setModalVisible(true);
         }
     };
 
@@ -42,7 +48,6 @@ const Login = () => {
                 onChangeText={value => setPassword(value)}
                 secureTextEntry={true}
             />
-            {errorMessage ? <Text style={styles.errorMessage}>{errorMessage}</Text> : null}
             <Button
                 icon={
                     <Icon
@@ -55,6 +60,12 @@ const Login = () => {
                 buttonStyle={styles.button}
                 onPress={entrar}
             />
+            <Modal isVisible={isModalVisible}>
+                <View style={styles.modalContent}>
+                    <Text style={styles.modalText}>{errorMessage}</Text>
+                    <Button title="Fechar" onPress={() => setModalVisible(false)} />
+                </View>
+            </Modal>
         </View>
     );
 };
@@ -78,7 +89,19 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         color: "#f00",
         fontSize: 12,
-    }
+    },
+    modalContent: {
+        backgroundColor: 'white',
+        padding: 22,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 4,
+        borderColor: 'rgba(0, 0, 0, 0.1)',
+    },
+    modalText: {
+        fontSize: 18,
+        marginBottom: 10,
+    },
 });
 
 export default Login;
