@@ -55,12 +55,12 @@ const PainelPontosColaborador = () => {
                         <div className="name-top-table">
                             <div className="setor-name">
                                 <span>Setor:</span>
-                                <span>{colaborador.setores[0].nome}</span>
+                                <span>{colaborador.setores != null ? colaborador.setores[0].nome : 'Sem setor vinculado'}</span>
                             </div>
                             <div className="vertical-line"></div>
                             <div className="employee-name">
                                 <span>{(colaborador.nome).toUpperCase()}</span>
-                                <span>{colaborador.setores[0].categoria}</span>
+                                <span>{colaborador.setores != null ? colaborador.setores[0].categoria : ''}</span>
                             </div>
                         </div>
                     </div>
