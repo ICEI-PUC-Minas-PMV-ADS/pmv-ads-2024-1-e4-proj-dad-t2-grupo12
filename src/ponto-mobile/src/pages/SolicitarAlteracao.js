@@ -296,7 +296,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
     },
     inputError: {
-        borderColor: 'red', // Cor da borda vermelha quando há erro no motivo
+        borderColor: 'red',
     },
     errorMessage: {
         color: 'red',

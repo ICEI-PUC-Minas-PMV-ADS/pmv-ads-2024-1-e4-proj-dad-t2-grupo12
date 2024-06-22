@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const Api = axios.create({
     baseURL: "https://nova-api-controller.onrender.com",
-    // baseURL: "http://localhost:8080"
 })
 
 export const getRegistrosPonto = async (userId) => {

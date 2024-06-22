@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './Perfil.css';
-import fotousuario from '../../assets/exemplo.jpeg'; // Verifique se o caminho está correto
+import fotousuario from '../../assets/exemplo.jpeg';
 import axios from 'axios';
-import BuscarInput from "../../components/buscar-input/BuscarInput.jsx"; // Ajuste o caminho se necessário
+import BuscarInput from "../../components/buscar-input/BuscarInput.jsx";
 
 const Perfil = () => {
   const [dadosUsuario, setDadosUsuario] = useState({});
@@ -21,7 +21,7 @@ const Perfil = () => {
   const handleTrocarSenha = async () => {
     if (novaSenha === confirmarSenha) {
       try {
-        const response = await axios.post('/api/editar-senha', { novaSenha }); // Atualize para a URL correta da sua API
+        const response = await axios.post('/api/editar-senha', { novaSenha });
         console.log(response.data);
         alert('Senha alterada com sucesso!');
         toggleModal();

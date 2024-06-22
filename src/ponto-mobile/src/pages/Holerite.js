@@ -42,7 +42,7 @@ const calculateTimeDifference = (start, end) => {
     const [endHour, endMinute] = end.split(':').map(Number);
     const startDate = new Date(0, 0, 0, startHour, startMinute, 0);
     const endDate = new Date(0, 0, 0, endHour, endMinute, 0);
-    const diff = (endDate - startDate) / 60000; // diferença em minutos
+    const diff = (endDate - startDate) / 60000;
 
     const hours = Math.floor(diff / 60);
     const minutes = diff % 60;
@@ -74,12 +74,12 @@ const getDailyBalance = (start, end, normalHours = 9) => {
     };
 };
 
-const hourlyRate = 20.0; // Exemplo de valor da hora extra do colaborador (R$ 20,00 por hora extra)
+const hourlyRate = 20.0;
 
 const TimeSheetTable = ({ startDate, workHours }) => {
     const daysOfWeek = Array.from({ length: 7 }, (_, index) => {
         const currentDate = addDays(startDate, index);
-        return format(currentDate, 'EEE', { locale: ptBR }); // Obtém o dia da semana abreviado
+        return format(currentDate, 'EEE', { locale: ptBR });
     });
 
     const dates = Array.from({ length: 7 }, (_, index) => {
@@ -205,17 +205,16 @@ const getMonthlyDeficitHoursValue = (startDate, endDate, workHours) => {
 
         if (balanceHours < 0 || balanceMins < 0) {
             const deficitMinutes = Math.abs(balanceHours * 60 + balanceMins);
-            totalDeficitHoursValue += (deficitMinutes / 60) * hourlyRate; // Converta os minutos em horas e multiplique pela taxa horária
+            totalDeficitHoursValue += (deficitMinutes / 60) * hourlyRate;
         }
     }
 
-    return totalDeficitHoursValue.toFixed(2); // Formata para duas casas decimais
+    return totalDeficitHoursValue.toFixed(2);
 };
 
 const Holerite = () => {
     const [startDate, setStartDate] = useState(new Date());
 
-    // Salário mensal do colaborador (exemplo: R$ 3000,00)
     const monthlySalary = 3000.0;
 
     const handlePrevious = () => {

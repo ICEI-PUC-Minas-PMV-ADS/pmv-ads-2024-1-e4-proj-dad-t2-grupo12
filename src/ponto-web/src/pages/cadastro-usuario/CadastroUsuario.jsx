@@ -2,12 +2,10 @@ import './CadastroUsuario.css';
 import { useState, useEffect } from 'react';
 import MenuLateral from "../../components/menu-lateral/MenuLateral.jsx";
 import Header from "../../components/header/Header.jsx";
-import { useNavigate } from "react-router-dom";
 import { cadastrarColaborador, obterSetores } from "../../services/Api.jsx";
 import GenericModal from "../../components/generic-modal/GenericModal.jsx";
 
 const CadastroUsuario = () => {
-    const navigateTo = useNavigate();
     const [showModal, setShowModal] = useState(false);
     const handleShowModal = () => setShowModal(true);
     const handleCloseModal = () => setShowModal(false);
@@ -20,7 +18,7 @@ const CadastroUsuario = () => {
         confirmarSenha: '',
         setor: '',
         status: 'ativo',
-        dataNascimento: '', // Novo campo adicionado
+        dataNascimento: '',
         endereco: {
             logradouro: '',
             numero: '',
@@ -78,7 +76,7 @@ const CadastroUsuario = () => {
                 confirmacaoSenha: formData.confirmarSenha,
                 statusUsuario: formData.status,
                 setores: [JSON.parse(formData.setor)],
-                dataNascimento: formData.dataNascimento, // Incluído no objeto DTO
+                dataNascimento: formData.dataNascimento,
                 endereco: {
                     rua: formData.endereco.logradouro,
                     numero: formData.endereco.numero,

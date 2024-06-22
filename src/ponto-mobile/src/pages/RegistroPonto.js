@@ -346,7 +346,7 @@ const styles = StyleSheet.create({
     editButton: {
         position: 'absolute',
         bottom: 30,
-        left: 30,  // Position the edit button to the left
+        left: 30,
         backgroundColor: '#FFD700',
         width: 60,
         height: 60,
