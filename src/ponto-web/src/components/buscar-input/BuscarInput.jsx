@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form, InputGroup, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { obterColaboradorPeloNome } from "../../services/api.jsx";
+import { obterColaboradorPeloNome } from "../../services/Api.jsx";
 import _ from "lodash";
 
 const BuscarInput = ({ onColaboradorSelect, redirect }) => {

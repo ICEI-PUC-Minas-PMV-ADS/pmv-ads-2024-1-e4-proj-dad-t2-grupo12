@@ -3,6 +3,7 @@ import { useState } from 'react';
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import GenericModal from '../../components/generic-modal/GenericModal.jsx';
 
 const api = axios.create({
     baseURL: "https://nova-api-controller.onrender.com"
@@ -21,21 +22,30 @@ const logar = async (dadosLogin) => {
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [showErrorModal, setShowErrorModal] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
     const navigateTo = useNavigate();
+
+    const handleCloseErrorModal = () => setShowErrorModal(false);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         try {
-            const dadosLogin = { email: username, senha: password };
+            const dadosLogin = { email: username, password: password };
             const responseData = await logar(dadosLogin);
 
-            localStorage.setItem('user', JSON.stringify(responseData));
-
-            navigateTo('/inicio');
+            if (responseData.jwtToken != null) {
+                localStorage.setItem('user', JSON.stringify(responseData));
+                navigateTo('/inicio');
+            } else {
+                setErrorMessage(responseData.mensagem);
+                setShowErrorModal(true);
+            }
         } catch (error) {
             console.error('Erro ao realizar login', error);
-            alert('Erro ao realizar login. Verifique suas credenciais.');
+            setErrorMessage('Erro ao realizar login. Verifique suas credenciais.');
+            setShowErrorModal(true);
         }
     };
 
@@ -55,10 +65,6 @@ const Login = () => {
                         <FaLock className='icon' />
                     </div>
 
-                    <div className='recall-forget'>
-                        <a href='#'>Recuperar senha</a>
-                    </div>
-
                     <button type="submit">Entrar</button>
 
                     <div className='signup-link'>
@@ -68,6 +74,13 @@ const Login = () => {
                     </div>
                 </form>
             </div>
+            <GenericModal
+                show={showErrorModal}
+                handleClose={handleCloseErrorModal}
+                title="Erro ao realizar login"
+                message={errorMessage}
+                closeText="Fechar"
+            />
         </div>
     );
 };

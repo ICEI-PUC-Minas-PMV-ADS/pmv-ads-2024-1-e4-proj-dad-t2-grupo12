@@ -9,13 +9,20 @@
 }
 
 .usuario-logado {
-    font-size: 20px;
-    padding-right: 0px;
     display: flex;
     align-items: center;
+    margin-left: auto;
 }
 
-.imagem-perfil {
-    margin-right: 30px;
+.user-name {
+    font-size: 23px;
+    width: 200px;
+    margin-right: 10px;
 }
 
+.logout-icon {
+    margin-right: 20px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #4f5656;
+}

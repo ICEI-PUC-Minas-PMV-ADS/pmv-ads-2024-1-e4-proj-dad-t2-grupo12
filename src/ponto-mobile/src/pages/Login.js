@@ -16,17 +16,21 @@ const Login = () => {
 
     const entrar = async () => {
         try {
-            const userData = await login(email, password);
+            if (email || password) {
+                const userData = await login(email, password);
 
-            if (userData.jwtToken) {
-                await AsyncStorage.setItem('userToken', userData.jwtToken);
-                await AsyncStorage.setItem('userInfo', JSON.stringify(userData));
-                navigation.navigate('PaginaInicial');
+                if (userData.jwtToken) {
+                    await AsyncStorage.setItem('userToken', userData.jwtToken);
+                    await AsyncStorage.setItem('userInfo', JSON.stringify(userData));
+                    navigation.navigate('PaginaInicial');
+                } else {
+                    setErrorMessage(userData.mensagem);
+                    setModalVisible(true);
+                }
             } else {
-                setErrorMessage(userData.mensagem);
+                setErrorMessage("Insira um login e senha para continuar");
                 setModalVisible(true);
             }
-
         } catch (error) {
             setErrorMessage('Erro ao fazer login. Verifique suas credenciais.');
             setModalVisible(true);

@@ -2,8 +2,19 @@ import './BuscarColaborador.css';
 import MenuLateral from "../../components/menu-lateral/MenuLateral.jsx";
 import Header from "../../components/header/Header.jsx";
 import BuscarInput from "../../components/buscar-input/BuscarInput.jsx";
+import {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 const BuscarColaborador = () => {
+    const navigateTo = useNavigate();
+
+    useEffect(() => {
+        const user = localStorage.getItem('user');
+        if (!user) {
+            navigateTo('/');
+        }
+    }, [navigateTo]);
+
     return (
         <div className="app">
             <Header />

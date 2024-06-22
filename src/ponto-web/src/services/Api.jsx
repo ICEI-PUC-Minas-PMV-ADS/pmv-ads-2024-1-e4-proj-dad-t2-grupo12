@@ -89,3 +89,14 @@ export const editarDadosColaborador = async (idRegistro, registroBory) => {
         throw error;
     }
 };
+
+export const cadastrarColaborador = async (cadastroBory) => {
+    try {
+        const response = await api.post('/v1/public/usuario/', cadastroBory);
+
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao buscar dados da API:', error);
+        throw error;
+    }
+};

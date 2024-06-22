@@ -1,8 +1,20 @@
 import './CadastroUsuario.css';
 import MenuLateral from "../../components/menu-lateral/MenuLateral.jsx";
 import Header from "../../components/header/Header.jsx";
+import {useEffect} from "react";
+import {useNavigate} from "react-router-dom";
 
 const CadastroUsuario = () => {
+    const navigateTo = useNavigate();
+
+    useEffect(() => {
+        const user = localStorage.getItem('user');
+        if (!user) {
+            navigateTo('/');
+        }
+    }, [navigateTo]);
+
+
     return (
         <><Header></Header><MenuLateral></MenuLateral><div className="cadastro-usuario">
             <h1>Cadastro de Usuário</h1>

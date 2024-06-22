@@ -5,7 +5,7 @@ import Header from "../../components/header/Header.jsx";
 import StatusSelector from "../../components/status-selector/StatusSelector.jsx";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import {editarEAprovarSolicitacao, editarRegistroPonto, obterSolicitacaoAlteracao} from "../../services/api.jsx";
+import {editarEAprovarSolicitacao, editarRegistroPonto, obterSolicitacaoAlteracao} from "../../services/Api.jsx";
 
 
 
@@ -19,6 +19,11 @@ const RegistroDiarioColaborador = () => {
 
     useEffect(() => {
         const fetchData = async () => {
+            const user = localStorage.getItem('user');
+            if (!user || (registro == null || registro.id == null)) {
+                navigateTo('/');
+            }
+
             if (!colaborador || !registro) {
                 navigateTo('/buscar-colaborador');
             } else {

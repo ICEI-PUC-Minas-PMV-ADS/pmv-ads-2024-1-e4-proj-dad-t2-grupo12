@@ -1,7 +1,7 @@
 import './PainelPontosColaborador.css';
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getRegistrosPontoUsuario } from "../../services/api.jsx";
+import { getRegistrosPontoUsuario } from "../../services/Api.jsx";
 import MenuLateral from "../../components/menu-lateral/MenuLateral.jsx";
 import PainelCentral from "../../components/painel-central/PainelCentral.jsx";
 import Header from "../../components/header/Header.jsx";
@@ -13,6 +13,11 @@ const PainelPontosColaborador = () => {
     const colaborador = location.state?.colaborador;
 
     useEffect(() => {
+        const user = localStorage.getItem('user');
+        if (!user) {
+            navigate('/');
+        }
+
         if (!colaborador) {
             navigate("/buscar-colaborador");
         } else {
