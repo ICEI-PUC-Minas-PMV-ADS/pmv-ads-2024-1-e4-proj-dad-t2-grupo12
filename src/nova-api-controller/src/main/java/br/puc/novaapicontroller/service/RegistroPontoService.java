@@ -59,10 +59,10 @@ public class RegistroPontoService {
             pontoDto.setFimIntervalo(pontoDto.getFimIntervalo() != null ? DateUtil.formatarDataISO(pontoDto.getFimIntervalo()) : null);
             pontoDto.setFimExpediente(pontoDto.getFimExpediente() != null ? DateUtil.formatarDataISO(pontoDto.getFimExpediente()) : null);
 
-            LocalDateTime inicioExpediente = pontoDto.getInicioExpediente() != null ? stringToLocalDteTime(pontoDto.getInicioExpediente(), "yyyy-MM-dd'T'HH:mm:ss.SSS") : null;
-            LocalDateTime inicioIntervalo = pontoDto.getInicioIntervalo() != null ? stringToLocalDteTime(pontoDto.getInicioIntervalo(), "yyyy-MM-dd'T'HH:mm:ss.SSS") : null;
-            LocalDateTime fimIntervalo = pontoDto.getFimIntervalo() != null ? stringToLocalDteTime(pontoDto.getFimIntervalo(), "yyyy-MM-dd'T'HH:mm:ss.SSS") : null;
-            LocalDateTime fimExpediente = pontoDto.getFimExpediente() != null ? stringToLocalDteTime(pontoDto.getFimExpediente(), "yyyy-MM-dd'T'HH:mm:ss.SSS") : null;
+            LocalDateTime inicioExpediente = pontoDto.getInicioExpediente() != null ? verificaEformataData(pontoDto.getInicioExpediente()) : null;
+            LocalDateTime inicioIntervalo = pontoDto.getInicioIntervalo() != null ? verificaEformataData(pontoDto.getInicioIntervalo()) : null;
+            LocalDateTime fimIntervalo = pontoDto.getFimIntervalo() != null ? verificaEformataData(pontoDto.getFimIntervalo()) : null;
+            LocalDateTime fimExpediente = pontoDto.getFimExpediente() != null ? verificaEformataData(pontoDto.getFimExpediente()) : null;
 
             SaldoDiario saldoDiario = calcularSaldo(inicioExpediente, inicioIntervalo, fimIntervalo, fimExpediente);
             pontoDto.setSaldo(saldoDiario.getSaldo());
@@ -83,6 +83,14 @@ public class RegistroPontoService {
             String erro = "Erro ao editar registro de ponto. Erro: " + e.getMessage();
             LogUtil.buscarLinhaExcecaoEImprimirLogErro(e, erro, "RegistroPontoService.java");
             throw new Exception(erro);
+        }
+    }
+
+    public LocalDateTime verificaEformataData(String data) throws Exception {
+        if (data.length() < 19) {
+            return stringToLocalDteTime(data, "yyyy-MM-dd'T'HH:mm:ss");
+        } else {
+            return stringToLocalDteTime(data, "yyyy-MM-dd'T'HH:mm:ss.SSS");
         }
     }
 
