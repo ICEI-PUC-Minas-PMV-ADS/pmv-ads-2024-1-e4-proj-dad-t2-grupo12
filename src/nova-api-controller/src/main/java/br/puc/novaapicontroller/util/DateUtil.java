@@ -11,7 +11,7 @@ public class DateUtil {
         return offsetDateTime.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
     }
 
-    public static LocalDateTime stringToLocalDteTime(String data, String formato) {
+    public static LocalDateTime stringToLocalDateTime(String data, String formato) {
         if (data.contains("Z") && !formato.contains("Z")) {
             data = data.replace("Z", "");
         }

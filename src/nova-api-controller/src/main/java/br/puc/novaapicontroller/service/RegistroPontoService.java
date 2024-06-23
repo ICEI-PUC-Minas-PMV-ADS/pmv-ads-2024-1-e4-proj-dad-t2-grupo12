@@ -11,10 +11,11 @@ import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static br.puc.novaapicontroller.util.DateUtil.stringToLocalDteTime;
+import static br.puc.novaapicontroller.util.DateUtil.stringToLocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -87,10 +88,20 @@ public class RegistroPontoService {
     }
 
     public LocalDateTime verificaEformataData(String data) throws Exception {
-        if (data.length() < 19) {
-            return stringToLocalDteTime(data, "yyyy-MM-dd'T'HH:mm:ss");
-        } else {
-            return stringToLocalDteTime(data, "yyyy-MM-dd'T'HH:mm:ss.SSS");
+        try {
+            if (data.length() == 20 && data.endsWith("Z")) {
+                return stringToLocalDateTime(data, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            } else if (data.length() == 24 && data.endsWith("Z")) {
+                return stringToLocalDateTime(data, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            } else if (data.length() == 19) {
+                return stringToLocalDateTime(data, "yyyy-MM-dd'T'HH:mm:ss");
+            } else if (data.length() == 23) {
+                return stringToLocalDateTime(data, "yyyy-MM-dd'T'HH:mm:ss.SSS");
+            } else {
+                throw new Exception("Formato de data não suportado");
+            }
+        } catch (DateTimeParseException e) {
+            throw new Exception("Erro ao parsear a data: " + e.getMessage());
         }
     }
 
