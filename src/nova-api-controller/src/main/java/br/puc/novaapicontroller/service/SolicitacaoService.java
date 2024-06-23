@@ -31,7 +31,7 @@ public class SolicitacaoService {
 
     public SolicitacaoDto registrarSolicitacaoAlteracao(SolicitacaoDto solicitacaoDto) throws Exception {
         solicitacaoDto.setNovaData(DateUtil.formatarDataISO(solicitacaoDto.getNovaData()));
-        solicitacaoDto.setDataSolicitacao(DateUtil.localDateTimeToString(LocalDateTime.now(), "yyyy-MM-dd'T'HH:mm:ss.SSS"));
+        solicitacaoDto.setDataSolicitacao(DateUtil.localDateTimeToString(LocalDateTime.now().minusHours(7), "yyyy-MM-dd'T'HH:mm:ss.SSS"));
         return alteracaoClient.registrarSolicitacaoPonto(solicitacaoDto);
     }
 
