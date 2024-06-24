@@ -23,7 +23,10 @@ const RegistroPonto = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedDate, setSelectedDate] = useState(() => {
         const currentDate = new Date();
+        console.log(new Date())
         currentDate.setHours(currentDate.getHours() - 3);
+        console.log(currentDate)
+
         return currentDate;
     });
     console.log(selectedDate)
