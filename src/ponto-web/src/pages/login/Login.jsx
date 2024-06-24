@@ -67,11 +67,6 @@ const Login = () => {
 
                     <button type="submit">Entrar</button>
 
-                    <div className='signup-link'>
-                        <p className="cadastro">
-                            Cadastrar novo usuário.<a href='#'>Criar conta</a>
-                        </p>
-                    </div>
                 </form>
             </div>
             <GenericModal
