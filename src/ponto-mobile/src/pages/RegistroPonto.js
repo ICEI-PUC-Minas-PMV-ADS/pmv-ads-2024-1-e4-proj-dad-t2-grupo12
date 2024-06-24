@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {View, Text, StyleSheet, Pressable, Modal, Button, FlatList, TouchableOpacity} from 'react-native';
 import { getRegistrosPonto, saveRegistroPonto, editarRegistroPonto } from "../services/Api";
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -9,6 +9,7 @@ const getUserData = async () => {
     try {
         const token = await AsyncStorage.getItem('userToken');
         const userInfo = await AsyncStorage.getItem('userInfo');
+        console.log(userInfo)
         return { token, userInfo: JSON.parse(userInfo) };
     } catch (error) {
         console.error('Erro ao obter dados do usuário:', error);
@@ -17,9 +18,15 @@ const getUserData = async () => {
 };
 
 const RegistroPonto = () => {
+    const [user, setUser] = useState(null);
     const [registro, setRegistro] = useState(null);
     const [modalVisible, setModalVisible] = useState(false);
-    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [selectedDate, setSelectedDate] = useState(() => {
+        const currentDate = new Date();
+        currentDate.setHours(currentDate.getHours() - 3);
+        return currentDate;
+    });
+    console.log(selectedDate)
     const [lastAddedRegistro, setLastAddedRegistro] = useState(null);
     const [confirmModalVisible, setConfirmModalVisible] = useState(false);
     const [saldoDiario, setSaldoDiario] = useState('00:00');
@@ -30,6 +37,7 @@ const RegistroPonto = () => {
         const fetchData = async () => {
             try {
                 const userData = await getUserData();
+                setUser(userData)
                 if (userData) {
                     let data = await getRegistrosPonto(userData.userInfo.id);
 
@@ -103,14 +111,13 @@ const RegistroPonto = () => {
             novoRegistro.inicioIntervalo = currentDateTimeString;
         } else if (!novoRegistro.fimIntervalo) {
             novoRegistro.fimIntervalo = currentDateTimeString;
-        } else if (!novoRegistro.fimExpediente) {
+        } else {
             novoRegistro.fimExpediente = currentDateTimeString;
         }
 
-        console.log(novoRegistro)
         novoRegistro.isPositivo = null;
         novoRegistro.saldo = null;
-        novoRegistro.usuarioId = '664bdc3adf17108bf6c8a689';
+        novoRegistro.usuarioId = user.userInfo.id;
 
         try {
             const updatedRegistro = await editarRegistroPonto(novoRegistro.id, novoRegistro);

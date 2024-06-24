@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Dimensions, TouchableOpacity, TextInput, Alert, Modal } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, TouchableOpacity, TextInput, Modal, Platform } from 'react-native';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Image } from 'react-native';
-import {useRoute} from "@react-navigation/native";
-import {editarRegistroPonto, registrarSolicitacaoAlteracao} from "../services/Api";
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { editarRegistroPonto, registrarSolicitacaoAlteracao } from '../services/Api';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -20,6 +21,18 @@ const dayAbbreviations = {
     'sábado': 'sab',
 };
 
+const getUserData = async () => {
+    try {
+        const token = await AsyncStorage.getItem('userToken');
+        const userInfo = await AsyncStorage.getItem('userInfo');
+        console.log(userInfo);
+        return { token, userInfo: JSON.parse(userInfo) };
+    } catch (error) {
+        console.error('Erro ao obter dados do usuário:', error);
+        return null;
+    }
+};
+
 const SolicitarAlteracao = () => {
     const route = useRoute();
     const { registro } = route.params;
@@ -32,9 +45,21 @@ const SolicitarAlteracao = () => {
     const [newTime, setNewTime] = useState('');
     const [timeToChange, setTimeToChange] = useState('');
     const [motivoError, setMotivoError] = useState(false);
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
+    const [successMessage, setSuccessMessage] = useState('');
+    const navigation = useNavigation();
+    const [userId, setUserId] = useState(null);
 
     useEffect(() => {
+        const fetchData = async () => {
+            const userData = await getUserData();
+            if (userData) {
+                setUserId(userData.userInfo.id);
+            }
+        };
+
         const timerID = setInterval(() => tick(), 1000);
+        fetchData();
         return () => {
             clearInterval(timerID);
         };
@@ -64,10 +89,6 @@ const SolicitarAlteracao = () => {
             updatedDate.setMinutes(minutes);
             updatedDate.setHours(updatedDate.getHours() - 3);
 
-            const formattedDate = updatedDate.toISOString();
-
-            console.log(formattedDate);
-            setNewTime(formattedDate)
             setShowTimeModal(false);
             setSelectedTime(timeToChange);
         } catch (error) {
@@ -75,20 +96,7 @@ const SolicitarAlteracao = () => {
         }
     };
 
-    const calculateDuration = (start, end) => {
-        const [startHours, startMinutes] = start.split(':').map(Number);
-        const [endHours, endMinutes] = end.split(':').map(Number);
-        const startDate = new Date();
-        const endDate = new Date();
-        startDate.setHours(startHours, startMinutes);
-        endDate.setHours(endHours, endMinutes);
-        const diff = endDate - startDate;
-        const diffHours = Math.floor(diff / (1000 * 60 * 60));
-        const diffMinutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        return `${diffHours}h ${diffMinutes}m`;
-    };
-
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (!motivo.trim()) {
             setMotivoError(true);
             return;
@@ -108,37 +116,44 @@ const SolicitarAlteracao = () => {
 
         const solicitacao = {
             motivo: motivo,
-            novaData: newTime,
+            novaData: `${registro.dataRegistro.split('T')[0]}T${newTime}:00Z`,
             tipoPeriodo: tipoPeriodo,
             aprovado: false,
             status: 'solicitado',
-            usuarioId: '664bdc3adf17108bf6c8a689',
+            usuarioId: userId,
             pontoId: registro.id,
         };
 
-        registrarSolicitacaoAlteracao(solicitacao).then(() => {
-            console.log('Solicitação registrada com sucesso');
-        }).catch(error => {
-            console.error('Erro ao registrar solicitação:', error);
-        });
+        try {
+            const resposta = await registrarSolicitacaoAlteracao(solicitacao);
 
-        const editarPonto = {
-            id: registro.id,
-            dataRegistro: registro.dataRegistro,
-            inicioExpediente: registro.inicioExpediente,
-            inicioIntervalo : registro.inicioIntervalo,
-            fimIntervalo: registro.fimIntervalo,
-            fimExpediente: registro.fimExpediente,
-            usuarioId: registro.usuarioId,
-            temSolicitacaoAlteracao: true,
-        };
+            if (resposta) {
+                const editarPonto = {
+                    id: registro.id,
+                    dataRegistro: registro.dataRegistro,
+                    inicioExpediente: registro.inicioExpediente,
+                    inicioIntervalo: registro.inicioIntervalo,
+                    fimIntervalo: registro.fimIntervalo,
+                    fimExpediente: registro.fimExpediente,
+                    usuarioId: registro.usuarioId,
+                    temSolicitacaoAlteracao: true,
+                };
 
-        editarRegistroPonto(registro.id, editarPonto).then(() => {
-            console.log('Solicitação registrada com sucesso');
-        }).catch(error => {
-            console.error('Erro ao registrar solicitação:', error);
-        });
+                const respostaEdicao = await editarRegistroPonto(registro.id, editarPonto);
 
+                if (respostaEdicao) {
+                    setSuccessMessage('Solicitação registrada com sucesso');
+                    setShowSuccessModal(true);
+                }
+            }
+        } catch (error) {
+            console.error('Erro ao atualizar ponto:', error);
+        }
+    };
+
+    const handleCloseSuccessModal = () => {
+        setShowSuccessModal(false);
+        navigation.navigate('RegistroPonto');
     };
 
     const formattedDate = format(new Date(registro.dataRegistro), 'EEE, dd/MM/yyyy', { locale: ptBR });
@@ -225,6 +240,20 @@ const SolicitarAlteracao = () => {
                         />
                         <TouchableOpacity style={styles.modalButton} onPress={handleTimeChangeConfirm}>
                             <Text style={styles.modalButtonText}>Confirmar</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
+            <Modal
+                visible={showSuccessModal}
+                animationType="slide"
+                transparent={true}
+            >
+                <View style={styles.modalContainer}>
+                    <View style={styles.modalContent}>
+                        <Text>{successMessage}</Text>
+                        <TouchableOpacity style={styles.modalButton} onPress={handleCloseSuccessModal}>
+                            <Text style={styles.modalButtonText}>Fechar</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -379,6 +408,5 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
 });
-
 
 export default SolicitarAlteracao;

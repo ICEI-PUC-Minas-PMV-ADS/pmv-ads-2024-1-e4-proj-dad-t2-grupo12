@@ -97,7 +97,9 @@ public class RegistroPontoService {
                 return LocalDateTime.parse(data, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
             } else if (data.length() == 23) {
                 return LocalDateTime.parse(data, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS"));
-            } else {
+            } else if (data.length() == 23) {
+                return LocalDateTime.parse(data, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS"));
+            }else {
                 throw new Exception("Formato de data não suportado");
             }
         } catch (DateTimeParseException e) {

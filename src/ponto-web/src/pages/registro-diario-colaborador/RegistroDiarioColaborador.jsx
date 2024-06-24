@@ -7,8 +7,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {editarEAprovarSolicitacao, editarRegistroPonto, obterSolicitacaoAlteracao} from "../../services/Api.jsx";
 
-
-
 const RegistroDiarioColaborador = () => {
     const navigateTo = useNavigate();
     const location = useLocation();
@@ -90,7 +88,10 @@ const RegistroDiarioColaborador = () => {
     };
 
     const handleSave = async () => {
-        if (selectedStatus === "Aprovado") {
+        solicitacaoAlteracao.novaData = solicitacaoAlteracao.novaData.replace('Z', '')
+        solicitacaoAlteracao.novaData = solicitacaoAlteracao.novaData + '.000Z'
+
+        if (selectedStatus === 'Aprovado') {
             if (solicitacaoAlteracao.tipoPeriodo === 'InicioExpediente') {
                 registro.inicioExpediente = solicitacaoAlteracao.novaData;
             } else if (solicitacaoAlteracao.tipoPeriodo === 'InicioIntervalo') {
@@ -102,17 +103,16 @@ const RegistroDiarioColaborador = () => {
             }
             registro.temSolicitacaoAlteracao = false;
 
-            try {
-                await editarRegistroPonto(registro.id, registro);
-            } catch (error) {
-                console.error('Erro ao buscar dados', error);
-            }
 
             try {
-                solicitacaoAlteracao.aprovado = true;
-                solicitacaoAlteracao.status = "aprovado"
-                const result = await editarEAprovarSolicitacao(solicitacaoAlteracao.id, solicitacaoAlteracao);
-                setSolicitacaoAlteracao(result);
+                const respostaPonto = await editarRegistroPonto(registro.id, registro);
+
+                if (respostaPonto) {
+                    solicitacaoAlteracao.aprovado = true;
+                    solicitacaoAlteracao.status = "aprovado"
+                    const result = await editarEAprovarSolicitacao(solicitacaoAlteracao.id, solicitacaoAlteracao);
+                    setSolicitacaoAlteracao(result);
+                }
 
             } catch (error) {
                 console.error('Erro ao buscar dados', error);

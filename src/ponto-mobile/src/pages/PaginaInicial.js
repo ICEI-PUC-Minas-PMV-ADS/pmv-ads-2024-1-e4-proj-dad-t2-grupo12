@@ -20,13 +20,25 @@ const PaginaInicial = () => {
     const navigation = useNavigation();
     const [nome, setNome] = useState('');
 
+    const handleLogout = async () => {
+        try {
+            await AsyncStorage.removeItem('userToken');
+            await AsyncStorage.removeItem('userInfo');
+            setNome('');
+
+            navigation.navigate('Login');
+        } catch (error) {
+            console.error('Erro ao realizar logout:', error);
+        }
+    };
 
     useEffect(() => {
-
         const fetchUserData = async () => {
             const data = await getUserData();
             if (data && data.userInfo && data.userInfo.nome) {
                 setNome(data.userInfo.nome);
+            } else {
+                navigation.navigate('Login');
             }
         };
 
@@ -50,7 +62,7 @@ const PaginaInicial = () => {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <TouchableOpacity onPress={() => navigation.navigate('Logout')}>
+                <TouchableOpacity onPress={() => handleLogout()}>
                     <Image
                         source={require('../../assets/image15.png')}
                         style={styles.headerImage}

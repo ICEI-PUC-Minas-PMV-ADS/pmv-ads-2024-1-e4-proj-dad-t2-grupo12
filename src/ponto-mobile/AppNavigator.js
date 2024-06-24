@@ -8,14 +8,13 @@ import TabelaPonto from "./src/pages/TabelaPonto";
 import Holerite from "./src/pages/Holerite";
 import SolicitarAlteracao from "./src/pages/SolicitarAlteracao";
 import Login from "./src/pages/Login";
-import Logout from "./src/pages/Logout";
 
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="Login">
+            <Stack.Navigator initialRouteName="PaginaInicial">
                 <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
                 <Stack.Screen name="PaginaInicial" component={PaginaInicial} options={{ headerShown: false }} />
                 <Stack.Screen name="RegistroPonto" component={RegistroPonto} options={{ title: 'Registro de Ponto' }} />
@@ -23,7 +22,6 @@ const AppNavigator = () => {
                 <Stack.Screen name="TabelaPonto" component={TabelaPonto} options={{ title: 'Espelho de Ponto' }} />
                 <Stack.Screen name="Holerite" component={Holerite} options={{ title: 'Saldos e holerite' }} />
                 <Stack.Screen name="SolicitarAlteracao" component={SolicitarAlteracao} options={{ title: 'Solicitar alteração' }} />
-                <Stack.Screen name="Logout" component={Logout} options={{ title: 'Logout' }} />
             </Stack.Navigator>
         </NavigationContainer>
     );

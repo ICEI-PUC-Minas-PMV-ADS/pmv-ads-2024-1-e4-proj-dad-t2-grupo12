@@ -56,6 +56,8 @@ public class UsuarioPontoService {
         if (!emailVerificacaoResponse.getEmailExists()) {
             cadastroUsuarioDto.setDataCadastro(DateUtil.localDateTimeToString(LocalDateTime.now(), "yyyy-MM-dd'T'HH:mm:ss.SSS"));
             cadastroUsuarioDto.setSetores(cadastroUsuarioDto.getSetores() != null ? cadastroUsuarioDto.getSetores() : new ArrayList<>());
+            cadastroUsuarioDto.setCpf(cadastroUsuarioDto.getCpf().contains(".") || cadastroUsuarioDto.getCpf().contains("-") ?
+                    cadastroUsuarioDto.getCpf().replaceAll("[.-]", "") : cadastroUsuarioDto.getCpf());
             return usuarioClient.cadastrarUsuario(cadastroUsuarioDto);
         }
 
