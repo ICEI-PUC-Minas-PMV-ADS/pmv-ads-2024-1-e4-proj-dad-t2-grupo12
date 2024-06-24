@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -89,14 +91,12 @@ public class RegistroPontoService {
 
     public LocalDateTime verificaEformataData(String data) throws Exception {
         try {
-            if (data.length() == 20 && data.endsWith("Z")) {
-                return stringToLocalDateTime(data, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-            } else if (data.length() == 24 && data.endsWith("Z")) {
-                return stringToLocalDateTime(data, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            if (data.endsWith("Z")) {
+                return OffsetDateTime.parse(data, DateTimeFormatter.ISO_OFFSET_DATE_TIME).toLocalDateTime();
             } else if (data.length() == 19) {
-                return stringToLocalDateTime(data, "yyyy-MM-dd'T'HH:mm:ss");
+                return LocalDateTime.parse(data, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
             } else if (data.length() == 23) {
-                return stringToLocalDateTime(data, "yyyy-MM-dd'T'HH:mm:ss.SSS");
+                return LocalDateTime.parse(data, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS"));
             } else {
                 throw new Exception("Formato de data não suportado");
             }
